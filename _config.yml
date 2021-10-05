@@ -76,7 +76,7 @@ production_url:  https://nomadxd.github.io/NomadXD/
 source_url:  https://github.com/NomadXD/NomadXD/
 
 exclude:
-  - assets/css
+#  - assets/css
   - node_modules
   - vendor
   - .travis.yml
