@@ -1,5 +1,5 @@
 tech:
-  name: Tech
+  name: tech
   description: False
   cover: False
 random:
@@ -7,7 +7,7 @@ random:
   description: Some of the greatest words ever spoken.
   cover: assets/images/speeches.jpg
 travel:
-  name: Travel
+  name: travel
   description: Not all those who wander are lost...
   cover: assets/images/speeches.jpg
 fiction:
