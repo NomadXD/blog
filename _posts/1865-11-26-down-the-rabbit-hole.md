@@ -1,13 +1,13 @@
 ---
 layout: post
 current: post
-cover: 'assets/images/piano.jpg'
+cover: "assets/images/piano.jpg"
 navigation: true
 title: Down The Rabbit Hole
 date: 1865-11-26 10:18:00
-tags: fiction
+tags: random
 class: post-template
-subclass: 'post'
+subclass: "post"
 author: lewis
 ---
 
