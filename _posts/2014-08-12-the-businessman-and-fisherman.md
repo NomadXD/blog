@@ -5,9 +5,9 @@ cover: assets/images/water.jpg
 navigation: True
 title: The Businessman & The Fisherman
 date: 2014-08-12 10:18:00
-tags: fables
+tags: travel
 class: post-template
-subclass: 'post'
+subclass: "post"
 logo: assets/images/ghost.png
 author: hannah
 ---
@@ -41,7 +41,6 @@ The American laughed and said, “That’s the best part. When the time is right
 “Millions señor? Then what?"
 
 “Then you would retire and move to a small coastal fishing village, where you would sleep late, fish a little, play with your kids, take a siesta with your wife, and stroll in to the village in the evenings where you could sip wine and play your guitar with your amigos.”
-
 
 Adapted from the "Anekdote zur Senkung der Arbeitsmoral" by **Heinrich Böll**
 

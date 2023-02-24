@@ -6,10 +6,10 @@ fiction:
   name: fiction
   description: False
   cover: False
-fables:
-  name: fables
-  description: A series of short stories that make you think.
-  cover: assets/images/fables.jpg
+travel:
+  name: Travel
+  description: Not all those who wander are lost...
+  cover: assets/images/travel.jpg
 tech:
   name: Tech
   description: False
