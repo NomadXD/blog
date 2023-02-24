@@ -9,7 +9,7 @@ fiction:
 travel:
   name: Travel
   description: Not all those who wander are lost...
-  cover: assets/images/travel.jpg
+  cover: assets/images/speeches.jpg
 tech:
   name: Tech
   description: False
