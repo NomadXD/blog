@@ -1,7 +1,7 @@
 tech:
   name: tech
   description: Distributed systems, Kubernetes and Envoy Proxy
-  cover: assets/images/advanced.jpg
+  cover: assets/images/tech.jpg
 random:
   name: random
   description: Some of the greatest words ever spoken
