@@ -31,6 +31,7 @@ _Siwa City Center_ -->
 
 <p align="center">
   <img alt="Siwa city" src="assets/images/siwa-city.png">
-  <br>
     <em>Siwa City Center</em>
 </p>
+
+The Temple of the Oracle of Amun is a must-visit destination for anyone interested in ancient Egyptian history and mythology.
