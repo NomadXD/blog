@@ -20,18 +20,16 @@ I was fortunate enough to explore Siwa, Egypt as part of a 6-week volunteering p
 
 We started the journey from Cairo on July 28, 2018, and first we went to Alexandria. From Alexandria, we went to Marsa Matruh and took the Marsa Matruh - Siwa road, which took around 12 hours to reach Siwa. We checked in to a nice, cozy garden hotel in the center of Siwa, which I don't remember the name exactly. After relaxing for a few hours, we explored Siwa City, which is basically a classical Middle Eastern bazaar with some hotels and restaurants that are targeted at tourists.
 
-<!-- ![Siwa city](assets/images/siwa-city.png)
-
-{:.image-caption}
-_Siwa City Center_ -->
-
-<!-- | ![Siwa city](assets/images/siwa-city.png) |
-| :---------------------------------------: |
-|            _Siwa city center_             | -->
-
 <p align="center">
   <img alt="Siwa city" src="assets/images/siwa-city.png">
     <em>Siwa City Center</em>
 </p>
 
-The Temple of the Oracle of Amun is a must-visit destination for anyone interested in ancient Egyptian history and mythology.
+The Temple of the Oracle of Amun is a must-visit destination for anyone interested in ancient Egyptian history and mythology. It was constructed during the reign of the pharaoh Nectanebo II in the fourth century BCE and was dedicated to the god Amun, who was worshipped throughout ancient Egypt as the king of the gods. The temple complex includes a main temple, several smaller temples, and a series of underground chambers that were used for religious ceremonies and burials.
+
+After the temple and a quick tour around the city center, we headed to a natural water spring named Cleopatra's Spring / Bath. It is said to be the spot where the legendary queen Cleopatra once bathed, and it has been a popular destination for tourists for many years. Pretty cool right ?
+
+<p align="center">
+  <img alt="Cleopatra's Spring" src="assets/images/cleopatras.jpg">
+    <em>Cleopatra's Spring</em>
+</p>
