@@ -1,7 +1,7 @@
 ---
 layout: post
 current: post
-cover: assets/images/water.jpg
+cover: assets/images/siwa-cover.jpg
 navigation: True
 title: Siwa, The Hidden Gem of Egypt's Western Desert
 date: 2014-08-12 10:18:00
