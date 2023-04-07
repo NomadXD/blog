@@ -33,3 +33,14 @@ After the temple and a quick tour around the city center, we headed to a natural
   <img alt="Cleopatra's Spring" src="assets/images/cleopatras.jpg">
     <em>Cleopatra's Spring</em>
 </p>
+
+After spending few hours at Cleopatra's Spring, we headed back to the hotel and then started getting ready for the most amazing part of the day; sleeping under the stars in the dessert !!!
+
+We packed our bags with snacks, beer and water and headed for the dessert camp. On the way we stopped at this lake hidden in the dessert named Siwa Cold Lake. As the name implies the water in the lake was sooo freaking cold !!!
+
+After spending around 1 hour at the Cold lake, we headed back for the final destination of the day; the dessert camp that we are going to spend the night. There was no proper road to the dessert camp and so we had to go through a bumpy V8 ride in the dessert with some crazyyy stunts by our driver Ali.
+
+<p align="center">
+  <img alt="Bumpy V8 ride through sand dunes" src="assets/images/jeeps.jpg">
+    <em>Bumpy V8 ride through sand dunes</em>
+</p>
