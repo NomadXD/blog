@@ -20,7 +20,7 @@ I was fortunate enough to explore Siwa, Egypt as part of a 6-week volunteering p
 
 We started the journey from Cairo on July 28, 2018, and first we went to Alexandria. From Alexandria, we went to Marsa Matruh and took the Marsa Matruh - Siwa road, which took around 12 hours to reach Siwa. We checked in to a nice, cozy garden hotel in the center of Siwa, which I don't remember the name exactly. After relaxing for a few hours, we explored Siwa City, which is basically a classical Middle Eastern bazaar with some hotels and restaurants that are targeted at tourists.
 
-![Siwa city](assets/images/siwa-city.png)
+<!-- ![Siwa city](assets/images/siwa-city.png) -->
 
 | ![Siwa city](assets/images/siwa-city.png) |
 | :---------------------------------------: |
