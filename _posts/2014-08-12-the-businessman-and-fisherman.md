@@ -4,11 +4,11 @@ current: post
 cover: assets/images/water.jpg
 navigation: True
 title: Siwa, The Hidden Gem of Egypt's Western Desert
-date: 2014-08-12 10:18:00
+date: 2023-04-08 10:18:00
 tags: travel
 class: post-template
 subclass: "post"
-logo: assets/images/ghost.png
+logo: assets/images/siwa-cover.jpg
 author: hannah
 ---
 
@@ -43,4 +43,21 @@ After spending around 1 hour at the Cold lake, we headed back for the final dest
 <p align="center">
   <img alt="Bumpy V8 ride through sand dunes" src="assets/images/jeeps.jpg">
     <em>Bumpy V8 ride through sand dunes</em>
+</p>
+
+Some photos I captured on the way to the dessert camp are listed below.
+
+<p align="center">
+  <img alt="Taking a selfie" src="assets/images/siwa-selfie.jpg">
+    <em>Taking a selfie</em>
+</p>
+
+<p align="center">
+  <img alt="Driving through the sand dunes" src="assets/images/siwa-driver.jpg">
+    <em>Driving through the sand dunes</em>
+</p>
+
+<p align="center">
+  <img alt="Cold Lake" src="assets/images/siwa-cold.jpg">
+    <em>Cold Lake</em>
 </p>
