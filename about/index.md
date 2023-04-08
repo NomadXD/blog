@@ -10,6 +10,10 @@ subclass: "post page"
 
 ![Me](/assets/images/lahiru.jpg)
 
+<p align="center">
+  <img alt="Me" src="assets/images/lahiru.jpg" style="width: 300px; height: 300px;">
+</p>
+
 Welcome to my personal blog! My name is Lahiru Udayanga, and I'm thrilled to have you here.
 
 I'm a 25-year-old Software Engineer currently living in Colombo, Sri Lanka. I hold a B.Sc (hons) in Computer Science and Engineering from University of Moratuwa, and I'm currently employed at WSO2 Inc. as a software engineer working on Kubernetes native API gateways.
