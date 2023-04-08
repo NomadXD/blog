@@ -61,3 +61,17 @@ Some photos I captured on the way to the dessert camp are listed below.
   <img alt="Cold Lake" src="assets/images/siwa-cold.jpg">
     <em>Cold Lake</em>
 </p>
+
+We spent several hours in the dessert sand boarding, watching sunset and taking photos. Here's a glimpse of me holding the Sri Lankan flag in the Sahara Desert, possibly making me the first person to hold the Sri Lankan flag in this desert.
+
+<p align="center">
+  <img alt="Siwa Sri Lankan flag" src="assets/images/siwa-srilanka.jpg">
+    <em>Me holding the Sri Lankan flag</em>
+</p>
+
+Finally, we settled ourselves in the desert camp, partied all night, drinking beers and singing beside a bonfire, and slept in the desert under open skies, watching the stars.
+
+<p align="center">
+  <img alt="Dessert camp" src="assets/images/siwa-night.jpg">
+    <em>Dessert camp</em>
+</p>
