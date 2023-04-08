@@ -3,15 +3,19 @@ layout: page
 current: about
 title: About
 navigation: true
-logo: 'assets/images/ghost.png'
+logo: "assets/images/ghost.png"
 class: page-template
-subclass: 'post page'
+subclass: "post page"
 ---
 
-Ghost is professional publishing platform designed for modern journalism. This is a demo site of a basic Ghost install to give you a general sense of what a new Ghost site looks like when set up for the first time.
+![Me](lahiru.jpg)
 
-> If you'd like to set up a site like this for yourself, head over to [Ghost.org](https://ghost.org/) and start a free 14 day trial to give Ghost a try!
+Welcome to my personal blog! My name is Lahiru Udayanga, and I'm thrilled to have you here.
 
-If you're a developer: Ghost is a completely open source (MIT) Node.js application built on a JSON API with an Ember.js admin client. It works with MySQL and SQLite, and is publicly available [on Github](https://github.com/TryGhost/ghost).
+I'm a 25-year-old Software Engineer currently living in Colombo, Sri Lanka. I hold a B.Sc (hons) in Computer Science and Engineering from University of Moratuwa, and I'm currently employed at WSO2 Inc. as a software engineer working on Kubernetes native API gateways.
 
-If you need help with using Ghost, you'll find a ton of useful articles on [our knowledgebase](https://help.ghost.org/), as well as extensive [developer documentation](https://docs.ghost.org/).
+I started this blog as a way to share my thoughts and experiences with the world. Whether it's my latest travel adventure, a new technology or a programming language I've tried, or my take on current events, I love to share my perspective and connect with others who share similar interests.
+
+I believe that life is meant to be lived to the fullest, and I hope that my blog inspires you to try new things, embrace your passions, and live your best life.
+
+Thank you for visiting, and I can't wait to share more with you in the future!
