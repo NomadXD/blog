@@ -8,10 +8,8 @@ class: page-template
 subclass: "post page"
 ---
 
-![Me](/assets/images/lahiru.jpg)
-
 <p align="center">
-  <img alt="Me" src="assets/images/lahiru.jpg" style="width: 300px; height: 300px;">
+  <img alt="Me" src="/assets/images/lahiru.jpg" class="author-profile-image" style="width: 300px; height: 300px;">
 </p>
 
 Welcome to my personal blog! My name is Lahiru Udayanga, and I'm thrilled to have you here.
