@@ -9,12 +9,12 @@ tags: travel
 class: post-template
 subclass: "post"
 logo: assets/images/ghost.png
-author: hannah
+author: lahiru
 ---
 
-It's amazing how a single photo can transport you back to a place you visited years ago. Today, I find myself reminiscing about my time in Siwa, Egypt which I visited back in July 2018.
+It's amazing how a single photo can travel you back to a place you visited years ago. Today, I find myself reminiscing about my time in Siwa, Egypt which I visited back in July 2018.
 
-Siwa is an ancient city located in Egypt's western desert near the border with Libya, known for its natural beauty and unique Berber culture. The city is situated on an oasis, surrounded by palm groves, freshwater springs, and a salt lake that glimmers in the desert sun. Siwa is also home to several ancient temples, including the Temple of the Oracle of Amun, which dates back to the 6th century BCE and was a site of pilgrimage for ancient Egyptians seeking divine guidance.
+Siwa is an ancient city located in Egypt's western desert near the border with Libya, known for its natural beauty and unique [Berber culture](https://www.newworldencyclopedia.org/entry/Berber). The city is situated on an oasis, surrounded by palm groves, freshwater springs, and a salt lake that glimmers in the desert sun. Siwa is also home to several ancient temples, including the [Temple of the Oracle of Amun](https://sacredsites.com/africa/egypt/temple_of_amun_siwa_oasis.html), which dates back to the 6th century BCE and was a site of pilgrimage for ancient Egyptians seeking divine guidance.
 
 I was fortunate enough to explore Siwa, Egypt as part of a 6-week volunteering program organized by AIESEC. This opportunity not only allowed me to give back to the community but also gave me the chance to immerse myself in the unique culture and natural beauty of this hidden gem in the heart of the Sahara desert.
 
@@ -34,18 +34,18 @@ After the temple and a quick tour around the city center, we headed to a natural
     <em>Cleopatra's Spring</em>
 </p>
 
-After spending few hours at Cleopatra's Spring, we headed back to the hotel and then started getting ready for the most amazing part of the day; sleeping under the stars in the dessert !!!
+After spending few hours at Cleopatra's Spring, we headed back to the hotel and then started getting ready for the most amazing part of the day; sleeping under the stars in the desert !!!
 
-We packed our bags with snacks, beer and water and headed for the dessert camp. On the way we stopped at this lake hidden in the dessert named Siwa Cold Lake. As the name implies the water in the lake was sooo freaking cold !!!
+We packed our bags with snacks, beer and water and headed for the desert camp. On the way we stopped at this lake hidden in the desert named Siwa Cold Lake. As the name implies the water in the lake was sooo freaking cold !!!
 
-After spending around 1 hour at the Cold lake, we headed back for the final destination of the day; the dessert camp that we are going to spend the night. There was no proper road to the dessert camp and so we had to go through a bumpy V8 ride in the dessert with some crazyyy stunts by our driver Ali.
+After spending around 1 hour at the Cold lake, we headed back for the final destination of the day; the desert camp that we are going to spend the night. There was no proper road to the desert camp and so we had to go through a bumpy V8 ride in the desert with some crazyyy stunts by our driver Ali.
 
 <p align="center">
   <img alt="Bumpy V8 ride through sand dunes" src="assets/images/jeeps.jpg">
     <em>Bumpy V8 ride through sand dunes</em>
 </p>
 
-Some photos I captured on the way to the dessert camp are listed below.
+Some photos I captured on the way to the desert camp are listed below.
 
 <p align="center">
   <img alt="Taking a selfie" src="assets/images/siwa-selfie.jpg">
@@ -62,7 +62,7 @@ Some photos I captured on the way to the dessert camp are listed below.
     <em>Cold Lake</em>
 </p>
 
-We spent several hours in the dessert sand boarding, watching sunset and taking photos. Here's a glimpse of me holding the Sri Lankan flag in the Sahara Desert, possibly making me the first person to hold the Sri Lankan flag in this desert.
+We spent several hours in the desert sand boarding, watching sunset and taking photos. Here's a glimpse of me holding the Sri Lankan flag in the Sahara Desert, possibly making me the first person to hold the Sri Lankan flag in this desert.
 
 <p align="center">
   <img alt="Siwa Sri Lankan flag" src="assets/images/siwa-srilanka.jpg">
@@ -72,6 +72,6 @@ We spent several hours in the dessert sand boarding, watching sunset and taking 
 Finally, we settled ourselves in the desert camp, partied all night, drinking beers and singing beside a bonfire, and slept in the desert under open skies, watching the stars.
 
 <p align="center">
-  <img alt="Dessert camp" src="assets/images/siwa-night.jpg">
-    <em>Dessert camp</em>
+  <img alt="Desert camp" src="assets/images/siwa-night.jpg">
+    <em>Desert camp</em>
 </p>

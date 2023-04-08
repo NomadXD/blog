@@ -8,17 +8,17 @@ ghost:
   facebook: ghost
   twitter: tryghost
   cover: False
-hannah:
-  username: hannah
-  name: Hannah Wolfe
-  location: London, UK
-  url_full: http://hannah.wf/
-  url: hannah.wf
-  bio: Hannah is the co-founder and lead developer at Ghost. She spends her days looking after Ghost's developer community, tracking down bugs & ensuring Ghost(Pro) is a happy place.
-  picture: assets/images/hannah.jpg
-  facebook: False
-  twitter: erisds
-  cover: assets/images/hannah-cover.jpg
+lahiru:
+  username: lahiru
+  name: Lahiru Udayanga
+  location: Colombo, Sri Lanka
+  url_full: https://nomadxd.github.io/
+  url: nomadxd.github.io
+  bio: Greetings! I go by the name nomadxd on all of my digital channels. My real name is Lahiru Udayanga, nice to meet you!. I'm a software engineer by profession specialized in distributed systems, kubernets and cloud native API management technologies.
+  picture: assets/images/lahiru.jpg
+  facebook: lahiru97udayanga
+  twitter: False
+  cover: assets/images/blog-cover.jpg
 john:
   username: john
   name: John O'Nolan
