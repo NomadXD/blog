@@ -8,7 +8,7 @@ class: page-template
 subclass: "post page"
 ---
 
-![Me](assets/images/lahiru.jpg)
+![Me](/assets/images/lahiru.jpg)
 
 Welcome to my personal blog! My name is Lahiru Udayanga, and I'm thrilled to have you here.
 
