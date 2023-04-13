@@ -4,11 +4,11 @@ current: post
 cover: assets/images/welcome.jpg
 navigation: True
 title: A Beginner's Guide to gRPC and protobuf
-date: 2017-07-27 10:00:00
+date: 2023-02-25 10:00:00
 tags: [tech]
 class: post-template
 subclass: "post"
-author: ghost
+author: lahiru
 ---
 
 ## What google says....
