@@ -5,7 +5,7 @@ cover: assets/images/grapes.jpg
 navigation: True
 title: The Purpose of Education
 date: 1948-12-12 10:18:00
-tags: tech
+tags: random
 class: post-template
 subclass: "post"
 author: martin

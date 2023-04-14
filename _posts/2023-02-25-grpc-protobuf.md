@@ -11,8 +11,6 @@ subclass: "post"
 author: lahiru
 ---
 
-## What google says....
-
 Since both protocol buffers and gRPC framework are developed internally at Google and then open sourced, let's first see what google says about them.
 
 ### Protocol buffers
