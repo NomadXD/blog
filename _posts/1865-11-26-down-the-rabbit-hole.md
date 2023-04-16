@@ -17,7 +17,7 @@ The paradox arises from the idea that if you prevented your grandfather from hav
 
 <p align="center">
   <img alt="Siwa city" src="assets/images/grandfather-paradox-and-time-travel.png">
-    <em>Siwa City Center</em>
+    <em>Diagram that shows the paradox</em>
 </p>
 
 The grandfather paradox is often used to illustrate the complexities and potential pitfalls of time travel. It suggests that any attempt to change the past could result in unpredictable and potentially disastrous consequences for the present and future.
