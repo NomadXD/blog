@@ -4,7 +4,7 @@ tech:
   cover: assets/images/technew.jpg
 random:
   name: random
-  description: Some of the greatest words ever spoken
+  description: Exploring the unknown, a collection of random stuff
   cover: assets/images/piano.jpg
 travel:
   name: travel
