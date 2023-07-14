@@ -23,9 +23,9 @@ subclass: "post page"
   <a href="https://www.linkedin.com/in/lahiru-udayanga/">LinkedIn</a>
 </p>
 
-Welcome to my personal blog! My name is Lahiru Udayanga, and I'm excited to have you here.
+Welcome to my personal blog! My name is Lahiru Udayanga De Silva, and I'm excited to have you here.
 
-I'm a 25-year-old Software Engineer currently living in Colombo, Sri Lanka. I hold a B.Sc (hons) in Computer Science and Engineering from University of Moratuwa, and I'm currently employed at WSO2 LLC as a software engineer working on Kubernetes native API gateways.
+I'm a 25-year-old Software Engineer currently living in Colombo, Sri Lanka. I hold a B.Sc (hons) in Computer Science and Engineering from University of Moratuwa, and I'm currently employed at WSO2 LLC as a software engineer working on Kubernetes native API gateways and cloud native product development.
 
 I started this blog as a way to share my thoughts and experiences with the world. Whether it's my latest travel adventure, a new technology or a programming language I've tried, or my take on current events, I love to share my perspective and connect with others who share similar interests.
 
