@@ -25,10 +25,6 @@ So the highlighted text defines exactly what protobufs do. But what is data seri
 
 So from the above definition, it is clear that gRPC is a RPC framework which has several improvements over traditional RPC frameworks. If you don't know what a RPC framework is, simply it's a set of tools that enable the programmer to call a piece of code in a remote process, be it on a different machine or just another process on the same machine.
 
-The following diagram illustrates how protocol buffers, gRPC and our application code interact with each other.
-
-![protobuf_large](https://frisbees.tech/content/images/2021/04/protobuf_large.png)
-
 ## Developer workflow
 
 1. Create a `.proto` file and define the message types and services that we want to work with.A message is analogous to a request/response in the REST world. We have to define messages by using the in-built [data types](https://developers.google.com/protocol-buffers/docs/proto3#simple). And then we have to define services. In gRPC there are 4 types of services that we can use.
@@ -51,7 +47,11 @@ Since this is an introductory article, I'm not going to add an example here. I h
 
 ## gRPC vs REST
 
-![RESTvgRPC-2](https://frisbees.tech/content/images/2021/05/RESTvgRPC-2.png)
+<p align="center">
+  <img alt="gRPC vs REST" src="assets/images/grpc-vs-rest.png">
+    <em>gRPC vs REST</em>
+</p>
+
 Now, let’s do a quick comparison of gRPC and REST to see their differences.
 
 1. gRPC uses HTTP/2 which is, as you know, much faster than HTTP/1.1 used in REST by default. Note that today we can enable HTTP/2 in REST as well, but normally it often goes with HTTP/1.1. Binary framing, compression and multiplexing capabilities of HTTP/2 improves the performance of gRPC significantly when compared to REST with HTTP/1.x.
@@ -88,9 +88,7 @@ Now, let’s do a quick comparison of gRPC and REST to see their differences.
 
 ## When to use gRPC
 
-![grpc](https://frisbees.tech/content/images/2021/05/grpc.png)
 From the previous section it is pretty obvious that gRPC has a lot of new features and strengths when compared to HTTP/1.1x based REST APIs. However with the current state of gRPC, browser support is not yet available. It's impossible to directly call a gRPC service from a browser today. gRPC heavily uses HTTP/2 features and no browser provides the level of control required over web requests to support a gRPC client. For example, browsers do not allow a caller to require that HTTP/2 be used, or provide access to underlying HTTP/2 frames. To overcome this issue, [grpc-web](https://grpc.io/blog/state-of-grpc-web/) was introduced but not all grpc features are supported in grpc-web. The basic idea of grpc-web is to have the browser send normal HTTP requests (with Fetch or XHR) and have a small proxy in front of the gRPC server to translate the requests and responses to something the browser can use. Due to this limitation , grpc is mostly used for internal service to service communication.
-![grpc-web-proxy-1](https://frisbees.tech/content/images/2021/05/grpc-web-proxy-1.png)
 
 gRPC is well suited to the following scenarios.
 
