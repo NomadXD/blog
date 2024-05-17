@@ -419,7 +419,7 @@ Execute the following command to specify the hello world service affinity as `lo
 
 ```sh
 # US cluster (Terminal 1)
-kubectl annotate service nginx service.cilium.io/affinity="local"
+kubectl annotate service hello-world service.cilium.io/affinity="local"
 ```
 
 Now if you invoke the hello world service from the US cluster, you will receive responses only from the hello world service in the US cluster.
