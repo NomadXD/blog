@@ -37,7 +37,7 @@ In this blog, we are going to deploy the following setup in your laptop using `k
 ### 1. Create the two kubernetes clusters using kind.
 
 - Create a new directory to host the kubernetes manifests. Let's name it as `cilium-cluster-mesh`.
-- Open a terminal session and set the environment variable `KUBECONFIG` to `export KUBECONFIG=./kubeconfig-us.yaml`
+- Open a terminal session (Terminal 1) and set the environment variable `KUBECONFIG` to `export KUBECONFIG=./kubeconfig-us.yaml`
 - Create a file with the following content and save it as `kind-us-cluster.yaml`
 
 ```yaml
@@ -69,11 +69,11 @@ nodes:
 ```sh
 Creating cluster "us" ...
  ✓ Ensuring node image (kindest/node:v1.27.3) 🖼
- ✓ Preparing nodes 📦 📦 📦  
- ✓ Writing configuration 📜 
- ✓ Starting control-plane 🕹️ 
- ✓ Installing StorageClass 💾 
- ✓ Joining worker nodes 🚜 
+ ✓ Preparing nodes 📦 📦 📦
+ ✓ Writing configuration 📜
+ ✓ Starting control-plane 🕹️
+ ✓ Installing StorageClass 💾
+ ✓ Joining worker nodes 🚜
 Set kubectl context to "kind-us"
 You can now use your cluster with:
 
@@ -83,7 +83,7 @@ Not sure what to do next? 😅  Check out https://kind.sigs.k8s.io/docs/user/qui
 
 ```
 
-- Next open a new terminal session and set the environment variable `KUBECONFIG` to `export KUBECONFIG=./kubeconfig-eu.yaml`
+- Next open a new terminal session (Terminal 2) and set the environment variable `KUBECONFIG` to `export KUBECONFIG=./kubeconfig-eu.yaml`
 - Create a file with the following content and save it as `kind-eu-cluster.yaml`
 
 ```yaml
@@ -104,14 +104,14 @@ nodes:
 
 ```sh
 samples/cilium-cluster-mesh on  main [?] …
-➜ kind create cluster --name eu --config kind-eu-cluster.yaml 
+➜ kind create cluster --name eu --config kind-eu-cluster.yaml
 Creating cluster "eu" ...
  ✓ Ensuring node image (kindest/node:v1.27.3) 🖼
- ✓ Preparing nodes 📦 📦 📦  
- ✓ Writing configuration 📜 
- ✓ Starting control-plane 🕹️ 
- ✓ Installing StorageClass 💾 
- ✓ Joining worker nodes 🚜 
+ ✓ Preparing nodes 📦 📦 📦
+ ✓ Writing configuration 📜
+ ✓ Starting control-plane 🕹️
+ ✓ Installing StorageClass 💾
+ ✓ Joining worker nodes 🚜
 Set kubectl context to "kind-eu"
 You can now use your cluster with:
 
@@ -127,7 +127,7 @@ Not sure what to do next? 😅  Check out https://kind.sigs.k8s.io/docs/user/qui
 
 ```sh
 cilium install \
-  --set cluster.name=us \       
+  --set cluster.name=us \
   --set cluster.id=1 \
   --set ipam.mode=kubernetes
 ```
@@ -154,7 +154,7 @@ Following logs can be seen after executing the above command.
 
 ```sh
 cilium install \
-  --set cluster.name=eu \       
+  --set cluster.name=eu \
   --set cluster.id=2 \
   --set ipam.mode=kubernetes
 ```
@@ -175,3 +175,78 @@ Now if you followed the instructions upto this point correctly, you would have 2
 ### 3. Enable cilium clustermesh in both clusters
 
 Next we are going to enable cilium clustermesh in both US and EU clusters. This will deploy an additional deployment for the `clustermesh-apiserver` in both of the clusters. Cilium agents running in the EU cluster will use this `clustermesh-apiserver` in the US cluster to replicate the states of US cluster to its own EU cluster and vice versa. Therefore this `clustermesh-apiserver` should be exposed as a Load balancer service for accessing outside the cluster. But for demonstrating purposes, we are going to expose the `clustermesh-apiserver` as a NodePort service as we don't have dynamic load balancers available. This is not recommended for production use cases as the service becomes unavailable when the node goes down.
+
+To enable `clustermesh-apiserver` run the following command in both Terminal 1 (US) and Terminal 2 (EU).
+
+```sh
+cilium clustermesh enable --service-type NodePort
+```
+
+Finally to connect the clusters, execute the following command.
+
+```sh
+cilium clustermesh connect --context us --destination-context eu
+```
+
+To check the status of the cilium clustermesh execute the command `cilium clustermesh status --wait`
+
+### 4. Deploy the sample hello world application
+
+Deploy the sample hello world application by executing the following commands.
+
+```sh
+kubectl apply -f deployment-us.yaml
+kubectl apply -f deployment-eu.yaml
+```
+
+Check whether sample hello world is working as expected by executing the following command in both US and EU clusters.
+
+```sh
+kubectl exec -it busybox-deployment-b7bc87c95-8q7l9 -- /bin/sh -c 'for i in $(seq 1 10); do wget -qO- nginx:80; echo ""; done'
+```
+
+If everything is working as expected, you will see a output similar to the following logs.
+
+```
+{Hello world}
+```
+
+Did you notice that all the responses in the US are returned from the nginx in US ? And all the responses in the EU are returned from the nginx in EU ? Eventhough we have enabled cilium clustermesh in both clusters and connected the two clusters, we haven't specified the hello world service as a global service. So the requests are load balanced among the pods within the same cluster.
+
+### 5. Specify hello world service as a global service to enable cross cluster service discovery and load balancing.
+
+To enable hello world service as a global service, execute the following command in both US and EU clusters.
+
+```sh
+kubectl annotate service nginx service.cilium.io/global="true"
+```
+
+Now invoke the hello world service again and notice the responses received.
+
+```sh
+kubectl exec -it busybox-deployment-b7bc87c95-8q7l9 -- /bin/sh -c 'for i in $(seq 1 10); do wget -qO- nginx:80; echo ""; done'
+```
+
+Now you can see that the requests from the US cluster are load balanced to US and EU and vice versa. But in most cases, we want to load balance cross cluster for fault tolerance. Load balancing cross cluster is not ideal always as the latency may get high
+
+But in an ideal scenario, we want to load balance globally for fault tolerance only if the local services are not available. To achive such behaviour, we can use the service affinity rules in cilium.
+
+### 6. Specify hello world service affinity as local for fault tolerant cross cluster load balancing.
+
+Execute the following command to specify the hello world service affinity as `local`. This will load balance requests to the hello world service among the pods in the cluster and route requests to the other cluster only if the local service is not available.
+
+```sh
+kubectl annotate service nginx service.cilium.io/affinity="local"
+```
+
+To demonstrate the fault tolerant behaviour, scale down the hello world service in US cluster and invoke the hello world service from the US cluster.
+
+```sh
+kubectl scale deployment rebel-base --replicas 0
+```
+
+```sh
+kubectl exec -it busybox-deployment-b7bc87c95-8q7l9 -- /bin/sh -c 'for i in $(seq 1 10); do wget -qO- nginx:80; echo ""; done'
+```
+
+Eventhough the hello world service is down in the US, the requests get routed to the hello world service in EU.
