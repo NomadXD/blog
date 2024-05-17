@@ -67,9 +67,12 @@ nodes:
   - role: worker
 ```
 
-- Execute `kind create cluster --name us --config kind-us-cluster.yaml` to create the US cluster. If the cluster creation is successful, following logs can be seen.
+- Execute the following command to create the US cluster. If the cluster creation is successful, following logs can be seen.
 
 ```sh
+# US cluster (Terminal 1)
+➜ kind create cluster --name us --config kind-us-cluster.yaml
+
 Creating cluster "us" ...
  ✓ Ensuring node image (kindest/node:v1.27.3) 🖼
  ✓ Preparing nodes 📦 📦 📦
@@ -86,7 +89,7 @@ Not sure what to do next? 😅  Check out https://kind.sigs.k8s.io/docs/user/qui
 
 ```
 
-- Next open a new terminal session (Terminal 2) and set the environment variable `KUBECONFIG` to `export KUBECONFIG=./kubeconfig-eu.yaml`
+- Next open a new terminal (Terminal 2) and set the environment variable `KUBECONFIG` to `export KUBECONFIG=./kubeconfig-eu.yaml`
 - Create a file with the following content and save it as `kind-eu-cluster.yaml`
 
 ```yaml
@@ -103,10 +106,12 @@ nodes:
   - role: worker
 ```
 
-- Execute `kind create cluster --name eu --config kind-eu-cluster.yaml` to create the EU cluster. If the cluster creation is successful, following logs can be seen.
+- Execute the following command to create the EU cluster. If the cluster creation is successful, following logs can be seen.
 
 ```sh
+# EU cluster (Terminal 2)
 ➜ kind create cluster --name eu --config kind-eu-cluster.yaml
+
 Creating cluster "eu" ...
  ✓ Ensuring node image (kindest/node:v1.27.3) 🖼
  ✓ Preparing nodes 📦 📦 📦
