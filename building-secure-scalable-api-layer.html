@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Document Settings -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Base Meta -->
+    <!-- dynamically fixing the title for tag/author pages -->
+
+
+
+    <title>Building a Secure and Scalable API layer using Envoy Proxy</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Styles'n'Scripts -->
+    <link rel="stylesheet" type="text/css" href="/blog/assets/built/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/blog/assets/built/screen.edited.css" />
+    <link rel="stylesheet" type="text/css" href="/blog/assets/built/syntax.css" />
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+
+    <!--[if IE]>
+        <style>
+            p, ol, ul{
+                width: 100%;
+            }
+            blockquote{
+                width: 100%;
+            }
+        </style>
+    <![endif]-->
+    
+    <!-- This tag outputs SEO meta+structured data and other important settings -->
+    <meta name="description" content="You'll find all my tech posts here" />
+    <link rel="shortcut icon" href="/blog//assets/images/favicon.png" type="image/png" />
+    <link rel="canonical" href="/blog/building-secure-scalable-api-layer" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+     <!--title below is coming from _includes/dynamic_title-->
+    <meta property="og:site_name" content="Nomad's Blog" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Building a Secure and Scalable API layer using Envoy Proxy" />
+    <meta property="og:description" content="APIs (Application Programming Interfaces) have become an integral part of modern software development. They allow different applications to communicate and exchange data, enabling developers to create complex systems that integrate multiple services and technologies. APIs are used by companies of all sizes to power their digital products and services, from" />
+    <meta property="og:url" content="/blog/building-secure-scalable-api-layer" />
+    <meta property="og:image" content="/blog/assets/images/secure-scalable-cover.jpg" />
+    <meta property="article:publisher" content="https://www.facebook.com/lahiru97udayanga" />
+    <meta property="article:author" content="https://www.facebook.com/lahiru97udayanga" />
+    <meta property="article:published_time" content="2023-04-12T10:18:00+00:00" />
+    <meta property="article:modified_time" content="2023-04-12T10:18:00+00:00" />
+    <meta property="article:tag" content="Tech" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Building a Secure and Scalable API layer using Envoy Proxy" />
+    <meta name="twitter:description" content="APIs (Application Programming Interfaces) have become an integral part of modern software development. They allow different applications to communicate and exchange data, enabling developers to create complex systems that integrate multiple services and technologies. APIs are used by companies of all sizes to power their digital products and services, from" />
+    <meta name="twitter:url" content="/blog/" />
+    <meta name="twitter:image" content="/blog/assets/images/secure-scalable-cover.jpg" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Nomad's Blog" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Tech" />
+    <meta name="twitter:site" content="@NomadXDDDD" />
+    <meta name="twitter:creator" content="@NomadXDDDD" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Nomad's Blog",
+        "logo": "/blog//assets/images/blog-icon.png"
+    },
+    "url": "/blog/building-secure-scalable-api-layer",
+    "image": {
+        "@type": "ImageObject",
+        "url": "/blog/assets/images/secure-scalable-cover.jpg",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/blog/building-secure-scalable-api-layer"
+    },
+    "description": "APIs (Application Programming Interfaces) have become an integral part of modern software development. They allow different applications to communicate and exchange data, enabling developers to create complex systems that integrate multiple services and technologies. APIs are used by companies of all sizes to power their digital products and services, from"
+}
+    </script>
+
+    <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>
+    <script type="text/javascript">
+    ghost.init({
+    	clientId: "ghost-frontend",
+    	clientSecret: "f84a07a72b17"
+    });
+    </script> -->
+
+    <meta name="generator" content="Jekyll 3.6.2" />
+    <link rel="alternate" type="application/rss+xml" title="Building a Secure and Scalable API layer using Envoy Proxy" href="/blog/feed.xml" />
+
+
+</head>
+<body class="post-template">
+
+    <div class="site-wrapper">
+        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+        <!-- default -->
+
+<!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template -->
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+        
+            
+                <a class="site-nav-logo" href="/blog/"><img src="/blog//assets/images/blog-icon.png" alt="Nomad's Blog" /></a>
+            
+        
+        
+            <ul class="nav" role="menu">
+  <li class="nav-getting-started" role="menuitem">
+    <a href="/blog/tag/tech/">Tech</a>
+  </li>
+  <li class="nav-home" role="menuitem">
+    <a href="/blog/tag/random/">Random</a>
+  </li>
+  <li class="nav-try-ghost" role="menuitem">
+    <a href="/blog/tag/travel/">Travel</a>
+  </li>
+  <li class="nav-about" role="menuitem">
+    <a href="/blog/about/">About</a>
+  </li>
+</ul>
+
+        
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+            
+                <a class="social-link social-link-fb" href="https://facebook.com/lahiru97udayanga" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+</a>
+            
+            
+                <a class="social-link social-link-tw" href="https://twitter.com/NomadXDDDD" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+</a>
+            
+        </div>
+        
+    </div>
+</nav>
+
+    </div>
+</header>
+
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+
+        <article class="post-full  tag-tech post ">
+
+            <header class="post-full-header">
+                <section class="post-full-meta">
+                    <time class="post-full-meta-date" datetime="12 April 2023">12 April 2023</time>
+                    
+                        <span class="date-divider">/</span>
+                        
+                            
+                               <a href='/blog/tag/tech/'>TECH</a>
+                            
+                        
+                    
+                </section>
+                <h1 class="post-full-title">Building a Secure and Scalable API layer using Envoy Proxy</h1>
+            </header>
+
+            
+            <figure class="post-full-image" style="background-image: url(/blog/assets/images/secure-scalable-cover.jpg)">
+            </figure>
+            
+
+            <section class="post-full-content">
+                <div class="kg-card-markdown">
+                    <p>APIs (Application Programming Interfaces) have become an integral part of modern software development. They allow different applications to communicate and exchange data, enabling developers to create complex systems that integrate multiple services and technologies. APIs are used by companies of all sizes to power their digital products and services, from social media platforms to financial systems.</p>
+
+<p>However, APIs can also be complex and challenging to manage, particularly when it comes to security and scalability. As APIs are exposed to the internet, they are vulnerable to attacks such as injection, denial of service, and man-in-the-middle attacks. Furthermore, as API usage grows, it becomes increasingly challenging to scale them to meet the demands of growing user bases and increasing traffic. This article aims to demonstrate the use of open source technologies, such as Envoy Proxy, to build a secure, scalable, and resilient Application Programming Interface (API) layer for organizations that depend heavily on APIs.</p>
+
+<p>The following design will be implemented within the scope of this article to demonstrate the creation of a secure and scalable API layer.</p>
+
+<p align="center">
+  <img alt="Siwa city" src="assets/images/secure-scalable-design.png" />
+    <em>Solid lines shows the request/response flow and dotted lines show the telemetry data flow</em>
+</p>
+
+<p>First, let’s start with the external authentication service and the related proxy configuration, as it is the first service that Envoy Proxy calls when a request is received.</p>
+
+<h4 id="external-authorization-with-external-authorization-grpc-service">External Authorization with external authorization gRPC service</h4>
+
+<p>Envoy Proxy supports external authorization through its built-in external authorization filter. The external authorization filter should be added to the filter chain with a reference to the relevant external gRPC/HTTP service. When a request is received, it is propagated through the filter chain, and upon reaching the external authorization filter, Envoy Proxy sends an authorization check request to the configured external authorization service. The authorization service receives the request, which includes information about the original request from the client/downstream, such as headers and body. After performing authorization, the external authorization service must return the response in the expected format for Envoy Proxy. Based on the response, Envoy Proxy will either pass the request to the next filter or return an unauthorized response to the client/downstream.</p>
+
+<p>This approach allows for a flexible and modular authorization architecture, where the authorization logic can be separated from the core application logic, making it easier to manage and scale. Additionally, it enables integration with a wide range of authorization providers, such as OAuth, LDAP, and more.</p>
+
+<p>Let’s go through the relevant envoy proxy configuration and the sample external authorization gRPC service.</p>
+
+<blockquote>
+  <p><strong>External authorization filter configuration</strong></p>
+</blockquote>
+
+<p>Add external authorization filter to the filter chain with a reference to the cluster that represents the external authorization service.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">http_filters</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">envoy.filters.http.ext_authz</span>
+    <span class="na">typed_config</span><span class="pi">:</span>
+      <span class="s2">"</span><span class="s">@type"</span><span class="pi">:</span> <span class="s">type.googleapis.com/envoy.extensions.filters.http.ext_authz.v3.ExtAuthz</span>
+      <span class="na">grpc_service</span><span class="pi">:</span>
+        <span class="na">envoy_grpc</span><span class="pi">:</span>
+          <span class="na">cluster_name</span><span class="pi">:</span> <span class="s">ext_authz</span>
+        <span class="na">timeout</span><span class="pi">:</span> <span class="s">2s</span>
+      <span class="na">transport_api_version</span><span class="pi">:</span> <span class="s">V3</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>External authorization service configuration</strong></p>
+</blockquote>
+
+<p>Add the external authorization cluster to the cluster configuration.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="na">clusters</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">ext_authz</span>
+      <span class="na">type</span><span class="pi">:</span> <span class="s">STRICT_DNS</span>
+      <span class="na">lb_policy</span><span class="pi">:</span> <span class="s">ROUND_ROBIN</span>
+      <span class="na">typed_extension_protocol_options</span><span class="pi">:</span>
+        <span class="s">envoy.extensions.upstreams.http.v3.HttpProtocolOptions</span><span class="pi">:</span>
+          <span class="s2">"</span><span class="s">@type"</span><span class="pi">:</span> <span class="s">type.googleapis.com/envoy.extensions.upstreams.http.v3.HttpProtocolOptions</span>
+          <span class="na">explicit_http_config</span><span class="pi">:</span>
+            <span class="na">http2_protocol_options</span><span class="pi">:</span> <span class="pi">{}</span>
+      <span class="na">load_assignment</span><span class="pi">:</span>
+        <span class="na">cluster_name</span><span class="pi">:</span> <span class="s">ext_authz</span>
+        <span class="na">endpoints</span><span class="pi">:</span>
+          <span class="pi">-</span> <span class="na">lb_endpoints</span><span class="pi">:</span>
+              <span class="pi">-</span> <span class="na">endpoint</span><span class="pi">:</span>
+                  <span class="na">address</span><span class="pi">:</span>
+                    <span class="na">socket_address</span><span class="pi">:</span>
+                      <span class="na">address</span><span class="pi">:</span> <span class="s">ext_authz</span>
+                      <span class="na">port_value</span><span class="pi">:</span> <span class="m">50051</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>Sample gRPC authorization service written in go</strong></p>
+</blockquote>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">main</span>
+
+<span class="k">import</span> <span class="p">(</span>
+	<span class="s">"context"</span>
+	<span class="s">"fmt"</span>
+	<span class="s">"log"</span>
+	<span class="s">"net"</span>
+	<span class="s">"net/http"</span>
+	<span class="s">"strings"</span>
+	<span class="s">"time"</span>
+
+	<span class="n">auth</span> <span class="s">"github.com/envoyproxy/go-control-plane/envoy/service/auth/v3"</span>
+	<span class="s">"github.com/golang-jwt/jwt"</span>
+	<span class="s">"google.golang.org/genproto/googleapis/rpc/code"</span>
+	<span class="s">"google.golang.org/genproto/googleapis/rpc/status"</span>
+	<span class="s">"google.golang.org/grpc"</span>
+<span class="p">)</span>
+
+<span class="k">type</span> <span class="n">AuthServer</span> <span class="k">struct</span><span class="p">{}</span>
+ 
+<span class="k">var</span> <span class="n">secretKey</span> <span class="p">[]</span><span class="kt">byte</span> <span class="o">=</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">(</span><span class="s">"my_secret_key"</span><span class="p">)</span>
+
+<span class="k">func</span> <span class="p">(</span><span class="n">authServer</span> <span class="o">*</span><span class="n">AuthServer</span><span class="p">)</span> <span class="n">Check</span><span class="p">(</span><span class="n">ctx</span> <span class="n">context</span><span class="o">.</span><span class="n">Context</span><span class="p">,</span> <span class="n">request</span> <span class="o">*</span><span class="n">auth</span><span class="o">.</span><span class="n">CheckRequest</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="n">auth</span><span class="o">.</span><span class="n">CheckResponse</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">log</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"Auth server received auth request: %v"</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">String</span><span class="p">())</span>
+  <span class="c">// Extract the authorization token from the request</span>
+	<span class="n">authHeader</span><span class="p">,</span> <span class="n">ok</span> <span class="o">:=</span> <span class="n">request</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">Request</span><span class="o">.</span><span class="n">Http</span><span class="o">.</span><span class="n">Headers</span><span class="p">[</span><span class="s">"authorization"</span><span class="p">]</span>
+	<span class="k">var</span> <span class="n">tokenString</span> <span class="kt">string</span>
+
+	<span class="k">if</span> <span class="n">ok</span> <span class="p">{</span>
+		<span class="n">tokenString</span> <span class="o">=</span> <span class="n">strings</span><span class="o">.</span><span class="n">TrimPrefix</span><span class="p">(</span><span class="n">authHeader</span><span class="p">,</span> <span class="s">"Bearer "</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"Token: %s"</span><span class="p">,</span> <span class="n">tokenString</span><span class="p">)</span>
+	<span class="n">_</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">jwt</span><span class="o">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">tokenString</span><span class="p">,</span> <span class="k">func</span><span class="p">(</span><span class="n">token</span> <span class="o">*</span><span class="n">jwt</span><span class="o">.</span><span class="n">Token</span><span class="p">)</span> <span class="p">(</span><span class="k">interface</span><span class="p">{},</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="n">_</span><span class="p">,</span> <span class="n">ok</span> <span class="o">:=</span> <span class="n">token</span><span class="o">.</span><span class="n">Method</span><span class="o">.</span><span class="p">(</span><span class="o">*</span><span class="n">jwt</span><span class="o">.</span><span class="n">SigningMethodHMAC</span><span class="p">);</span> <span class="o">!</span><span class="n">ok</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="no">nil</span><span class="p">,</span> <span class="n">fmt</span><span class="o">.</span><span class="n">Errorf</span><span class="p">(</span><span class="s">"unexpected signing method: %v"</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">Header</span><span class="p">[</span><span class="s">"alg"</span><span class="p">])</span>
+		<span class="p">}</span>
+		<span class="k">return</span> <span class="n">secretKey</span><span class="p">,</span> <span class="no">nil</span>
+	<span class="p">})</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"Error: %v"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+  <span class="c">// If valid token, returns Code_OK</span>
+	<span class="k">if</span> <span class="n">err</span> <span class="o">==</span> <span class="no">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="o">&amp;</span><span class="n">auth</span><span class="o">.</span><span class="n">CheckResponse</span><span class="p">{</span>
+			<span class="n">Status</span><span class="o">:</span> <span class="o">&amp;</span><span class="n">status</span><span class="o">.</span><span class="n">Status</span><span class="p">{</span>
+				<span class="n">Code</span><span class="o">:</span> <span class="kt">int32</span><span class="p">(</span><span class="n">code</span><span class="o">.</span><span class="n">Code_OK</span><span class="p">),</span>
+				<span class="n">Message</span><span class="o">:</span> <span class="s">"AuthServer authentication successful"</span><span class="p">,</span>
+			<span class="p">},</span>
+		<span class="p">},</span> <span class="no">nil</span>
+	<span class="p">}</span>
+  <span class="c">// If invalid token, returns Code_PERMISSION_DENIED </span>
+	<span class="k">return</span> <span class="o">&amp;</span><span class="n">auth</span><span class="o">.</span><span class="n">CheckResponse</span><span class="p">{</span>
+		<span class="n">Status</span><span class="o">:</span> <span class="o">&amp;</span><span class="n">status</span><span class="o">.</span><span class="n">Status</span><span class="p">{</span>
+			<span class="n">Code</span><span class="o">:</span> <span class="kt">int32</span><span class="p">(</span><span class="n">code</span><span class="o">.</span><span class="n">Code_PERMISSION_DENIED</span><span class="p">),</span>
+			<span class="n">Message</span><span class="o">:</span> <span class="s">"AuthServer authentication unsuccessful"</span><span class="p">,</span>
+		<span class="p">},</span>
+	<span class="p">},</span> <span class="no">nil</span> 
+<span class="p">}</span>
+
+<span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">lis</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">net</span><span class="o">.</span><span class="n">Listen</span><span class="p">(</span><span class="s">"tcp"</span><span class="p">,</span> <span class="s">":50051"</span><span class="p">)</span>
+	<span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+		<span class="n">log</span><span class="o">.</span><span class="n">Fatalf</span><span class="p">(</span><span class="s">"failed to listen: %v"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="n">opts</span> <span class="o">:=</span> <span class="p">[]</span><span class="n">grpc</span><span class="o">.</span><span class="n">ServerOption</span><span class="p">{</span><span class="n">grpc</span><span class="o">.</span><span class="n">MaxConcurrentStreams</span><span class="p">(</span><span class="m">10</span><span class="p">)}</span>
+	<span class="n">s</span> <span class="o">:=</span> <span class="n">grpc</span><span class="o">.</span><span class="n">NewServer</span><span class="p">(</span><span class="n">opts</span><span class="o">...</span><span class="p">)</span>
+
+	<span class="n">auth</span><span class="o">.</span><span class="n">RegisterAuthorizationServer</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">AuthServer</span><span class="p">{})</span>
+
+	<span class="n">log</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"Starting gRPC Server at 50051"</span><span class="p">)</span>
+	<span class="n">s</span><span class="o">.</span><span class="n">Serve</span><span class="p">(</span><span class="n">lis</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="rate-limiting-with-envoy-ratelimit-grpc-service">Rate limiting with envoy ratelimit gRPC service</h4>
+
+<p>Envoy Proxy offers multiple rate limiting strategies, including local rate limiting, circuit breaking, and global rate limiting. For this article, we will focus on global rate limiting using the Envoy External Rate Limit Service. Local rate limiting and circuit breakers can also be used in cases where network connection level rate limiting is needed, in addition to application level rate limiting enforced by the global rate limit service.</p>
+
+<blockquote>
+  <p><strong>Add ratelimit filter to the HTTP filter chain</strong></p>
+</blockquote>
+
+<p>Similar to external authorization, we need to add the Envoy Rate Limit filter to the filter chain to enable the Envoy Proxy to call the global rate limit service. It’s important to add the Rate Limit filter after the External Authorization filter to reduce the load on the external ratelimit service.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">http_filters</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">envoy.filters.http.ext_authz</span>
+    <span class="na">typed_config</span><span class="pi">:</span>
+      <span class="s2">"</span><span class="s">@type"</span><span class="pi">:</span> <span class="s">type.googleapis.com/envoy.extensions.filters.http.ext_authz.v3.ExtAuthz</span>
+      <span class="na">grpc_service</span><span class="pi">:</span>
+        <span class="na">envoy_grpc</span><span class="pi">:</span>
+          <span class="na">cluster_name</span><span class="pi">:</span> <span class="s">ext_authz</span>
+        <span class="na">timeout</span><span class="pi">:</span> <span class="s">2s</span>
+      <span class="na">transport_api_version</span><span class="pi">:</span> <span class="s">V3</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">envoy.filters.http.ratelimit</span>
+    <span class="na">typed_config</span><span class="pi">:</span>
+      <span class="s2">"</span><span class="s">@type"</span><span class="pi">:</span> <span class="s">type.googleapis.com/envoy.extensions.filters.http.ratelimit.v3.RateLimit</span>
+      <span class="na">domain</span><span class="pi">:</span> <span class="s">default</span>
+      <span class="na">failure_mode_deny</span><span class="pi">:</span> <span class="no">true</span>
+      <span class="na">enable_x_ratelimit_headers</span><span class="pi">:</span> <span class="s">DRAFT_VERSION_03</span>
+      <span class="na">rate_limit_service</span><span class="pi">:</span>
+        <span class="na">grpc_service</span><span class="pi">:</span>
+          <span class="na">envoy_grpc</span><span class="pi">:</span>
+            <span class="na">cluster_name</span><span class="pi">:</span> <span class="s">ratelimit</span>
+        <span class="na">transport_api_version</span><span class="pi">:</span> <span class="s">V3</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>Provide ratelimit configuration to the external ratelimit service</strong></p>
+</blockquote>
+
+<p>Envoy Rate Limit Service uses descriptors which are basically key, value pairs to perform rate limiting. In order to use the Envoy Rate Limit Service, we need to provide rate limits related to the descriptors as configuration to the Rate Limit Service.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">domain</span><span class="pi">:</span> <span class="s">default</span>
+<span class="na">descriptors</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">key</span><span class="pi">:</span> <span class="s">version</span>
+    <span class="na">value</span><span class="pi">:</span> <span class="s">v1</span>
+    <span class="na">rate_limit</span><span class="pi">:</span>
+      <span class="na">unit</span><span class="pi">:</span> <span class="s">second</span>
+      <span class="na">requests_per_unit</span><span class="pi">:</span> <span class="m">5</span>
+  <span class="pi">-</span> <span class="na">key</span><span class="pi">:</span> <span class="s">version</span>
+    <span class="na">value</span><span class="pi">:</span> <span class="s">v2</span>
+    <span class="na">rate_limit</span><span class="pi">:</span>
+      <span class="na">unit</span><span class="pi">:</span> <span class="s">second</span>
+      <span class="na">requests_per_unit</span><span class="pi">:</span> <span class="m">10</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>Add ratelimit descriptors to the routes</strong></p>
+</blockquote>
+
+<p>Additionally, we need a mechanism for Envoy Proxy to inform the External Rate Limit Service to increment a specific descriptor when a resource is accessed. To achieve this, we need to define descriptors for each resource.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="na">route_config</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">local_route</span>
+  <span class="na">virtual_hosts</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">upstream</span>
+      <span class="na">domains</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s2">"</span><span class="s">*"</span>
+      <span class="na">routes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">match</span><span class="pi">:</span>
+          <span class="na">prefix</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/api/v1"</span>
+        <span class="na">route</span><span class="pi">:</span>
+          <span class="na">cluster</span><span class="pi">:</span> <span class="s">upstream_service</span>
+          <span class="na">rate_limits</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">actions</span><span class="pi">:</span>
+                <span class="pi">-</span> <span class="na">generic_key</span><span class="pi">:</span>
+                    <span class="na">descriptor_key</span><span class="pi">:</span> <span class="s">version</span>
+                    <span class="na">descriptor_value</span><span class="pi">:</span> <span class="s">v1</span>
+      <span class="pi">-</span> <span class="na">match</span><span class="pi">:</span>
+          <span class="na">prefix</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/api/v2"</span>
+        <span class="na">route</span><span class="pi">:</span>
+          <span class="na">cluster</span><span class="pi">:</span> <span class="s">upstream_service</span>
+          <span class="na">rate_limits</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">actions</span><span class="pi">:</span>
+                <span class="pi">-</span> <span class="na">generic_key</span><span class="pi">:</span>
+                    <span class="na">descriptor_key</span><span class="pi">:</span> <span class="s">version</span>
+                    <span class="na">descriptor_value</span><span class="pi">:</span> <span class="s">v2</span>  
+</code></pre></div></div>
+
+<p>In this scenario, we have defined two rate limit keys. When resources with prefix <code class="language-plaintext highlighter-rouge">/api/v1</code> are accessed, the rate limit policy with descriptor value <code class="language-plaintext highlighter-rouge">v1</code> is applied. Similarly, for resources with prefix <code class="language-plaintext highlighter-rouge">/api/v2</code>, the rate limit policy with descriptor value <code class="language-plaintext highlighter-rouge">v2</code> is applied. This means that API v1 can be accessed 5 times per minute, while API v2 can be accessed 10 times per minute. If the quota is exceeded, Envoy Proxy returns a 429 error response without processing the request any further.</p>
+
+<h4 id="collecting-telemetry-data-for-distributed-tracing">Collecting telemetry data for distributed tracing</h4>
+
+<p>As demonstrated in the above scenario, Envoy Proxy makes multiple gRPC/HTTP requests to external services during request processing. Therefore, it’s important to have better visibility into what’s happening behind the scenes for debugging errors or monitoring purposes. In the above scenario, we can configure Envoy Proxy, External Authorization Service, and Rate Limit Service to publish telemetry data to a telemetry backend. For this example, we use Jaeger as the telemetry backend and OpenTelemetry to generate telemetry data.</p>
+
+<blockquote>
+  <p><strong>Envoy proxy tracer configuration</strong></p>
+</blockquote>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">envoy.filters.network.http_connection_manager</span>
+  <span class="na">typed_config</span><span class="pi">:</span>
+    <span class="s2">"</span><span class="s">@type"</span><span class="pi">:</span> <span class="s">type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager</span>
+    <span class="na">codec_type</span><span class="pi">:</span> <span class="s">AUTO</span>
+    <span class="na">stat_prefix</span><span class="pi">:</span> <span class="s">ingress_http</span>
+    <span class="na">generate_request_id</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">tracing</span><span class="pi">:</span>
+      <span class="na">provider</span><span class="pi">:</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s">envoy.tracers.opentelemetry</span>
+        <span class="na">typed_config</span><span class="pi">:</span>
+          <span class="s2">"</span><span class="s">@type"</span><span class="pi">:</span> <span class="s">type.googleapis.com/envoy.config.trace.v3.OpenTelemetryConfig</span>
+          <span class="na">grpc_service</span><span class="pi">:</span>
+            <span class="na">envoy_grpc</span><span class="pi">:</span>
+              <span class="na">cluster_name</span><span class="pi">:</span> <span class="s">jaeger</span>
+            <span class="na">timeout</span><span class="pi">:</span> <span class="s">1s</span>
+          <span class="na">service_name</span><span class="pi">:</span> <span class="s">proxy</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>Publishing telemetry data from external authorization service</strong></p>
+</blockquote>
+
+<div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">func</span> <span class="p">(</span><span class="n">authServer</span> <span class="o">*</span><span class="n">AuthServer</span><span class="p">)</span> <span class="n">Check</span><span class="p">(</span><span class="n">ctx</span> <span class="n">context</span><span class="o">.</span><span class="n">Context</span><span class="p">,</span> <span class="n">request</span> <span class="o">*</span><span class="n">auth</span><span class="o">.</span><span class="n">CheckRequest</span><span class="p">)</span> <span class="p">(</span><span class="o">*</span><span class="n">auth</span><span class="o">.</span><span class="n">CheckResponse</span><span class="p">,</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">tracer</span> <span class="o">:=</span> <span class="n">otel</span><span class="o">.</span><span class="n">Tracer</span><span class="p">(</span><span class="s">"ext-authz"</span><span class="p">)</span>
+  <span class="c">// create span</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">span</span> <span class="o">:=</span> <span class="n">tracer</span><span class="o">.</span><span class="n">Start</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="s">"ext-authz-span"</span><span class="p">)</span>
+    <span class="k">defer</span> <span class="n">span</span><span class="o">.</span><span class="n">End</span><span class="p">()</span>
+	<span class="n">log</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"Auth server received auth request: %v"</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">String</span><span class="p">())</span>
+	<span class="n">authHeader</span><span class="p">,</span> <span class="n">ok</span> <span class="o">:=</span> <span class="n">request</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">Request</span><span class="o">.</span><span class="n">Http</span><span class="o">.</span><span class="n">Headers</span><span class="p">[</span><span class="s">"authorization"</span><span class="p">]</span>
+	<span class="k">var</span> <span class="n">tokenString</span> <span class="kt">string</span>
+
+	<span class="k">if</span> <span class="n">ok</span> <span class="p">{</span>
+		<span class="n">tokenString</span> <span class="o">=</span> <span class="n">strings</span><span class="o">.</span><span class="n">TrimPrefix</span><span class="p">(</span><span class="n">authHeader</span><span class="p">,</span> <span class="s">"Bearer "</span><span class="p">)</span>
+	<span class="p">}</span>
+  <span class="c">// set attributes to span</span>
+	<span class="n">span</span><span class="o">.</span><span class="n">SetAttributes</span><span class="p">(</span>
+        <span class="n">attribute</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="s">"example-key"</span><span class="p">,</span> <span class="s">"example-value"</span><span class="p">),</span>
+		<span class="n">attribute</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="s">"guid:x-request-id"</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">Request</span><span class="o">.</span><span class="n">Http</span><span class="o">.</span><span class="n">Headers</span><span class="p">[</span><span class="s">"x-request-id"</span><span class="p">]),</span>
+    <span class="p">)</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"Token: %s"</span><span class="p">,</span> <span class="n">tokenString</span><span class="p">)</span>
+	<span class="n">_</span><span class="p">,</span> <span class="n">err</span> <span class="o">:=</span> <span class="n">jwt</span><span class="o">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">tokenString</span><span class="p">,</span> <span class="k">func</span><span class="p">(</span><span class="n">token</span> <span class="o">*</span><span class="n">jwt</span><span class="o">.</span><span class="n">Token</span><span class="p">)</span> <span class="p">(</span><span class="k">interface</span><span class="p">{},</span> <span class="kt">error</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">if</span> <span class="n">_</span><span class="p">,</span> <span class="n">ok</span> <span class="o">:=</span> <span class="n">token</span><span class="o">.</span><span class="n">Method</span><span class="o">.</span><span class="p">(</span><span class="o">*</span><span class="n">jwt</span><span class="o">.</span><span class="n">SigningMethodHMAC</span><span class="p">);</span> <span class="o">!</span><span class="n">ok</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="no">nil</span><span class="p">,</span> <span class="n">fmt</span><span class="o">.</span><span class="n">Errorf</span><span class="p">(</span><span class="s">"unexpected signing method: %v"</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">Header</span><span class="p">[</span><span class="s">"alg"</span><span class="p">])</span>
+		<span class="p">}</span>
+		<span class="k">return</span> <span class="n">secretKey</span><span class="p">,</span> <span class="no">nil</span>
+	<span class="p">})</span>
+	<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"Error: %v"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span>
+  <span class="c">// Span end</span>
+	<span class="n">span</span><span class="o">.</span><span class="n">End</span><span class="p">()</span>
+	<span class="k">if</span> <span class="n">err</span> <span class="o">==</span> <span class="no">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="o">&amp;</span><span class="n">auth</span><span class="o">.</span><span class="n">CheckResponse</span><span class="p">{</span>
+			<span class="n">Status</span><span class="o">:</span> <span class="o">&amp;</span><span class="n">status</span><span class="o">.</span><span class="n">Status</span><span class="p">{</span>
+				<span class="n">Code</span><span class="o">:</span> <span class="kt">int32</span><span class="p">(</span><span class="n">code</span><span class="o">.</span><span class="n">Code_OK</span><span class="p">),</span>
+				<span class="n">Message</span><span class="o">:</span> <span class="s">"AuthServer authentication successful"</span><span class="p">,</span>
+			<span class="p">},</span>
+		<span class="p">},</span> <span class="no">nil</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="o">&amp;</span><span class="n">auth</span><span class="o">.</span><span class="n">CheckResponse</span><span class="p">{</span>
+		<span class="n">Status</span><span class="o">:</span> <span class="o">&amp;</span><span class="n">status</span><span class="o">.</span><span class="n">Status</span><span class="p">{</span>
+			<span class="n">Code</span><span class="o">:</span> <span class="kt">int32</span><span class="p">(</span><span class="n">code</span><span class="o">.</span><span class="n">Code_PERMISSION_DENIED</span><span class="p">),</span>
+			<span class="n">Message</span><span class="o">:</span> <span class="s">"AuthServer authentication unsuccessful"</span><span class="p">,</span>
+		<span class="p">},</span>
+	<span class="p">},</span> <span class="no">nil</span> 
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="summary">Summary</h4>
+
+<p>This article mainly focuses on the application-level security and scalability of the API layer. We achieve application-level security using the External Authorization Service, which deals with identity verification and authorization, and the External Rate Limit Service, which ensures the availability of upstream services by performing the configured rate limits.</p>
+
+<p>Scalability can be achieved by scaling the necessary components based on requirements. It’s recommended to identify the bottleneck and scale the components accordingly. For example, if the rate limit service is causing a bottleneck in request processing and adding high latency, the external rate limit service can be scaled independently without scaling other components.</p>
+
+<p>This kind of API layer helps application developers focus on writing business logic in their microservices without worrying about security and scalability.</p>
+
+<p><strong>Complete source code for the above setup with a docker-compose deployment:</strong> <a href="https://github.com/NomadXD/samples/tree/main/secure-scalable-api-layer">secure-scalable-api-layer</a></p>
+
+                </div>
+            </section>
+
+            <!-- Email subscribe form at the bottom of the page -->
+            <!--  -->
+
+            <footer class="post-full-footer">
+                <!-- Everything inside the #author tags pulls data from the author -->
+                <!-- #author-->
+                
+                    
+                
+                    
+                        <section class="author-card">
+                            
+                                <img class="author-profile-image" src="/blog/assets/images/lahiru.jpg" alt="lahiru" />
+                            
+                            <section class="author-card-content">
+                                <h4 class="author-card-name"><a href="/blog/author/lahiru">Lahiru Udayanga</a></h4>
+                                
+                                    <p>Greetings! I go by the name nomadxd on all of my digital channels. My real name is Lahiru Udayanga De Silva. I'm a software engineer by profession specialized in distributed systems, kubernetes and cloud native API management technologies.</p>
+                                
+                            </section>
+                        </section>
+                        <div class="post-full-footer-right">
+                            <a class="author-card-button" href="/blog/author/lahiru">Read More</a>
+                        </div>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                <!-- /author  -->
+            </footer>
+
+            <!-- If you use Disqus comments, just uncomment this block.
+            The only thing you need to change is "test-apkdzgmqhj" - which
+            should be replaced with your own Disqus site-id. -->
+            
+
+        </article>
+
+    </div>
+</main>
+
+<!-- Links to Previous/Next posts -->
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
+                
+                
+                
+                
+                    <article class="read-next-card"
+                        
+                            style="background-image: url(/blog//assets/images/blog-cover.jpg)"
+                        
+                    >
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; Nomad's Blog &mdash;</small>
+                            
+                                <h3 class="read-next-card-header-title"><a href="/blog/tag/tech/">Tech</a></h3>
+                            
+                        </header>
+                        <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/blog/multi-cluster-networking-with-cilium-cluster-mesh">Multi cluster networking with Cilium Cluster Mesh</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/blog/deep-dive-into-kubernetes-custom-controllers">Deep dive into Kubernetes custom controllers</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/blog/how-to-implement-a-k8s-operator-like-a-ninja">How to implement a K8s operator like a Ninja</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                    
+                                  
+                                
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href="/blog/tag/tech/">
+                                
+                                    See all 5 posts  →
+                                
+                            </a>
+                        </footer>
+                    </article>
+                
+            
+
+            <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/blog/my-cka-story">
+                <div class="post-card-image" style="background-image: url(/blog/assets/images/cka-cover.jpg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/blog/my-cka-story">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Tech</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">How I passed my CKA exam on the first attempt</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p>Passing the Certified Kubernetes Administrator (CKA) exam was an exhilarating milestone in my career. In this article, I’ll take you through my journey of preparing for and cracking the CKA exam.
+
+</p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                        
+                        <img class="author-profile-image" src="/blog/assets/images/lahiru.jpg" alt="Lahiru Udayanga" />
+                        
+                        <span class="post-card-author">
+                            <a href="/blog/author/lahiru/">Lahiru Udayanga</a>
+                        </span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      4 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/blog/genetic-adam-eve">
+                <div class="post-card-image" style="background-image: url(/blog/assets/images/adam-and-eve-cover.jpg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/blog/genetic-adam-eve">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Random</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">The Enigma of Genetic Adam and Eve</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p>Understanding Genetic Adam and Eve takes us on a journey through human evolution, diverse genes, and the quest to learn about the origin of humanity. In this article, we will explore the mystery</p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                
+                    
+                        
+                        <img class="author-profile-image" src="/blog/assets/images/lahiru.jpg" alt="Lahiru Udayanga" />
+                        
+                        <span class="post-card-author">
+                            <a href="/blog/author/lahiru/">Lahiru Udayanga</a>
+                        </span>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      2 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+        </div>
+    </div>
+</aside>
+
+<!-- Floating header which appears on-scroll, included from includes/floating-header.hbs -->
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="/blog/">
+            
+                <img src="/blog//assets/images/favicon.png" alt="Nomad's Blog icon" />
+            
+            <span>Nomad's Blog</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">Building a Secure and Scalable API layer using Envoy Proxy</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Building+a+Secure+and+Scalable+API+layer+using+Envoy+Proxy&amp;url=https://nomadxd.github.io/NomadXD/building-secure-scalable-api-layer"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://nomadxd.github.io/NomadXD/building-secure-scalable-api-layer"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+<!-- /post -->
+
+<!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs -->
+
+
+        <!-- Previous/next page links - displayed on every page -->
+        
+
+        <!-- The footer at the very bottom of the screen -->
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="/blog/">Nomad's Blog</a> &copy; 2024</section>
+                <section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> &
+                    <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> using
+                    <a href="https://github.com/jekyllt/jasper2" target="_blank" rel="noopener">Jasper2</a></section>
+                <nav class="site-footer-nav">
+                    <a href="/blog/">Latest Posts</a>
+                    <a href="https://facebook.com/lahiru97udayanga" target="_blank" rel="noopener">Facebook</a>
+                    <a href="https://twitter.com/NomadXDDDD" target="_blank" rel="noopener">Twitter</a>
+                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- The big email subscribe modal content -->
+    
+
+    <!-- highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/components/prism-abap.min.js"></script>
+    <script>$(document).ready(function() {
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    });</script>
+
+    <!-- jQuery + Fitvids, which makes all video embeds responsive -->
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="/blog/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://demo.ghost.io/assets/js/jquery.fitvids.js?v=724281a32e"></script>
+
+
+    <!-- Paginator increased to "infinit" in _config.yml -->
+    <!-- if paginator.posts  -->
+    <!-- <script>
+        var maxPages = parseInt('');
+    </script>
+    <script src="/blog/assets/js/infinitescroll.js"></script> -->
+    <!-- /endif -->
+
+    
+
+
+    <!-- Add Google Analytics  -->
+    <!-- Google Analytics Tracking code -->
+<!-- Google tag (gtag.js) -->
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=G-C0VWGXL63G"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+
+  gtag("config", "G-C0VWGXL63G");
+</script>
+
+
+    <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
+    
+        <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+
+    
+
+    <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->
+    <!-- ghost_foot -->
+
+</body>
+</html>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title> - Articles</title>
+    <description>You'll find all my tech posts here</description>
+    <link>
+    </link>
+    
+      
+      <item>
+        <title>From Sunset to Sunrise....</title>
+        
+          <description>&lt;p&gt;&lt;a href=&quot;https://maps.app.goo.gl/2gpcmkuo7f1uL7V89&quot;&gt;Blue beach island&lt;/a&gt; is a small island located in the Nilwella area in between Dickwella and Tangalle. The island is known for its stunning sunsets and tranquil environment, making it an ideal spot to escape the hustle and bustle of everyday life. The island is connected to the mainland by a small narrow sand dune which can be submerged by sea water during high tides or during the southwest monsoons. For this reason, it is advisable to plan your visit in advance.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Thu, 23 May 2024 10:18:00 +0000</pubDate>
+        <link>
+        /from-sunset-to-sunrise</link>
+        <guid isPermaLink="true">/from-sunset-to-sunrise</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Multi cluster networking with Cilium Cluster Mesh</title>
+        
+          <description>&lt;p&gt;As organizations increasingly adopt distributed architectures and scale their Kubernetes deployments, the need for robust networking and security solutions that can seamlessly operate across multiple clusters becomes paramount. In this blog, we will go through how you can use Cilium Cluster Mesh to effectively manage a fleet of Kubernetes clusters spanning across availability zones or regions, thereby achieving unparalleled levels of high availability and fault tolerance across your infrastructure.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Fri, 17 May 2024 00:00:00 +0000</pubDate>
+        <link>
+        /multi-cluster-networking-with-cilium-cluster-mesh</link>
+        <guid isPermaLink="true">/multi-cluster-networking-with-cilium-cluster-mesh</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Deep dive into Kubernetes custom controllers</title>
+        
+          <description>&lt;p&gt;Kubernetes offers a rich ecosystem of &lt;a href=&quot;https://kubernetes.io/docs/concepts/extend-kubernetes/&quot;&gt;extension points&lt;/a&gt; that allow developers to tailor and extend its functionality. Among these ability to implement Custom Controllers emerge as a powerful mechanism for extending Kubernetes with your own “Kubernetes logic”. While there are frameworks and tools like &lt;a href=&quot;https://github.com/kubernetes-sigs/kubebuilder&quot;&gt;Kubebuilder&lt;/a&gt; and &lt;a href=&quot;https://sdk.operatorframework.io/&quot;&gt;OperatorSDK&lt;/a&gt; that abstracts away the complexity of implementing custom controllers, understanding how custom controllers operate at a fundamental level is crucial for those who wish to harness the full potential of Kubernetes. In this article, we will go through how custom controllers work behind the scenes and how you can leverage the basic building blocks of custom controllers for your use cases.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 30 Sep 2023 00:00:00 +0000</pubDate>
+        <link>
+        /deep-dive-into-kubernetes-custom-controllers</link>
+        <guid isPermaLink="true">/deep-dive-into-kubernetes-custom-controllers</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>How to implement a K8s operator like a Ninja</title>
+        
+          <description>&lt;p&gt;Kubernetes has emerged as the widely accepted standard for deploying and running modern cloud-native applications. With its declarative approach using YAML, it offers a straightforward and intuitive method to define the desired infrastructure state for application deployments. However, managing complex application deployments on Kubernetes requires additional automation and control beyond what Kubernetes provides out of the box. This is where Kubernetes operators come in.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Fri, 14 Jul 2023 10:18:00 +0000</pubDate>
+        <link>
+        /how-to-implement-a-k8s-operator-like-a-ninja</link>
+        <guid isPermaLink="true">/how-to-implement-a-k8s-operator-like-a-ninja</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>How I passed my CKA exam on the first attempt</title>
+        
+          <description>&lt;p&gt;Passing the Certified Kubernetes Administrator (CKA) exam was an exhilarating milestone in my career. In this article, I’ll take you through my journey of preparing for and cracking the CKA exam.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Thu, 13 Jul 2023 10:18:00 +0000</pubDate>
+        <link>
+        /my-cka-story</link>
+        <guid isPermaLink="true">/my-cka-story</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Building a Secure and Scalable API layer using Envoy Proxy</title>
+        
+          <description>&lt;p&gt;APIs (Application Programming Interfaces) have become an integral part of modern software development. They allow different applications to communicate and exchange data, enabling developers to create complex systems that integrate multiple services and technologies. APIs are used by companies of all sizes to power their digital products and services, from social media platforms to financial systems.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 12 Apr 2023 10:18:00 +0000</pubDate>
+        <link>
+        /building-secure-scalable-api-layer</link>
+        <guid isPermaLink="true">/building-secure-scalable-api-layer</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>The Enigma of Genetic Adam and Eve</title>
+        
+          <description>&lt;p&gt;Understanding Genetic Adam and Eve takes us on a journey through human evolution, diverse genes, and the quest to learn about the origin of humanity. In this article, we will explore the mystery of Genetic Adam and Eve, explaining the science behind these ideas and the interesting insights they provide into our ancient history.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Tue, 11 Apr 2023 10:18:00 +0000</pubDate>
+        <link>
+        /genetic-adam-eve</link>
+        <guid isPermaLink="true">/genetic-adam-eve</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Siwa, The Hidden Gem of Egypt's Western Desert</title>
+        
+          <description>&lt;p&gt;It’s amazing how a single photo can travel you back to a place you visited years ago. Today, I find myself reminiscing about my time in Siwa, Egypt which I visited back in July 2018.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Tue, 11 Apr 2023 10:18:00 +0000</pubDate>
+        <link>
+        /siwa-the-hidden-gem-of-egypts-western-desert</link>
+        <guid isPermaLink="true">/siwa-the-hidden-gem-of-egypts-western-desert</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Off the Beaten Path, Finding Serenity on Delft Island</title>
+        
+          <description>&lt;p&gt;Jaffna, located in the northern part of Sri Lanka, is known for its rich cultural heritage, stunning coastline, and natural beauty. Among the many hidden gems in Jaffna is the enchanting Delft Island, located off the coast of the Jaffna Peninsula. Delft Island, also known as Neduntheevu, is a small island surrounded by crystal-clear turquoise waters and dotted with palm trees, pristine beaches, and unique wildlife. The island’s name is derived from the city of Delft in the Netherlands, reflecting the Dutch colonial influence on the island’s history. This island has a fascinating past, dating back to the Chola Dynasty and the Dutch colonial period, and is home to ancient ruins and landmarks that are worth exploring. In this travel blog, I’ll take you on a journey through Delft Island in Jaffna, sharing my experiences and recommendations for the best things to see, do, and eat on this enchanting island. So, get ready to discover the natural beauty, cultural richness, and unique wildlife of Delft Island in Jaffna.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Tue, 11 Apr 2023 10:18:00 +0000</pubDate>
+        <link>
+        /off-the-beaten-path-finding-serenity-on-delft-island</link>
+        <guid isPermaLink="true">/off-the-beaten-path-finding-serenity-on-delft-island</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Down The Rabbit Hole</title>
+        
+          <description>&lt;p&gt;The grandfather paradox is a famous thought experiment that explores the consequences of time travel. The paradox poses the question: “If you could go back in time and kill your grandfather before he had children, would you still exist?”&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Tue, 11 Apr 2023 10:18:00 +0000</pubDate>
+        <link>
+        /down-the-rabbit-hole</link>
+        <guid isPermaLink="true">/down-the-rabbit-hole</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>When life gives you limes and mint, make a Bacardi Mojito 🍃🍈</title>
+        
+          <description>&lt;p&gt;Are you in the mood for a refreshing and tangy cocktail? Look no further than the Bacardi Mojito! This classic Cuban cocktail is a perfect summer drink, combining the fresh flavors of lime and mint with a smooth Bacardi rum kick.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Tue, 11 Apr 2023 01:18:00 +0000</pubDate>
+        <link>
+        /when-life-gives-you-limes-and-mint-make-a-bacardi-mojito</link>
+        <guid isPermaLink="true">/when-life-gives-you-limes-and-mint-make-a-bacardi-mojito</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>A Beginner's Guide to gRPC and protobuf</title>
+        
+          <description>&lt;p&gt;Since both protocol buffers and gRPC framework are developed internally at Google and then open sourced, let’s first see what google says about them.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Sat, 25 Feb 2023 10:00:00 +0000</pubDate>
+        <link>
+        /grpc-protobuf</link>
+        <guid isPermaLink="true">/grpc-protobuf</guid>
+      </item>
+      
+    
+  </channel>
+</rss>
