@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <!-- White background for dark mode compatibility -->
+  <rect width="800" height="600" fill="white"/>
+  
+  <defs>
+    <style>
+      .title { font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; fill: #2c3e50; }
+      .subtitle { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #34495e; }
+      .label { font-family: Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #2c3e50; }
+      .small-label { font-family: Arial, sans-serif; font-size: 10px; fill: #7f8c8d; }
+      .arrow { stroke: #3498db; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .peer-arrow { stroke: #e74c3c; stroke-width: 2; fill: none; marker-end: url(#arrowhead-red); stroke-dasharray: 5,5; }
+      .data-flow { stroke: #27ae60; stroke-width: 3; fill: none; marker-end: url(#arrowhead-green); }
+      .app-box { fill: #ecf0f1; stroke: #bdc3c7; stroke-width: 1; }
+      .collector-box { fill: #e8f5e8; stroke: #4caf50; stroke-width: 2; }
+      .opensearch-box { fill: #e3f2fd; stroke: #2196f3; stroke-width: 2; }
+      .hash-ring { stroke: #f39c12; stroke-width: 2; fill: none; stroke-dasharray: 8,4; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#3498db" />
+    </marker>
+    <marker id="arrowhead-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#e74c3c" />
+    </marker>
+    <marker id="arrowhead-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#27ae60" />
+    </marker>
+  </defs>
+  
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" class="title">OpenSearch Data Prepper - Peer Forwarder Configuration</text>
+  
+  <!-- Applications Section -->
+  <rect x="50" y="60" width="700" height="80" fill="none" stroke="#bdc3c7" stroke-width="1" stroke-dasharray="5,5"/>
+  <text x="400" y="75" text-anchor="middle" class="subtitle">Instrumented Applications</text>
+  
+  <!-- Application instances -->
+  <rect x="120" y="85" width="120" height="40" class="app-box"/>
+  <text x="180" y="105" text-anchor="middle" class="label">Applications</text>
+  <text x="180" y="115" text-anchor="middle" class="small-label">Publishing OTLP Traces</text>
+  
+  <rect x="280" y="85" width="120" height="40" class="app-box"/>
+  <text x="340" y="105" text-anchor="middle" class="label">Applications</text>
+  <text x="340" y="115" text-anchor="middle" class="small-label">Publishing OTLP Traces</text>
+  
+  <rect x="440" y="85" width="120" height="40" class="app-box"/>
+  <text x="500" y="105" text-anchor="middle" class="label">Applications</text>
+  <text x="500" y="115" text-anchor="middle" class="small-label">Publishing OTLP Traces</text>
+  
+  <rect x="600" y="85" width="120" height="40" class="app-box"/>
+  <text x="660" y="105" text-anchor="middle" class="label">Applications</text>
+  <text x="660" y="115" text-anchor="middle" class="small-label">Publishing OTLP Traces</text>
+  
+  <!-- Data Prepper Collectors Section -->
+  <rect x="50" y="160" width="700" height="200" fill="none" stroke="#bdc3c7" stroke-width="1" stroke-dasharray="5,5"/>
+  <text x="400" y="175" text-anchor="middle" class="subtitle">OpenSearch Data Prepper - Peer Forwarder</text>
+  
+  <!-- Hash Ring Visual -->
+  <circle cx="400" cy="280" r="80" class="hash-ring"/>
+  <text x="400" y="185" text-anchor="middle" class="small-label">Hash Ring for Trace Routing</text>
+  
+  <!-- Data Prepper Collector 1 -->
+  <rect x="280" y="220" width="120" height="80" class="collector-box"/>
+  <text x="340" y="240" text-anchor="middle" class="label">Data Prepper</text>
+  <text x="340" y="250" text-anchor="middle" class="small-label">Collector 1</text>
+  <text x="340" y="265" text-anchor="middle" class="small-label">OTLP Receiver</text>
+  <text x="340" y="275" text-anchor="middle" class="small-label">Peer Forwarder</text>
+  <text x="340" y="285" text-anchor="middle" class="small-label">Tail Sampling</text>
+  <text x="340" y="295" text-anchor="middle" class="small-label">Port: 4994</text>
+  
+  <!-- Data Prepper Collector 2 -->
+  <rect x="450" y="320" width="120" height="80" class="collector-box"/>
+  <text x="510" y="340" text-anchor="middle" class="label">Data Prepper</text>
+  <text x="510" y="350" text-anchor="middle" class="small-label">Collector 2</text>
+  <text x="510" y="365" text-anchor="middle" class="small-label">OTLP Receiver</text>
+  <text x="510" y="375" text-anchor="middle" class="small-label">Peer Forwarder</text>
+  <text x="510" y="385" text-anchor="middle" class="small-label">Tail Sampling</text>
+  <text x="510" y="395" text-anchor="middle" class="small-label">Port: 4994</text>
+  
+  <!-- Data Prepper Collector 3 -->
+  <rect x="230" y="320" width="120" height="80" class="collector-box"/>
+  <text x="290" y="340" text-anchor="middle" class="label">Data Prepper</text>
+  <text x="290" y="350" text-anchor="middle" class="small-label">Collector 3</text>
+  <text x="290" y="365" text-anchor="middle" class="small-label">OTLP Receiver</text>
+  <text x="290" y="375" text-anchor="middle" class="small-label">Peer Forwarder</text>
+  <text x="290" y="385" text-anchor="middle" class="small-label">Tail Sampling</text>
+  <text x="290" y="395" text-anchor="middle" class="small-label">Port: 4994</text>
+  
+  <!-- DNS Discovery -->
+  <rect x="580" y="220" width="140" height="60" fill="#fff3e0" stroke="#ff9800" stroke-width="2"/>
+  <text x="650" y="240" text-anchor="middle" class="label">DNS Discovery</text>
+  <text x="650" y="250" text-anchor="middle" class="small-label">Headless Service</text>
+  <text x="650" y="260" text-anchor="middle" class="small-label">data-prepper-headless</text>
+  <text x="650" y="270" text-anchor="middle" class="small-label">Pod IP Resolution</text>
+  
+  <!-- OpenSearch Backend -->
+  <rect x="250" y="450" width="300" height="80" class="opensearch-box"/>
+  <text x="400" y="475" text-anchor="middle" class="label">OpenSearch</text>
+  <text x="400" y="490" text-anchor="middle" class="small-label">Trace Analytics Backend</text>
+  <text x="400" y="505" text-anchor="middle" class="small-label">Index: otel-v1-apm-span</text>
+  <text x="400" y="520" text-anchor="middle" class="small-label">Storage and Query API</text>
+  
+  <!-- Arrows from Applications to Collectors -->
+  <path d="M 180 125 L 320 220" class="arrow"/>
+  <path d="M 340 125 L 360 220" class="arrow"/>
+  <path d="M 500 125 L 480 220" class="arrow"/>
+  <path d="M 660 125 L 520 320" class="arrow"/>
+  
+  <!-- Peer communication arrows (between collectors) -->
+  <path d="M 400 260 L 450 340" class="peer-arrow"/>
+  <path d="M 350 320 L 450 360" class="peer-arrow"/>
+  <path d="M 290 320 L 340 280" class="peer-arrow"/>
+  
+  <!-- DNS Discovery arrows -->
+  <path d="M 580 250 L 450 250" stroke="#ff9800" stroke-width="1" fill="none" stroke-dasharray="3,3"/>
+  <path d="M 580 260 L 450 370" stroke="#ff9800" stroke-width="1" fill="none" stroke-dasharray="3,3"/>
+  <path d="M 580 270 L 350 380" stroke="#ff9800" stroke-width="1" fill="none" stroke-dasharray="3,3"/>
+  
+  <!-- Data flow to OpenSearch -->
+  <path d="M 340 300 L 400 450" class="data-flow"/>
+  <path d="M 510 400 L 450 450" class="data-flow"/>
+  <path d="M 290 400 L 350 450" class="data-flow"/>
+  
+  <!-- Legend -->
+  <rect x="50" y="550" width="700" height="40" fill="#f8f9fa" stroke="#dee2e6" stroke-width="1"/>
+  <text x="400" y="565" text-anchor="middle" class="label">Legend</text>
+  
+  <path d="M 80 575 L 100 575" class="arrow"/>
+  <text x="110" y="579" class="small-label">OTLP Trace Data</text>
+  
+  <path d="M 200 575 L 220 575" class="peer-arrow"/>
+  <text x="230" y="579" class="small-label">Peer Communication</text>
+  
+  <path d="M 350 575 L 370 575" class="data-flow"/>
+  <text x="380" y="579" class="small-label">To OpenSearch</text>
+  
+  <path d="M 480 575 L 500 575" stroke="#ff9800" stroke-width="1" fill="none" stroke-dasharray="3,3"/>
+  <text x="510" y="579" class="small-label">DNS Discovery</text>
+  
+  <!-- Key Features Text -->
+  <text x="60" y="200" class="small-label">• Hash-ring based trace routing by Trace ID</text>
+  <text x="60" y="210" class="small-label">• Ensures all spans of a trace go to same collector</text>
+  <text x="60" y="220" class="small-label">• DNS-based peer discovery via headless service</text>
+  <text x="60" y="230" class="small-label">• Tail sampling with complete trace context</text>
+</svg>
