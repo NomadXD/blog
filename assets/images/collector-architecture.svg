@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; fill: #2c3e50; }
+      .subtitle { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #34495e; }
+      .label { font-family: Arial, sans-serif; font-size: 12px; fill: #2c3e50; }
+      .small-label { font-family: Arial, sans-serif; font-size: 10px; fill: #7f8c8d; }
+      .arrow { stroke: #3498db; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .dashed-arrow { stroke: #e74c3c; stroke-width: 2; stroke-dasharray: 5,5; fill: none; marker-end: url(#arrowhead); }
+      .trace-line { stroke: #9b59b6; stroke-width: 3; fill: none; }
+      .span-box { fill: #ecf0f1; stroke: #bdc3c7; stroke-width: 1; }
+      .span-error { fill: #ffebee; stroke: #ef5350; stroke-width: 2; }
+      .span-slow { fill: #fff3e0; stroke: #ff9800; stroke-width: 2; }
+      .collector-box { fill: #e8f5e8; stroke: #4caf50; stroke-width: 2; }
+      .gateway-box { fill: #e3f2fd; stroke: #2196f3; stroke-width: 2; }
+      .backend-box { fill: #f3e5f5; stroke: #9c27b0; stroke-width: 2; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#3498db" />
+    </marker>
+  </defs>
+  
+  <!-- White background -->
+  <rect x="0" y="0" width="800" height="600" fill="white"/>
+  
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" class="title">Distributed Tracing Collector Architecture</text>
+  
+  <!-- Applications Section -->
+  <rect x="50" y="60" width="700" height="120" fill="none" stroke="#bdc3c7" stroke-width="1" stroke-dasharray="5,5"/>
+  <text x="400" y="75" text-anchor="middle" class="subtitle">Applications (Instrumented with OpenTelemetry)</text>
+  
+  <!-- Application instances -->
+  <rect x="150" y="85" width="80" height="40" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1"/>
+  <text x="190" y="105" text-anchor="middle" class="label">App A</text>
+  <text x="190" y="115" text-anchor="middle" class="small-label">Service 1</text>
+  
+  <rect x="250" y="85" width="80" height="40" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1"/>
+  <text x="290" y="105" text-anchor="middle" class="label">App B</text>
+  <text x="290" y="115" text-anchor="middle" class="small-label">Service 2</text>
+  
+  <rect x="350" y="85" width="80" height="40" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1"/>
+  <text x="390" y="105" text-anchor="middle" class="label">App C</text>
+  <text x="390" y="115" text-anchor="middle" class="small-label">Service 3</text>
+  
+  <rect x="450" y="85" width="80" height="40" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1"/>
+  <text x="490" y="105" text-anchor="middle" class="label">App D</text>
+  <text x="490" y="115" text-anchor="middle" class="small-label">Service 4</text>
+  
+  <rect x="550" y="85" width="80" height="40" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1"/>
+  <text x="590" y="105" text-anchor="middle" class="label">App E</text>
+  <text x="590" y="115" text-anchor="middle" class="small-label">Service 5</text>
+  
+  <!-- Trace Example -->
+  <text x="400" y="140" text-anchor="middle" class="subtitle">Example Trace Flow</text>
+  
+  <!-- Trace spans -->
+  <rect x="150" y="150" width="60" height="20" class="span-box"/>
+  <text x="180" y="163" text-anchor="middle" class="small-label">Span A1</text>
+  
+  <rect x="250" y="150" width="60" height="20" class="span-error"/>
+  <text x="280" y="163" text-anchor="middle" class="small-label">Span B1</text>
+  
+  <rect x="350" y="150" width="60" height="20" class="span-slow"/>
+  <text x="380" y="163" text-anchor="middle" class="small-label">Span C1</text>
+  
+  <rect x="450" y="150" width="60" height="20" class="span-box"/>
+  <text x="480" y="163" text-anchor="middle" class="small-label">Span D1</text>
+  
+  <rect x="550" y="150" width="60" height="20" class="span-box"/>
+  <text x="580" y="163" text-anchor="middle" class="small-label">Span E1</text>
+  
+  <!-- Trace line connecting spans -->
+  <path d="M 210 160 L 250 160" class="trace-line"/>
+  <path d="M 310 160 L 350 160" class="trace-line"/>
+  <path d="M 410 160 L 450 160" class="trace-line"/>
+  <path d="M 510 160 L 550 160" class="trace-line"/>
+  
+  <!-- Tier 1 Collectors (Gateway) -->
+  <rect x="50" y="220" width="700" height="100" fill="none" stroke="#bdc3c7" stroke-width="1" stroke-dasharray="5,5"/>
+  <text x="400" y="235" text-anchor="middle" class="subtitle">Tier 1: Gateway Collectors (Stateless)</text>
+  
+  <rect x="200" y="245" width="150" height="50" class="gateway-box"/>
+  <text x="275" y="265" text-anchor="middle" class="label">Gateway</text>
+  <text x="275" y="275" text-anchor="middle" class="small-label">Collector 1</text>
+  <text x="275" y="285" text-anchor="middle" class="small-label">Load Balancer</text>
+  
+  <rect x="450" y="245" width="150" height="50" class="gateway-box"/>
+  <text x="525" y="265" text-anchor="middle" class="label">Gateway</text>
+  <text x="525" y="275" text-anchor="middle" class="small-label">Collector 2</text>
+  <text x="525" y="285" text-anchor="middle" class="small-label">Load Balancer</text>
+  
+  <!-- Tier 2 Collectors (Stateful) -->
+  <rect x="50" y="360" width="700" height="100" fill="none" stroke="#bdc3c7" stroke-width="1" stroke-dasharray="5,5"/>
+  <text x="400" y="375" text-anchor="middle" class="subtitle">Tier 2: Stateful Collectors (Tail Sampling)</text>
+  
+  <rect x="80" y="385" width="120" height="60" class="collector-box"/>
+  <text x="140" y="405" text-anchor="middle" class="label">Stateful</text>
+  <text x="140" y="415" text-anchor="middle" class="small-label">Collector 1</text>
+  <text x="140" y="425" text-anchor="middle" class="small-label">Trace ID: ABC123</text>
+  <text x="140" y="435" text-anchor="middle" class="small-label">Tail Sampling</text>
+  
+  <rect x="220" y="385" width="120" height="60" class="collector-box"/>
+  <text x="280" y="405" text-anchor="middle" class="label">Stateful</text>
+  <text x="280" y="415" text-anchor="middle" class="small-label">Collector 2</text>
+  <text x="280" y="425" text-anchor="middle" class="small-label">Trace ID: DEF456</text>
+  <text x="280" y="435" text-anchor="middle" class="small-label">Tail Sampling</text>
+  
+  <rect x="360" y="385" width="120" height="60" class="collector-box"/>
+  <text x="420" y="405" text-anchor="middle" class="label">Stateful</text>
+  <text x="420" y="415" text-anchor="middle" class="small-label">Collector 3</text>
+  <text x="420" y="425" text-anchor="middle" class="small-label">Trace ID: GHI789</text>
+  <text x="420" y="435" text-anchor="middle" class="small-label">Tail Sampling</text>
+  
+  <rect x="500" y="385" width="120" height="60" class="collector-box"/>
+  <text x="560" y="405" text-anchor="middle" class="label">Stateful</text>
+  <text x="560" y="415" text-anchor="middle" class="small-label">Collector 4</text>
+  <text x="560" y="425" text-anchor="middle" class="small-label">Trace ID: JKL012</text>
+  <text x="560" y="435" text-anchor="middle" class="small-label">Tail Sampling</text>
+  
+  <!-- Backend Systems -->
+  <rect x="50" y="500" width="700" height="80" fill="none" stroke="#bdc3c7" stroke-width="1" stroke-dasharray="5,5"/>
+  <text x="400" y="515" text-anchor="middle" class="subtitle">Backend Systems</text>
+  
+  <rect x="120" y="525" width="120" height="40" class="backend-box"/>
+  <text x="180" y="545" text-anchor="middle" class="label">Jaeger</text>
+  <text x="180" y="555" text-anchor="middle" class="small-label">Trace Storage</text>
+  
+  <rect x="260" y="525" width="120" height="40" class="backend-box"/>
+  <text x="320" y="545" text-anchor="middle" class="label">Zipkin</text>
+  <text x="320" y="555" text-anchor="middle" class="small-label">Trace Storage</text>
+  
+  <rect x="400" y="525" width="120" height="40" class="backend-box"/>
+  <text x="460" y="545" text-anchor="middle" class="label">Elasticsearch</text>
+  <text x="460" y="555" text-anchor="middle" class="small-label">Trace Storage</text>
+  
+  <rect x="540" y="525" width="120" height="40" class="backend-box"/>
+  <text x="600" y="545" text-anchor="middle" class="label">OpenSearch</text>
+  <text x="600" y="555" text-anchor="middle" class="small-label">Trace Storage</text>
+  
+  <!-- Arrows from Applications to Tier 1 (to top edge of gateway boxes) -->
+  <path d="M 190 125 L 240 240" class="arrow"/>
+  <path d="M 290 125 L 260 240" class="arrow"/>
+  <path d="M 390 125 L 310 240" class="arrow"/>
+  <path d="M 490 125 L 590 240" class="arrow"/>
+  <path d="M 590 125 L 540 240" class="arrow"/>
+  
+  <!-- Arrows from Tier 1 to Tier 2 (from bottom of gateway to sides of stateful) -->
+  <path d="M 230 295 L 100 380" class="dashed-arrow"/>
+  <path d="M 270 295 L 240 380" class="dashed-arrow"/>
+  <path d="M 480 295 L 432 380" class="dashed-arrow"/>
+  <path d="M 520 295 L 600 380" class="dashed-arrow"/>
+  
+  <!-- Arrows from Tier 2 to Backend (from bottom of stateful to top of backends) -->
+  <path d="M 140 445 L 180 520" class="arrow"/>
+  <path d="M 280 445 L 320 520" class="arrow"/>
+  <path d="M 420 445 L 480 520" class="arrow"/>
+  <path d="M 560 445 L 600 520" class="arrow"/>
+  
+  <!-- Legend -->
+  <rect x="50" y="580" width="700" height="20" fill="#f8f9fa" stroke="#dee2e6" stroke-width="1"/>
+  <rect x="60" y="585" width="15" height="10" class="span-box"/>
+  <text x="80" y="595" class="small-label">Normal Span</text>
+  
+  <rect x="150" y="585" width="15" height="10" class="span-error"/>
+  <text x="170" y="595" class="small-label">Error Span</text>
+  
+  <rect x="240" y="585" width="15" height="10" class="span-slow"/>
+  <text x="260" y="595" class="small-label">Slow Span</text>
+  
+  <rect x="330" y="585" width="15" height="10" class="gateway-box"/>
+  <text x="350" y="595" class="small-label">Gateway Collector</text>
+  
+  <rect x="450" y="585" width="15" height="10" class="collector-box"/>
+  <text x="470" y="595" class="small-label">Stateful Collector</text>
+  
+  <rect x="570" y="585" width="15" height="10" class="backend-box"/>
+  <text x="590" y="595" class="small-label">Backend System</text>
+</svg> 

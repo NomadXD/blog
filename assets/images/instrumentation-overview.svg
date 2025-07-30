@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="500" xmlns="http://www.w3.org/2000/svg">
+  <!-- White background for dark mode compatibility -->
+  <rect width="800" height="500" fill="white"/>
+  
+  <defs>
+    <style>
+      .title { font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; fill: #2c3e50; }
+      .subtitle { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; fill: #34495e; }
+      .label { font-family: Arial, sans-serif; font-size: 12px; font-weight: bold; fill: #2c3e50; }
+      .small-label { font-family: Arial, sans-serif; font-size: 10px; fill: #7f8c8d; }
+      .code-label { font-family: 'Courier New', monospace; font-size: 9px; fill: #2c3e50; }
+      .arrow { stroke: #3498db; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .data-flow { stroke: #e74c3c; stroke-width: 3; fill: none; marker-end: url(#arrowhead-red); }
+      .app-box { fill: #e8f5e8; stroke: #4caf50; stroke-width: 2; }
+      .sdk-box { fill: #fff3e0; stroke: #ff9800; stroke-width: 2; }
+      .collector-box { fill: #e3f2fd; stroke: #2196f3; stroke-width: 2; }
+      .data-box { fill: #f3e5f5; stroke: #9c27b0; stroke-width: 1; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#3498db" />
+    </marker>
+    <marker id="arrowhead-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#e74c3c" />
+    </marker>
+  </defs>
+  
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" class="title">OpenTelemetry Instrumentation Overview</text>
+  
+  <!-- Applications Section -->
+  <rect x="50" y="60" width="700" height="200" fill="none" stroke="#bdc3c7" stroke-width="1" stroke-dasharray="5,5"/>
+  <text x="400" y="75" text-anchor="middle" class="subtitle">Instrumented Applications</text>
+  
+  <!-- Node.js Application -->
+  <rect x="80" y="90" width="180" height="120" class="app-box"/>
+  <text x="170" y="110" text-anchor="middle" class="label">Node.js Application</text>
+  <text x="170" y="125" text-anchor="middle" class="small-label">Express.js API Server</text>
+  
+  <!-- Node.js SDK -->
+  <rect x="100" y="140" width="140" height="50" class="sdk-box"/>
+  <text x="170" y="158" text-anchor="middle" class="label">OpenTelemetry SDK</text>
+  <text x="170" y="170" text-anchor="middle" class="code-label">@opentelemetry/api</text>
+  <text x="170" y="180" text-anchor="middle" class="code-label">@opentelemetry/sdk-node</text>
+  
+  <!-- Go Application -->
+  <rect x="310" y="90" width="180" height="120" class="app-box"/>
+  <text x="400" y="110" text-anchor="middle" class="label">Go Application</text>
+  <text x="400" y="125" text-anchor="middle" class="small-label">HTTP Microservice</text>
+  
+  <!-- Go SDK -->
+  <rect x="330" y="140" width="140" height="50" class="sdk-box"/>
+  <text x="400" y="158" text-anchor="middle" class="label">OpenTelemetry SDK</text>
+  <text x="400" y="170" text-anchor="middle" class="code-label">go.opentelemetry.io/otel</text>
+  <text x="400" y="180" text-anchor="middle" class="code-label">go.opentelemetry.io/otel/sdk</text>
+  
+  <!-- Java Application -->
+  <rect x="540" y="90" width="180" height="120" class="app-box"/>
+  <text x="630" y="110" text-anchor="middle" class="label">Java Application</text>
+  <text x="630" y="125" text-anchor="middle" class="small-label">Spring Boot Service</text>
+  
+  <!-- Java SDK -->
+  <rect x="560" y="140" width="140" height="50" class="sdk-box"/>
+  <text x="630" y="158" text-anchor="middle" class="label">OpenTelemetry SDK</text>
+  <text x="630" y="170" text-anchor="middle" class="code-label">io.opentelemetry</text>
+  <text x="630" y="180" text-anchor="middle" class="code-label">opentelemetry-api</text>
+  
+  <!-- Telemetry Data Examples -->
+  <text x="200" y="240" text-anchor="middle" class="subtitle">Generated Trace Data</text>
+  
+  <!-- Traces only -->
+  <rect x="340" y="250" width="120" height="30" class="data-box"/>
+  <text x="400" y="268" text-anchor="middle" class="label">Traces</text>
+  <text x="400" y="275" text-anchor="middle" class="small-label">Spans, Trace IDs, Context</text>
+  
+  <!-- Trace Collector -->
+  <rect x="250" y="320" width="300" height="80" class="collector-box"/>
+  <text x="400" y="345" text-anchor="middle" class="label">Trace Collector</text>
+  <text x="400" y="360" text-anchor="middle" class="small-label">Receives, processes, and exports trace data</text>
+  <text x="400" y="375" text-anchor="middle" class="small-label">OTLP (OpenTelemetry Protocol)</text>
+  <text x="400" y="390" text-anchor="middle" class="small-label">HTTP/gRPC endpoints</text>
+  
+  <!-- Backend Systems -->
+  <text x="150" y="410" text-anchor="middle" class="subtitle">Export to Trace Backend Systems</text>
+  
+  <rect x="150" y="440" width="100" height="30" class="data-box"/>
+  <text x="200" y="458" text-anchor="middle" class="small-label">Jaeger</text>
+  
+  <rect x="270" y="440" width="100" height="30" class="data-box"/>
+  <text x="320" y="458" text-anchor="middle" class="small-label">Zipkin</text>
+  
+  <rect x="390" y="440" width="100" height="30" class="data-box"/>
+  <text x="440" y="458" text-anchor="middle" class="small-label">Elasticsearch</text>
+  
+  <rect x="510" y="440" width="100" height="30" class="data-box"/>
+  <text x="560" y="458" text-anchor="middle" class="small-label">OpenSearch</text>
+  
+  <!-- Arrows from Applications to Trace Data -->
+  <path d="M 170 210 L 380 250" class="arrow"/>
+  <path d="M 400 210 L 400 250" class="arrow"/>
+  <path d="M 630 210 L 420 250" class="arrow"/>
+  
+  <!-- Data flow arrow to Collector -->
+  <path d="M 400 280 L 400 320" class="data-flow"/>
+  
+  <!-- Arrows from Collector to Backends -->
+  <path d="M 320 400 L 200 440" class="arrow"/>
+  <path d="M 360 400 L 320 440" class="arrow"/>
+  <path d="M 440 400 L 440 440" class="arrow"/>
+  <path d="M 480 400 L 560 440" class="arrow"/>
+  
+  <!-- SDK Integration Notes -->
+  <text x="80" y="220" class="small-label">npm install</text>
+  <text x="310" y="220" class="small-label">go mod</text>
+  <text x="540" y="220" class="small-label">Maven/Gradle</text>
+</svg>
