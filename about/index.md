@@ -9,10 +9,10 @@ subclass: "post page"
 ---
 
 <p align="center">
-  <img alt="Me" src="/blog/assets/images/lahiru.jpg" class="author-profile-image" style="width: 300px; height: 300px;">
+  <img alt="Me" src="/blog/assets/images/lahiru.png" class="author-profile-image" style="width: 300px; height: 300px;">
 </p>
 
-<h4 align="center">Lahiru Udayanga</h4>
+<h4 align="center">Lahiru De Silva</h4>
 <p align="center">
   <a href="https://github.com/NomadXD">Github</a>
   |
@@ -23,9 +23,11 @@ subclass: "post page"
   <a href="https://www.linkedin.com/in/lahiru-udayanga/">LinkedIn</a>
 </p>
 
-Welcome to my personal blog! My name is Lahiru Udayanga De Silva, and I'm excited to have you here.
+I’m someone who’s endlessly curious — about how things work, why people build what they build, and how ideas turn into reality. This blog is my little space to share that curiosity, whether it’s a deep dive into some new tech I’ve been playing with, thoughts on random life events, or just stories from life in sunny Sri Lanka.
 
-I'm a 25-year-old Software Engineer currently living in Colombo, Sri Lanka. I hold a B.Sc (hons) in Computer Science and Engineering from University of Moratuwa, and I'm currently employed at WSO2 LLC as a software engineer working on Kubernetes native API gateways and cloud native product development.
+By day, I work as a Senior Software Engineer at WSO2, where I get to play with Kubernetes, API gateways, Cloud Native technologies, and all the moving parts that make modern infrastructure tick. Some days it’s smooth sailing, other days it’s “why is this breaking now?” — but that’s half the fun.
+
+My time studying Computer Science and Engineering at the University of Moratuwa was where I learned that technology isn’t just about code — it’s about solving problems, creating opportunities, and constantly reinventing yourself.
 
 I started this blog as a way to share my thoughts and experiences with the world. Whether it's my latest travel adventure, a new technology or a programming language I've tried, or my take on current events, I love to share my perspective and connect with others who share similar interests.
 

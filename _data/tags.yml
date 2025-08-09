@@ -1,7 +1,7 @@
 tech:
   name: tech
   description: Distributed systems, Kubernetes and Envoy Proxy
-  cover: assets/images/technew.jpg
+  cover: assets/images/tech-cover.jpg
 random:
   name: random
   description: Exploring the unknown, a collection of random stuff
@@ -10,7 +10,7 @@ travel:
   name: travel
   description: Not all those who wander are lost...
   cover: assets/images/speeches.jpg
-fiction:
+fiction:  
   name: fiction
   description: False
   cover: False

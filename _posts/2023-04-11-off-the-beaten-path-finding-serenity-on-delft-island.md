@@ -1,13 +1,13 @@
 ---
 layout: post
 current: post
-cover: 'assets/images/delft-cover.jpg'
+cover: "assets/images/delft-cover.jpg"
 navigation: True
 title: Off the Beaten Path, Finding Serenity on Delft Island
 date: 2023-04-11 10:18:00
 tags: travel
 class: post-template
-subclass: 'post'
+subclass: "post"
 author: lahiru
 ---
 
@@ -97,7 +97,6 @@ Later, the Dutch expanded and strengthened the fort, adding several buildings, i
 
 In addition to these, there are a number of ancient churches, ruins of Buddhist stupas dating back to the Cholan era, and lots of wild horses that roam freely on the island. Attached below are some photos captured on the island, each accompanied by a brief description.
 
-
 <p align="center">
   <img alt="Delft Island Fort" src="assets/images/delft-fishing.jpg">
     <em>A small fishing village by the edge of the island</em>
@@ -113,16 +112,11 @@ In addition to these, there are a number of ancient churches, ruins of Buddhist 
     <em>Palmyrah toddy</em>
 </p>
 
-<p align="center">
-  <img alt="Delft Island Fort" src="assets/images/delft-beba.jpg">
-    <em>Me with Supun AKA "Beba" :-D</em>
-</p>
-
 For anyone looking for tips and recommendations about visiting Delft Island,
 
-* There are only three ferries per day. If you are planning to do a one-day tour, take the morning ferry and hire a tuk tuk or a cab to explore the island. Be back at the jetty on time for the ferry back to the mainland.
-* If you are planning on staying overnight on the island, make a hotel reservation prior. Only one hotel is on the island, and you have to book it in advance. [Delft Samudra Hotel](https://www.tripadvisor.com/Hotel_Review-g304135-d12862271-Reviews-Delft_Samudra_Hotel-Jaffna_Northern_Province.html)
-* There are no ATM machines on the island, so take the required amount of cash with you.
-* Take some snacks, chocolates, and water bottles with you as there is only one shop on the island with very limited items.
-* For anyone looking for a guide, please contact [Anistan](https://www.facebook.com/anistan.vinu) via Facebook. We hired him, and he’s a trustworthy, pretty cool guy. (This is not any kind of paid promotion. Just my honest recommendation for anyone looking for a guide.
-* Finally, for anyone who's looking forward to getting wasted with Palmyrah Toddy, please contact Anistan, and he even accepts the payment with toddy ;-D 
+- There are only three ferries per day. If you are planning to do a one-day tour, take the morning ferry and hire a tuk tuk or a cab to explore the island. Be back at the jetty on time for the ferry back to the mainland.
+- If you are planning on staying overnight on the island, make a hotel reservation prior. Only one hotel is on the island, and you have to book it in advance. [Delft Samudra Hotel](https://www.tripadvisor.com/Hotel_Review-g304135-d12862271-Reviews-Delft_Samudra_Hotel-Jaffna_Northern_Province.html)
+- There are no ATM machines on the island, so take the required amount of cash with you.
+- Take some snacks, chocolates, and water bottles with you as there is only one shop on the island with very limited items.
+- For anyone looking for a guide, please contact [Anistan](https://www.facebook.com/anistan.vinu) via Facebook. We hired him, and he’s a trustworthy, pretty cool guy. (This is not any kind of paid promotion. Just my honest recommendation for anyone looking for a guide.
+- Finally, for anyone who's looking forward to getting wasted with Palmyrah Toddy, please contact Anistan, and he even accepts the payment with toddy ;-D

@@ -10,12 +10,12 @@ ghost:
   cover: False
 lahiru:
   username: lahiru
-  name: Lahiru Udayanga
+  name: Lahiru De Silva
   location: Colombo, Sri Lanka
   url_full: https://nomadxd.github.io/
   url: nomadxd.github.io
-  bio: Greetings! I go by the name nomadxd on all of my digital channels. My real name is Lahiru Udayanga De Silva. I'm a software engineer by profession specialized in distributed systems, kubernetes and cloud native API management technologies.
-  picture: assets/images/lahiru.jpg
+  bio: I’m someone who’s endlessly curious — about how things work, why people build what they build, and how ideas turn into reality. This blog is my little space to share that curiosity, whether it’s a deep dive into some new tech I’ve been playing with, thoughts on random life events, or just stories from life in sunny Sri Lanka.
+  picture: assets/images/lahiru.png
   facebook: lahiru97udayanga
   twitter: False
   cover: assets/images/blog-cover.jpg

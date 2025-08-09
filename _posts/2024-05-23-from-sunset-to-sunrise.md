@@ -1,13 +1,13 @@
 ---
 layout: post
 current: post
-cover: 'assets/images/blue-beach-island.jpg'
+cover: "assets/images/blue-beach-island.jpg"
 navigation: True
 title: From Sunset to Sunrise....
 date: 2024-05-23 10:18:00
 tags: travel
 class: post-template
-subclass: 'post'
+subclass: "post"
 author: lahiru
 ---
 
@@ -40,7 +40,7 @@ You have to go through the sand dune, climb a small hill and then reach the tiny
 
 ## Getting familiar with the island 🧭
 
-- To reach the camping site follow the red arrows. 
+- To reach the camping site follow the red arrows.
 - To reach the view point from the camping site, there's a small walking trail through the bushes.
 
 <p align="center">
@@ -53,19 +53,9 @@ You have to go through the sand dune, climb a small hill and then reach the tiny
     <em>Camping site</em>
 </p>
 
-<p align="center">
-  <img alt="Blue beach island" src="assets/images/blue-beach-sea-urchin.jpg">
-    <em>Me holding a sea urchin</em>
-</p>
-
 ## Let the night begin 🔥
 
 After exploring the island and watching the glamorous sunset, we started to prepare the bonfire and the BBQ. We bought some woods on the way to the island near the Nilwella fishing harbour. Several houses nearby also sell chopped wood for bonfires. We had some beers while the chicken and sausages get marinated for the BBQ. We spent the full night drinking, singing and dancing untill around 3 am.
-
-<p align="center">
-  <img alt="Blue beach island" src="assets/images/blue-beach-bonfire.jpg">
-    <em>Bonfire and BBQ</em>
-</p>
 
 <p align="center">
   <img alt="Blue beach island" src="assets/images/blue-beach-bbq.jpg">
@@ -79,4 +69,4 @@ We didn't actually sleep as it was raining heavily after 3 am and not that much 
 <p align="center">
   <img alt="Blue beach island" src="assets/images/blue-beach-final.jpg">
     <em>A distant drone shot of the blue beach island. Nilwella fishing harbour is visible in the corner</em>
-</p> 
+</p>
