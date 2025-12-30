@@ -233,3 +233,11 @@ Even after provisioning the 2 VMs, Proxmox itself was only using about half of t
 - Run additional infrastructure components alongside Kubernetes
 
 Not bad for a decade old laptop after all !!!
+
+## References
+
+- [unable to install r8168-dkms for Realtek NIC](https://forum.proxmox.com/threads/unable-to-install-r8168-dkms-for-realtek-nic.137727/?utm_source=chatgpt.com)
+- [[New Installation] Proxmox 8.0 - Network interfaces down and cannot be brought up](https://forum.proxmox.com/threads/new-installation-proxmox-8-0-network-interfaces-down-and-cannot-be-brought-up.130519/)
+- [Driver Problem with r8169 Network Card after Kernel Update](https://forum.proxmox.com/threads/driver-problem-with-r8169-network-card-after-kernel-update.135302/)
+- [Networking issues PVE8](https://forum.proxmox.com/threads/networking-issues-pve8.129742/)
+- [USB Tethering for proxmox host](https://forum.proxmox.com/threads/usb-tethering-for-proxmox-host.166388/)
