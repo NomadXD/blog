@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" width="1400" height="900">
+  <defs>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <polygon points="0 0, 8 3, 0 6" fill="#B0B0B0"/>
+    </marker>
+    <style>
+      .cell-shape { fill: #F5F5F5; stroke: #C0C0C0; stroke-width: 1.5; }
+      .comp-circle { fill: #FFFFFF; stroke: #A0A0A0; stroke-width: 1.2; }
+      .gw-diamond { fill: #E8E8E8; stroke: #909090; stroke-width: 1; }
+      .cell-title { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; font-weight: 600; fill: #555; text-anchor: middle; }
+      .comp-label { font-family: 'Segoe UI', Arial, sans-serif; font-size: 8.5px; fill: #888; text-anchor: middle; }
+      .conn-line { stroke: #B8B8B8; stroke-width: 1.5; stroke-dasharray: 8,5; fill: none; marker-end: url(#arrowhead); }
+      .conn-label-bg { fill: white; opacity: 0.9; }
+      .conn-label { font-family: 'Segoe UI', Arial, sans-serif; font-size: 8px; fill: #AAA; text-anchor: middle; font-style: italic; }
+      .internal-line { stroke: #D8D8D8; stroke-width: 0.8; }
+      .icon-stroke { stroke: #B0B0B0; stroke-width: 0.7; fill: none; }
+      .waypoint-body { fill: #E8E8E8; stroke: #909090; stroke-width: 1.2; }
+      .waypoint-label { font-family: 'Segoe UI', Arial, sans-serif; font-size: 7px; fill: #888; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1400" height="900" fill="white"/>
+
+  <!-- ========== INTER-CELL CONNECTIONS (bottom layer) ========== -->
+  <g id="connections">
+    <line class="conn-line" x1="352" y1="228" x2="568" y2="273"/>
+    <line class="conn-line" x1="832" y1="273" x2="1048" y2="228"/>
+    <line class="conn-line" x1="1139" y1="329" x2="1061" y2="572"/>
+    <line class="conn-line" x1="936" y1="595" x2="784" y2="405"/>
+    <line class="conn-line" x1="481" y1="592" x2="619" y2="408"/>
+  </g>
+
+  <!-- Connection labels -->
+  <g id="conn-labels">
+    <rect class="conn-label-bg" x="425" y="233" width="52" height="14" rx="3"/>
+    <text class="conn-label" x="451" y="244">handoff</text>
+    <rect class="conn-label-bg" x="905" y="233" width="62" height="14" rx="3"/>
+    <text class="conn-label" x="936" y="244">commands</text>
+    <rect class="conn-label-bg" x="1080" y="438" width="58" height="14" rx="3"/>
+    <text class="conn-label" x="1109" y="449">telemetry</text>
+    <rect class="conn-label-bg" x="845" y="483" width="36" height="14" rx="3"/>
+    <text class="conn-label" x="863" y="494">relay</text>
+    <rect class="conn-label-bg" x="522" y="488" width="55" height="14" rx="3"/>
+    <text class="conn-label" x="550" y="499">ESM data</text>
+  </g>
+
+  <!-- ========== KENNEDY CELL ========== -->
+  <g id="kennedy">
+    <polygon class="cell-shape" points="349.3,146.4 273.6,70.7 166.4,70.7 90.7,146.4 90.7,253.6 166.4,329.3 273.6,329.3 349.3,253.6"/>
+
+
+    <circle class="comp-circle" cx="220" cy="140" r="18"/>
+    <g transform="translate(220,140)">
+      <rect class="icon-stroke" x="-5" y="-6" width="10" height="12" rx="1.5"/>
+      <line class="icon-stroke" x1="-3" y1="-1" x2="3" y2="-1"/>
+      <line class="icon-stroke" x1="-3" y1="3" x2="3" y2="3"/>
+    </g>
+    <text class="comp-label" x="220" y="115">launch-control</text>
+
+    <circle class="comp-circle" cx="280" cy="200" r="18"/>
+    <g transform="translate(280,200)">
+      <rect class="icon-stroke" x="-5" y="-6" width="10" height="12" rx="1.5"/>
+      <line class="icon-stroke" x1="-3" y1="-1" x2="3" y2="-1"/>
+      <line class="icon-stroke" x1="-3" y1="3" x2="3" y2="3"/>
+    </g>
+    <text class="comp-label" x="280" y="226">ground-systems</text>
+
+    <circle class="comp-circle" cx="220" cy="260" r="18"/>
+    <g transform="translate(220,260)">
+      <rect class="icon-stroke" x="-5" y="-6" width="10" height="12" rx="1.5"/>
+      <line class="icon-stroke" x1="-3" y1="-1" x2="3" y2="-1"/>
+      <line class="icon-stroke" x1="-3" y1="3" x2="3" y2="3"/>
+    </g>
+    <text class="comp-label" x="220" y="288">weather-station</text>
+
+    <circle class="comp-circle" cx="160" cy="200" r="18"/>
+    <g transform="translate(160,200)">
+      <rect class="icon-stroke" x="-5" y="-6" width="10" height="12" rx="1.5"/>
+      <line class="icon-stroke" x1="-3" y1="-1" x2="3" y2="-1"/>
+      <line class="icon-stroke" x1="-3" y1="3" x2="3" y2="3"/>
+    </g>
+    <text class="comp-label" x="160" y="226">pad-operations</text>
+
+    <text class="cell-title" x="220" y="350">Kennedy</text>
+  </g>
+
+  <!-- ========== HOUSTON CELL ========== -->
+  <g id="houston">
+    <polygon class="cell-shape" points="829.3,246.4 753.6,170.7 646.4,170.7 570.7,246.4 570.7,353.6 646.4,429.3 753.6,429.3 829.3,353.6"/>
+
+
+    <circle class="comp-circle" cx="700" cy="240" r="18"/>
+    <g transform="translate(700,240)">
+      <rect class="icon-stroke" x="-5" y="-6" width="10" height="12" rx="1.5"/>
+      <line class="icon-stroke" x1="-3" y1="-1" x2="3" y2="-1"/>
+      <line class="icon-stroke" x1="-3" y1="3" x2="3" y2="3"/>
+    </g>
+    <text class="comp-label" x="700" y="215">flight-director</text>
+
+    <circle class="comp-circle" cx="760" cy="300" r="18"/>
+    <g transform="translate(760,300)">
+      <rect class="icon-stroke" x="-5" y="-6" width="10" height="12" rx="1.5"/>
+      <line class="icon-stroke" x1="-3" y1="-1" x2="3" y2="-1"/>
+      <line class="icon-stroke" x1="-3" y1="3" x2="3" y2="3"/>
+    </g>
+    <text class="comp-label" x="760" y="326">capcom</text>
+
+    <circle class="comp-circle" cx="700" cy="360" r="18"/>
+    <g transform="translate(700,360)">
+      <rect class="icon-stroke" x="-5" y="-6" width="10" height="12" rx="1.5"/>
+      <line class="icon-stroke" x1="-3" y1="-1" x2="3" y2="-1"/>
+      <line class="icon-stroke" x1="-3" y1="3" x2="3" y2="3"/>
+    </g>
+    <text class="comp-label" x="700" y="388">telemetry-monitor</text>
+
+    <circle class="comp-circle" cx="640" cy="300" r="18"/>
+    <g transform="translate(640,300)">
+      <rect class="icon-stroke" x="-5" y="-6" width="10" height="12" rx="1.5"/>
+      <line class="icon-stroke" x1="-3" y1="-1" x2="3" y2="-1"/>
+      <line class="icon-stroke" x1="-3" y1="3" x2="3" y2="3"/>
+    </g>
+    <text class="comp-label" x="640" y="326">flight-dynamics</text>
+
+    <!-- Waypoint proxy on left edge -->
+    <circle class="waypoint-body" cx="570.7" cy="300" r="14"/>
+    <polygon points="562,300 568,296 568,304" fill="#909090"/>
+    <polygon points="579,300 573,296 573,304" fill="#909090"/>
+    <text class="waypoint-label" x="570.7" y="322">waypoint</text>
+
+    <text class="cell-title" x="700" y="450">Houston</text>
+  </g>
+
+  <!-- ========== ORION CELL ========== -->
+  <g id="orion">
+    <polygon class="cell-shape" points="1309.3,146.4 1233.6,70.7 1126.4,70.7 1050.7,146.4 1050.7,253.6 1126.4,329.3 1233.6,329.3 1309.3,253.6"/>
+
+
+    <circle class="comp-circle" cx="1180" cy="140" r="18"/>
+    <g transform="translate(1180,140)">
+      <rect class="icon-stroke" x="-5" y="-6" width="10" height="12" rx="1.5"/>
+      <line class="icon-stroke" x1="-3" y1="-1" x2="3" y2="-1"/>
+      <line class="icon-stroke" x1="-3" y1="3" x2="3" y2="3"/>
+    </g>
+    <text class="comp-label" x="1180" y="115">guidance-nav</text>
+
+    <circle class="comp-circle" cx="1240" cy="200" r="18"/>
+    <g transform="translate(1240,200)">
+      <rect class="icon-stroke" x="-5" y="-6" width="10" height="12" rx="1.5"/>
+      <line class="icon-stroke" x1="-3" y1="-1" x2="3" y2="-1"/>
+      <line class="icon-stroke" x1="-3" y1="3" x2="3" y2="3"/>
+    </g>
+    <text class="comp-label" x="1240" y="226">comms-system</text>
+
+    <circle class="comp-circle" cx="1180" cy="260" r="18"/>
+    <g transform="translate(1180,260)">
+      <rect class="icon-stroke" x="-5" y="-6" width="10" height="12" rx="1.5"/>
+      <line class="icon-stroke" x1="-3" y1="-1" x2="3" y2="-1"/>
+      <line class="icon-stroke" x1="-3" y1="3" x2="3" y2="3"/>
+    </g>
+    <text class="comp-label" x="1180" y="288">life-support</text>
+
+    <circle class="comp-circle" cx="1120" cy="200" r="18"/>
+    <g transform="translate(1120,200)">
+      <rect class="icon-stroke" x="-5" y="-6" width="10" height="12" rx="1.5"/>
+      <line class="icon-stroke" x1="-3" y1="-1" x2="3" y2="-1"/>
+      <line class="icon-stroke" x1="-3" y1="3" x2="3" y2="3"/>
+    </g>
+    <text class="comp-label" x="1120" y="226">crew-interface</text>
+
+    <!-- Waypoint proxy on left edge -->
+    <circle class="waypoint-body" cx="1050.7" cy="200" r="14"/>
+    <polygon points="1042,200 1048,196 1048,204" fill="#909090"/>
+    <polygon points="1059,200 1053,196 1053,204" fill="#909090"/>
+    <text class="waypoint-label" x="1050.7" y="222">waypoint</text>
+
+    <text class="cell-title" x="1180" y="350">Orion</text>
+  </g>
+
+  <!-- ========== ESA OPS CELL ========== -->
+  <g id="esa">
+    <polygon class="cell-shape" points="529.3,646.4 453.6,570.7 346.4,570.7 270.7,646.4 270.7,753.6 346.4,829.3 453.6,829.3 529.3,753.6"/>
+
+
+    <circle class="comp-circle" cx="345" cy="680" r="18"/>
+    <g transform="translate(345,680)">
+      <rect class="icon-stroke" x="-5" y="-6" width="10" height="12" rx="1.5"/>
+      <line class="icon-stroke" x1="-3" y1="-1" x2="3" y2="-1"/>
+      <line class="icon-stroke" x1="-3" y1="3" x2="3" y2="3"/>
+    </g>
+    <text class="comp-label" x="345" y="656">service-module-</text>
+    <text class="comp-label" x="345" y="666">monitor</text>
+
+    <circle class="comp-circle" cx="455" cy="720" r="18"/>
+    <g transform="translate(455,720)">
+      <rect class="icon-stroke" x="-5" y="-6" width="10" height="12" rx="1.5"/>
+      <line class="icon-stroke" x1="-3" y1="-1" x2="3" y2="-1"/>
+      <line class="icon-stroke" x1="-3" y1="3" x2="3" y2="3"/>
+    </g>
+    <text class="comp-label" x="455" y="748">mission-relay</text>
+
+    <text class="cell-title" x="400" y="850">ESA Ops</text>
+  </g>
+
+  <!-- ========== DEEP SPACE NETWORK CELL ========== -->
+  <g id="dsn">
+    <polygon class="cell-shape" points="1149.3,646.4 1073.6,570.7 966.4,570.7 890.7,646.4 890.7,753.6 966.4,829.3 1073.6,829.3 1149.3,753.6"/>
+
+
+    <circle class="comp-circle" cx="1020" cy="640" r="18"/>
+    <g transform="translate(1020,640)">
+      <rect class="icon-stroke" x="-5" y="-6" width="10" height="12" rx="1.5"/>
+      <line class="icon-stroke" x1="-3" y1="-1" x2="3" y2="-1"/>
+      <line class="icon-stroke" x1="-3" y1="3" x2="3" y2="3"/>
+    </g>
+    <text class="comp-label" x="1020" y="615">signal-router</text>
+
+    <circle class="comp-circle" cx="1080" cy="700" r="18"/>
+    <g transform="translate(1080,700)">
+      <rect class="icon-stroke" x="-5" y="-6" width="10" height="12" rx="1.5"/>
+      <line class="icon-stroke" x1="-3" y1="-1" x2="3" y2="-1"/>
+      <line class="icon-stroke" x1="-3" y1="3" x2="3" y2="3"/>
+    </g>
+    <text class="comp-label" x="1080" y="726">goldstone</text>
+
+    <circle class="comp-circle" cx="1020" cy="760" r="18"/>
+    <g transform="translate(1020,760)">
+      <rect class="icon-stroke" x="-5" y="-6" width="10" height="12" rx="1.5"/>
+      <line class="icon-stroke" x1="-3" y1="-1" x2="3" y2="-1"/>
+      <line class="icon-stroke" x1="-3" y1="3" x2="3" y2="3"/>
+    </g>
+    <text class="comp-label" x="1020" y="788">madrid</text>
+
+    <circle class="comp-circle" cx="960" cy="700" r="18"/>
+    <g transform="translate(960,700)">
+      <rect class="icon-stroke" x="-5" y="-6" width="10" height="12" rx="1.5"/>
+      <line class="icon-stroke" x1="-3" y1="-1" x2="3" y2="-1"/>
+      <line class="icon-stroke" x1="-3" y1="3" x2="3" y2="3"/>
+    </g>
+    <text class="comp-label" x="960" y="726">canberra</text>
+
+    <!-- Waypoint proxy on left edge -->
+    <circle class="waypoint-body" cx="890.7" cy="700" r="14"/>
+    <polygon points="882,700 888,696 888,704" fill="#909090"/>
+    <polygon points="899,700 893,696 893,704" fill="#909090"/>
+    <text class="waypoint-label" x="890.7" y="722">waypoint</text>
+
+    <text class="cell-title" x="1020" y="850">Deep Space Network</text>
+  </g>
+</svg>
