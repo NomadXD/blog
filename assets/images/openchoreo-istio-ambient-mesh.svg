@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700" width="1000" height="700">
+  <defs>
+    <style>
+      .platform-top { fill: #EDF1F7; stroke: #8FA4BD; stroke-width: 1.5; }
+      .platform-front { fill: #C8D3E2; stroke: #8FA4BD; stroke-width: 1; }
+      .platform-right { fill: #D4DCE8; stroke: #8FA4BD; stroke-width: 1; }
+      .cell-oct { fill: #F5F5F5; stroke: #A0A0A0; stroke-width: 1.8; }
+      .cell-title { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; font-weight: 600; fill: #555; text-anchor: middle; }
+      .cell-sub { font-family: 'Segoe UI', Arial, sans-serif; font-size: 11px; fill: #888; text-anchor: middle; }
+      .pod-circle { fill: #FFFFFF; stroke: #A0A0A0; stroke-width: 1.2; }
+      .pod-label { font-family: 'Segoe UI', Arial, sans-serif; font-size: 8px; fill: #888; text-anchor: middle; }
+      .icon-stroke { stroke: #A0A0A0; stroke-width: 0.8; fill: none; }
+      .istio-box { fill: #466BB0; }
+      .istio-label { font-family: 'Segoe UI', Arial, sans-serif; font-size: 13px; font-weight: 600; fill: #FFFFFF; text-anchor: middle; }
+      .istio-sub { font-family: 'Segoe UI', Arial, sans-serif; font-size: 9.5px; fill: #B8CDE8; text-anchor: middle; }
+      .zt-bar { fill: #2E86AB; opacity: 0.88; }
+      .zt-label { font-family: 'Segoe UI', Arial, sans-serif; font-size: 8.5px; font-weight: 600; fill: #FFFFFF; text-anchor: middle; }
+      .ext-label { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; font-weight: 600; fill: #555; text-anchor: middle; }
+      .platform-label { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; font-weight: 600; fill: #5A7A9C; text-anchor: middle; letter-spacing: 0.3px; }
+      .ns-line { stroke: #D4832D; stroke-width: 2; fill: none; }
+      .ns-dash { stroke: #D4832D; stroke-width: 2; fill: none; stroke-dasharray: 7 4; }
+      .ew-line { stroke: #8E6AB8; stroke-width: 2.2; fill: none; }
+      .mtls-line { stroke: #2E86AB; stroke-width: 1.8; fill: none; stroke-dasharray: 5 4; opacity: 0.7; }
+      .traffic-label { font-family: 'Segoe UI', Arial, sans-serif; font-weight: 600; text-anchor: middle; }
+      .legend-text { font-family: 'Segoe UI', Arial, sans-serif; font-size: 11px; fill: #666; }
+    </style>
+    <marker id="ns-arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#D4832D"/>
+    </marker>
+    <marker id="ew-arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#8E6AB8"/>
+    </marker>
+    <filter id="shd" x="-2%" y="-2%" width="104%" height="108%">
+      <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.1"/>
+    </filter>
+    <pattern id="mtls-dots" width="16" height="16" patternUnits="userSpaceOnUse">
+      <circle cx="8" cy="8" r="1.8" fill="#2E86AB" opacity="0.4"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1000" height="700" fill="white"/>
+
+  <!-- 3D Platform -->
+  <polygon class="platform-right" points="890,530 930,110 930,138 890,558"/>
+  <polygon class="platform-front" points="30,570 890,530 890,558 30,598"/>
+  <polygon class="platform-top" points="70,150 930,110 890,530 30,570"/>
+  <text class="platform-label" x="460" y="532">OpenChoreo DataPlane &#x2014; Kubernetes Cluster</text>
+
+  <!-- External traffic -->
+  <text class="ext-label" x="490" y="32">External Traffic</text>
+  <line class="ns-dash" x1="490" y1="45" x2="490" y2="172" marker-end="url(#ns-arr)"/>
+  <text class="traffic-label" x="515" y="110" fill="#D4832D" font-size="11">N/S</text>
+
+  <!-- Istio Ingress Gateway -->
+  <rect x="320" y="172" width="340" height="52" rx="6" class="istio-box" filter="url(#shd)"/>
+  <text class="istio-label" x="490" y="198">Istio Ingress Gateway</text>
+  <text class="istio-sub" x="490" y="214">North / South Traffic Entry Point</text>
+
+  <!-- N/S arrows: gateway → cells -->
+  <path class="ns-dash" d="M405 224 Q350 260 272 298" marker-end="url(#ns-arr)"/>
+  <path class="ns-dash" d="M560 224 Q615 250 695 270" marker-end="url(#ns-arr)"/>
+
+  <!-- ztunnel mTLS overlay -->
+  <rect x="168" y="258" width="630" height="228" rx="14" fill="url(#mtls-dots)" stroke="#2E86AB" stroke-width="0.5" stroke-opacity="0.2"/>
+  <g opacity="0.6">
+    <g transform="translate(448,494)">
+      <rect x="-5" y="-2" width="10" height="7" rx="1.5" fill="#2E86AB"/>
+      <path d="M-3,-2 L-3,-5 Q-3,-8.5 0,-8.5 Q3,-8.5 3,-5 L3,-2" fill="none" stroke="#2E86AB" stroke-width="1.5"/>
+    </g>
+    <text x="490" y="498" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#2E86AB" font-weight="600">ztunnel mTLS</text>
+  </g>
+
+  <!-- ========== CELL A ========== -->
+  <polygon class="cell-oct" points="346,351 299,301 231,301 184,351 184,419 231,469 299,469 346,419" filter="url(#shd)"/>
+  <text class="cell-title" x="265" y="330">Project A</text>
+  <text class="cell-sub" x="265" y="346">Cell</text>
+
+  <!-- Cell A pods -->
+  <circle class="pod-circle" cx="235" cy="378" r="14"/>
+  <g transform="translate(235,378)">
+    <rect class="icon-stroke" x="-5" y="-7" width="10" height="14" rx="1.5"/>
+    <line class="icon-stroke" x1="-3" y1="-1" x2="3" y2="-1"/>
+    <line class="icon-stroke" x1="-3" y1="3" x2="3" y2="3"/>
+  </g>
+  <text class="pod-label" x="235" y="400">Pod</text>
+
+  <circle class="pod-circle" cx="295" cy="378" r="14"/>
+  <g transform="translate(295,378)">
+    <rect class="icon-stroke" x="-5" y="-7" width="10" height="14" rx="1.5"/>
+    <line class="icon-stroke" x1="-3" y1="-1" x2="3" y2="-1"/>
+    <line class="icon-stroke" x1="-3" y1="3" x2="3" y2="3"/>
+  </g>
+  <text class="pod-label" x="295" y="400">Pod</text>
+
+  <!-- Cell A namespace label -->
+  <rect x="205" y="430" width="120" height="20" rx="3" fill="#2E86AB" opacity="0.88"/>
+  <text x="265" y="444" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="8.5" font-weight="600" fill="#FFFFFF">Namespace A</text>
+
+  <!-- ========== CELL B ========== -->
+  <polygon class="cell-oct" points="781,321 734,271 666,271 619,321 619,389 666,439 734,439 781,389" filter="url(#shd)"/>
+  <text class="cell-title" x="700" y="300">Project B</text>
+  <text class="cell-sub" x="700" y="316">Cell</text>
+
+  <!-- Cell B pods -->
+  <circle class="pod-circle" cx="670" cy="348" r="14"/>
+  <g transform="translate(670,348)">
+    <rect class="icon-stroke" x="-5" y="-7" width="10" height="14" rx="1.5"/>
+    <line class="icon-stroke" x1="-3" y1="-1" x2="3" y2="-1"/>
+    <line class="icon-stroke" x1="-3" y1="3" x2="3" y2="3"/>
+  </g>
+  <text class="pod-label" x="670" y="370">Pod</text>
+
+  <circle class="pod-circle" cx="730" cy="348" r="14"/>
+  <g transform="translate(730,348)">
+    <rect class="icon-stroke" x="-5" y="-7" width="10" height="14" rx="1.5"/>
+    <line class="icon-stroke" x1="-3" y1="-1" x2="3" y2="-1"/>
+    <line class="icon-stroke" x1="-3" y1="3" x2="3" y2="3"/>
+  </g>
+  <text class="pod-label" x="730" y="370">Pod</text>
+
+  <!-- Cell B namespace label -->
+  <rect x="640" y="400" width="120" height="20" rx="3" fill="#2E86AB" opacity="0.88"/>
+  <text x="700" y="414" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="8.5" font-weight="600" fill="#FFFFFF">Namespace B</text>
+
+  <!-- ========== WAYPOINT PROXIES (on cell left edges) ========== -->
+  <!-- Cell A waypoint -->
+  <circle cx="184" cy="385" r="18" fill="#466BB0" filter="url(#shd)"/>
+  <polygon points="174,385 181,380 181,390" fill="#FFFFFF"/>
+  <polygon points="194,385 187,380 187,390" fill="#FFFFFF"/>
+  <text x="184" y="418" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#888" font-weight="600">waypoint</text>
+
+  <!-- Cell B waypoint -->
+  <circle cx="619" cy="355" r="18" fill="#466BB0" filter="url(#shd)"/>
+  <polygon points="609,355 616,350 616,360" fill="#FFFFFF"/>
+  <polygon points="629,355 622,350 622,360" fill="#FFFFFF"/>
+  <text x="619" y="388" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#888" font-weight="600">waypoint</text>
+
+  <!-- E/W traffic -->
+  <text class="traffic-label" x="440" y="332" fill="#8E6AB8" font-size="11">E/W Traffic</text>
+  <text font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#8E6AB8" text-anchor="middle" x="440" y="346" opacity="0.8">via Waypoint Proxy (L7 AuthZ)</text>
+  <line class="ew-line" x1="346" y1="385" x2="601" y2="355" marker-end="url(#ew-arr)"/>
+
+  <!-- Legend -->
+  <g transform="translate(260,672)">
+    <line x1="0" y1="0" x2="22" y2="0" stroke="#D4832D" stroke-width="2.2" stroke-dasharray="7 4"/>
+    <text class="legend-text" x="30" y="4">North/South Traffic</text>
+    <line x1="175" y1="0" x2="197" y2="0" stroke="#8E6AB8" stroke-width="2.2"/>
+    <text class="legend-text" x="205" y="4">East/West Traffic</text>
+    <rect x="330" y="-6" width="22" height="12" rx="2" fill="url(#mtls-dots)" stroke="#2E86AB" stroke-width="0.5" stroke-opacity="0.3"/>
+    <text class="legend-text" x="360" y="4">ztunnel mTLS</text>
+  </g>
+</svg>
