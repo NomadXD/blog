@@ -7,7 +7,7 @@
         {% assign excerpt = page.content | strip_html | truncatewords: 50, "" %}
      {% endif %} <!--title below is coming from _includes/dynamic_title-->
     <meta property="og:site_name" content="{{ site.title }}" />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content="{% if page.current == 'post' %}article{% else %}website{% endif %}" />
     <meta property="og:title" content="{% if title %}{{ title }}{% elsif page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}" />
     <meta property="og:description" content="{% if excerpt %}{{ excerpt }}{% elsif page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}" />
     <meta property="og:url" content="{{ site.url }}{% if site.baseurl %}{{ site.baseurl }}{% endif %}{{ page.url | remove_first: '/' }}" />
@@ -34,13 +34,49 @@
     <meta property="og:image:height" content="666" />{% endif %}
 
     <script type="application/ld+json">
+{% if page.current == 'post' %}
 {
     "@context": "https://schema.org",
-    "@type": "Website",
+    "@type": "BlogPosting",
     "publisher": {
         "@type": "Organization",
         "name": "{{ site.title }}",
-        "logo": "{{ site.url }}{{ site.baseurl }}{{ site.logo }}"
+        "logo": {
+            "@type": "ImageObject",
+            "url": "{{ site.url }}{{ site.baseurl }}{{ site.logo }}"
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "{% if page.author %}{% assign author = site.data.authors[page.author] %}{{ author.name }}{% else %}{{ site.title }}{% endif %}"
+    },
+    "headline": "{{ page.title | truncate: 110 }}",
+    "url": "{{ site.url }}{% if site.baseurl %}{{ site.baseurl }}{% endif %}{{ page.url | remove_first: '/' }}",
+    "datePublished": "{{ page.date | date_to_xmlschema }}",
+    "dateModified": "{{ page.date | date_to_xmlschema }}",
+    "image": {
+        "@type": "ImageObject",
+        "url": "{{ site.url }}{{ site.baseurl }}{% if page.cover %}{{ page.cover }}{% else %}{{ site.cover }}{% endif %}",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ site.url }}{% if site.baseurl %}{{ site.baseurl }}{% endif %}{{ page.url | remove_first: '/' }}"
+    },
+    "description": "{% if page.description %}{{ page.description }}{% elsif excerpt %}{{ excerpt }}{% else %}{{ site.description }}{% endif %}"
+}
+{% else %}
+{
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "publisher": {
+        "@type": "Organization",
+        "name": "{{ site.title }}",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "{{ site.url }}{{ site.baseurl }}{{ site.logo }}"
+        }
     },
     "url": "{{ site.url }}{% if site.baseurl %}{{ site.baseurl }}{% endif %}{{ page.url | remove_first: '/' }}",
     "image": {
@@ -53,8 +89,9 @@
         "@type": "WebPage",
         "@id": "{{ site.url }}{% if site.baseurl %}{{ site.baseurl }}{% endif %}{{ page.url | remove_first: '/' }}"
     },
-    "description": "{% if excerpt %}{{ excerpt }}{% elsif page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}"
+    "description": "{{ site.description }}"
 }
+{% endif %}
     </script>
 
     <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>

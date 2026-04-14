@@ -10,6 +10,7 @@ class: post-template
 subclass: "post"
 logo: assets/images/ghost.png
 author: lahiru
+description: "Understanding how Kubernetes custom controllers work behind the scenes — informers, work queues, reconciliation loops, and building your own controller from scratch."
 ---
 
 Kubernetes offers a rich ecosystem of [extension points](https://kubernetes.io/docs/concepts/extend-kubernetes/) that allow developers to tailor and extend its functionality. Among these ability to implement Custom Controllers emerge as a powerful mechanism for extending Kubernetes with your own "Kubernetes logic". While there are frameworks and tools like [Kubebuilder](https://github.com/kubernetes-sigs/kubebuilder) and [OperatorSDK](https://sdk.operatorframework.io/) that abstracts away the complexity of implementing custom controllers, understanding how custom controllers operate at a fundamental level is crucial for those who wish to harness the full potential of Kubernetes. In this article, we will go through how custom controllers work behind the scenes and how you can leverage the basic building blocks of custom controllers for your use cases.

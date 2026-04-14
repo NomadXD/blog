@@ -9,6 +9,7 @@ tags: tech
 class: post-template
 subclass: "post"
 author: lahiru
+description: "Our experience contributing to open source during Google Summer of Code — working on Envoy proxy WebAssembly extensions with Red Hat 3scale."
 ---
 
 > This article was originally published on [Opensource.com](https://opensource.com/) and co-authored by Rahul Anand and Lahiru De Silva (myself).

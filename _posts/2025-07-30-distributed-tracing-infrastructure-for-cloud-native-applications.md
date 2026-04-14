@@ -10,6 +10,7 @@ class: post-template
 subclass: "post"
 logo: assets/images/ghost.png
 author: lahiru
+description: "Architectural patterns and core components for building a distributed tracing infrastructure for cloud-native microservices, covering instrumentation, collection, storage, and visualization."
 ---
 
 As modern applications are increasingly built on a foundation of cloud-native infrastructure and microservices, the simplicity of monolithic debugging has given way to a new era of distributed complexity. When a single user request can trigger a cascade of calls across dozens of services, how do you find the root cause of a slowdown or an error? Traditional monitoring tools often fall short, leaving developers in the dark. This is precisely the problem that distributed tracing was designed to solve. By stitching together the entire lifecycle of a request as it hops across services, it provides the end-to-end visibility crucial for maintaining performance and reliability. This article will guide you through the architectural patterns and core components needed to build a robust distributed tracing infrastructure for your own cloud-native ecosystem.

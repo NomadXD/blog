@@ -9,6 +9,7 @@ tags: tech
 class: post-template
 subclass: "post"
 author: lahiru
+description: "High-level design for an authorization cache in Envoy proxy using WebAssembly and Proxy-Wasm, reducing latency by caching auth decisions from external services."
 ---
 
 > This article was originally published on [Red Hat Developer Blogs](https://developers.redhat.com/) and co-authored by Rahul Anand and Lahiru De Silva (myself).

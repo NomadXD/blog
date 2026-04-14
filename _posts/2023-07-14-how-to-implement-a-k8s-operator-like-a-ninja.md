@@ -10,6 +10,7 @@ class: post-template
 subclass: "post"
 logo: assets/images/ghost.png
 author: lahiru
+description: "A practical guide to building Kubernetes operators using Kubebuilder — from scaffolding to custom controllers, reconciliation logic, and deployment."
 ---
 
 Kubernetes has emerged as the widely accepted standard for deploying and running modern cloud-native applications. With its declarative approach using YAML, it offers a straightforward and intuitive method to define the desired infrastructure state for application deployments. However, managing complex application deployments on Kubernetes requires additional automation and control beyond what Kubernetes provides out of the box. This is where Kubernetes operators come in.

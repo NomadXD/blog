@@ -9,6 +9,7 @@ tags: random
 class: post-template
 subclass: "post"
 author: lahiru
+description: "Exploring the grandfather paradox and the logical contradictions of time travel — what happens when cause and effect collide."
 ---
 
 The grandfather paradox is a famous thought experiment that explores the consequences of time travel. The paradox poses the question: "If you could go back in time and kill your grandfather before he had children, would you still exist?"

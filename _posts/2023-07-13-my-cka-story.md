@@ -10,6 +10,7 @@ class: post-template
 subclass: "post"
 logo: assets/images/ghost.png
 author: lahiru
+description: "My experience preparing for and passing the Certified Kubernetes Administrator (CKA) exam on the first attempt, including study resources, tips, and exam strategy."
 ---
 
 Passing the Certified Kubernetes Administrator (CKA) exam was an exhilarating milestone in my career. In this article, I'll take you through my journey of preparing for and cracking the CKA exam.

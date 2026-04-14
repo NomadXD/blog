@@ -10,6 +10,7 @@ class: post-template
 subclass: "post"
 logo: assets/images/ghost.png
 author: lahiru
+description: "Setting up a Kubernetes homelab on a decade-old gaming laptop with Proxmox, tackling broken network drivers, offline package installs, and Kubeadm bootstrapping."
 ---
 What began as a simple idea - *"let me reuse my old gaming laptop as a Kubernetes homelab"*, turned into a series of interesting challenges. On paper, the plan was straightforward: install Proxmox, spin up a couple of virtual machines, bootstrap a Kubernetes cluster using Kubeadm, and call it a day. In reality, the process became a deep dive through Linux kernel headers, broken network drivers, offline package installs, and typical networking subnet issues.
 

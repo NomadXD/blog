@@ -9,6 +9,7 @@ tags: random
 class: post-template
 subclass: "post"
 author: lahiru
+description: "A simple recipe for making a refreshing Bacardi Mojito at home with fresh limes, mint, rum, and soda water."
 ---
 
 Are you in the mood for a refreshing and tangy cocktail? Look no further than the Bacardi Mojito! This classic Cuban cocktail is a perfect summer drink, combining the fresh flavors of lime and mint with a smooth Bacardi rum kick.

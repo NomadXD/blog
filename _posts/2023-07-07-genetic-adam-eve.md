@@ -9,6 +9,7 @@ tags: random
 class: post-template
 subclass: "post"
 author: lahiru
+description: "Exploring Mitochondrial Eve and Y-chromosomal Adam — the science behind humanity's most recent common ancestors and what genetics reveals about our ancient origins."
 ---
 
 Understanding Genetic Adam and Eve takes us on a journey through human evolution, diverse genes, and the quest to learn about the origin of humanity. In this article, we will explore the mystery of Genetic Adam and Eve, explaining the science behind these ideas and the interesting insights they provide into our ancient history.

@@ -9,6 +9,7 @@ tags: travel
 class: post-template
 subclass: "post"
 author: lahiru
+description: "A travel guide to Delft Island (Neduntheevu) in Jaffna, Sri Lanka — ferry schedules, ancient ruins, wild ponies, and pristine beaches off the beaten path."
 ---
 
 Jaffna, located in the northern part of Sri Lanka, is known for its rich cultural heritage, stunning coastline, and natural beauty. Among the many hidden gems in Jaffna is the enchanting Delft Island, located off the coast of the Jaffna Peninsula. Delft Island, also known as Neduntheevu, is a small island surrounded by crystal-clear turquoise waters and dotted with palm trees, pristine beaches, and unique wildlife. The island's name is derived from the city of Delft in the Netherlands, reflecting the Dutch colonial influence on the island's history. This island has a fascinating past, dating back to the Chola Dynasty and the Dutch colonial period, and is home to ancient ruins and landmarks that are worth exploring. In this travel blog, I'll take you on a journey through Delft Island in Jaffna, sharing my experiences and recommendations for the best things to see, do, and eat on this enchanting island. So, get ready to discover the natural beauty, cultural richness, and unique wildlife of Delft Island in Jaffna.

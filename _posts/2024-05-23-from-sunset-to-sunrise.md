@@ -9,6 +9,7 @@ tags: travel
 class: post-template
 subclass: "post"
 author: lahiru
+description: "A night camping guide to Blue Beach Island in Nilwella, Sri Lanka — how to reserve a spot, what to bring, and what to expect from sunset to sunrise."
 ---
 
 [Blue beach island](https://maps.app.goo.gl/2gpcmkuo7f1uL7V89) is a small island located in the Nilwella area in between Dickwella and Tangalle. The island is known for its stunning sunsets and tranquil environment, making it an ideal spot to escape the hustle and bustle of everyday life. The island is connected to the mainland by a small narrow sand dune which can be submerged by sea water during high tides or during the southwest monsoons. For this reason, it is advisable to plan your visit in advance.

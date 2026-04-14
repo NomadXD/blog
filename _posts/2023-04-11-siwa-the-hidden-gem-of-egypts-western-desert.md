@@ -10,6 +10,7 @@ class: post-template
 subclass: "post"
 logo: assets/images/ghost.png
 author: lahiru
+description: "Exploring Siwa Oasis in Egypt's western desert — ancient temples, salt lakes, sand dunes, and Berber culture through a volunteering program with AIESEC."
 ---
 
 It's amazing how a single photo can travel you back to a place you visited years ago. Today, I find myself reminiscing about my time in Siwa, Egypt which I visited back in July 2018.

@@ -10,6 +10,7 @@ class: post-template
 subclass: "post"
 logo: assets/images/ghost.png
 author: lahiru
+description: "How to build a secure and scalable API layer using Envoy Proxy with rate limiting, authentication, and load balancing for production workloads."
 ---
 
 APIs (Application Programming Interfaces) have become an integral part of modern software development. They allow different applications to communicate and exchange data, enabling developers to create complex systems that integrate multiple services and technologies. APIs are used by companies of all sizes to power their digital products and services, from social media platforms to financial systems.

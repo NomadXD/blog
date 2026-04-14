@@ -23,11 +23,11 @@ subclass: "post page"
   <a href="https://www.linkedin.com/in/lahiru-udayanga/">LinkedIn</a>
 </p>
 
-I’m someone who’s endlessly curious — about how things work, why people build what they build, and how ideas turn into reality. This blog is my little space to share that curiosity, whether it’s a deep dive into some new tech I’ve been playing with, thoughts on random life events, or just stories from life in sunny Sri Lanka.
+I’m someone who’s endlessly curious about how things work, why people build what they build, and how ideas turn into reality. This blog is my little space to share that curiosity, whether it’s a deep dive into some new tech I’ve been playing with, thoughts on random life events, or just stories from life in sunny Sri Lanka.
 
-By day, I work as a Senior Software Engineer at WSO2, where I get to play with Kubernetes, API gateways, Cloud Native technologies, and all the moving parts that make modern infrastructure tick. Some days it’s smooth sailing, other days it’s “why is this breaking now?” — but that’s half the fun.
+By day, I work as a Software Engineer at WSO2, where I get to play with Kubernetes, API gateways, Cloud Native technologies, and all the moving parts that make modern infrastructure tick. Some days it’s smooth sailing, other days it’s “why is this breaking now?” — but that’s half the fun.
 
-My time studying Computer Science and Engineering at the University of Moratuwa was where I learned that technology isn’t just about code — it’s about solving problems, creating opportunities, and constantly reinventing yourself.
+My time studying Computer Science and Engineering at the University of Moratuwa was where I learned that technology isn’t just about code, it’s about solving problems, creating opportunities, and constantly reinventing yourself.
 
 I started this blog as a way to share my thoughts and experiences with the world. Whether it's my latest travel adventure, a new technology or a programming language I've tried, or my take on current events, I love to share my perspective and connect with others who share similar interests.
 

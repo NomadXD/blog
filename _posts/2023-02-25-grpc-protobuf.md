@@ -9,6 +9,7 @@ tags: [tech]
 class: post-template
 subclass: "post"
 author: lahiru
+description: "An introduction to gRPC and Protocol Buffers — how they work together for efficient service-to-service communication with binary serialization."
 ---
 
 Since both protocol buffers and gRPC framework are developed internally at Google and then open sourced, let's first see what google says about them.

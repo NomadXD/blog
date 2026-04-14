@@ -10,6 +10,7 @@ class: post-template
 subclass: "post"
 logo: assets/images/ghost.png
 author: lahiru
+description: "How OpenChoreo Cell architecture and Istio ambient mesh create defense-in-depth for Kubernetes workloads, with mTLS encryption, SPIFFE identities, and L7 authorization policies."
 ---
 
 How OpenChoreo Cell architecture and Istio ambient mesh create defense-in-depth for Kubernetes workloads, demonstrated with a simulated NASA Artemis II lunar mission.

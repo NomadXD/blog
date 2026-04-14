@@ -9,6 +9,7 @@ tags: tech
 class: post-template
 subclass: "post"
 author: lahiru
+description: "Implementation details of an Envoy proxy authorization cache using Proxy-Wasm and WebAssembly, integrated with Red Hat 3scale API Management."
 ---
 
 > This article was originally published on [Red Hat Developer Blogs](https://developers.redhat.com/) and co-authored by Rahul Anand and Lahiru De Silva (myself).
