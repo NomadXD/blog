@@ -1,10 +1,10 @@
 ---
 layout: post
 current: post
-cover: assets/images/artemis-2-cover-1.jpg
+cover: assets/images/artemis-ii-cover.jpg
 navigation: True
 title: "Zero-Trust Networking with OpenChoreo and Istio Ambient Mesh"
-date: 2025-07-30 00:00:00
+date: 2026-04-14 00:00:00
 tags: tech
 class: post-template
 subclass: "post"
@@ -18,7 +18,7 @@ How OpenChoreo Cell architecture and Istio ambient mesh create defense-in-depth 
 
 [OpenChoreo](https://openchoreo.dev) is an open-source Internal Developer Platform (IDP) for Kubernetes that recently joined the [CNCF as a sandbox project](https://openchoreo.dev/blog/openchoreo-joins-cncf-and-ships-1-0/). It provides high-level abstractions such as Projects, Components, Endpoints that compile down to Kubernetes resources, letting developers focus on their applications while platform engineers govern the infrastructure.
 
-One of OpenChoreo's most powerful architectural concepts is the **Cell**, which is a secure isolated runtime boundary inspired by Domain-Driven Design. Each OpenChoreo Project becomes a Cell at runtime: a dedicated Kubernetes namespace with NetworkPolicies that govern ingress/egress traffic of the Cell.
+One of the most powerful architectural concepts in OpenChoreo is the **Cell**, which is a secure isolated runtime boundary inspired by Domain-Driven Design and [Cell-Based Architecture](https://github.com/wso2/reference-architecture/blob/master/reference-architecture-cell-based.md). Each OpenChoreo Project becomes a Cell at runtime: a dedicated Kubernetes namespace with NetworkPolicies that govern ingress/egress traffic of the Cell.
 
 OpenChoreo currently uses standard Kubernetes NetworkPolicies for Cell isolation, which operate at L3/L4. They control _which pods can talk to which pods (and on which ports)_, but not _what HTTP requests are allowed_. What if a container inside the Cell is compromised? What if a rogue pod can reach your services but shouldn't be able to call specific endpoints? NetworkPolicies can't distinguish a legitimate `POST /api/orders` from a malicious `DELETE /api/users`.
 
@@ -31,7 +31,7 @@ Together, they create a zero-trust networking stack where:
 - **OpenChoreo Cells** define _what is isolated_ (namespace boundaries with NetworkPolicies at L3/L4)
 - **Istio Gateway** handles _north/south traffic_ (external ingress via the standard Gateway API)
 - **Istio ztunnel** secures _east/west traffic_ (mTLS encryption with SPIFFE identities for all pod-to-pod communication)
-- **Istio waypoint proxies** enforce _what requests are allowed_ (L7 authorization — identity, method, and path)
+- **Istio waypoint proxies** enforce _what requests are allowed_ (L7 authorization with identity, method, and path)
 
 ## Why Istio Ambient Mesh Is a Natural Fit for OpenChoreo
 
@@ -39,14 +39,14 @@ Together, they create a zero-trust networking stack where:
 
 OpenChoreo Cell architecture maps remarkably well to Istio ambient architecture:
 
-| OpenChoreo Concept  | Istio Ambient Equivalent                         | What It Does                                        |
-| ------------------- | ------------------------------------------------ | --------------------------------------------------- |
-| **Project (Cell)**  | Namespace with `istio.io/dataplane-mode=ambient` | Defines the isolation boundary                      |
-| **Cell networking** | ztunnel mTLS                                     | Encrypts all traffic — both within and across Cells |
-| **Cell gateway**    | Waypoint proxy                                   | Enforces L7 policies at the Cell entrance           |
-| **Component**       | Pod with SPIFFE identity                         | Has a cryptographic identity for authorization      |
+| OpenChoreo Concept  | Istio Ambient Equivalent                         | What It Does                                      |
+| ------------------- | ------------------------------------------------ | ------------------------------------------------- |
+| **Project (Cell)**  | Namespace with `istio.io/dataplane-mode=ambient` | Defines the isolation boundary                    |
+| **Cell networking** | ztunnel mTLS                                     | Encrypts all traffic both within and across Cells |
+| **Cell gateway**    | Waypoint proxy                                   | Enforces L7 policies at the Cell entrance         |
+| **Component**       | Pod with SPIFFE identity                         | Has a cryptographic identity for authorization    |
 
-The key insight is that OpenChoreo already creates one namespace per Project-Environment combination. When you label that namespace for ambient mesh enrollment, ztunnel automatically encrypts all pod-to-pod traffic with mTLS. Deploy a waypoint proxy in the namespace, and it becomes the Cell gateway evaluating AuthorizationPolicies before any request reaches your services.
+The key insight is that OpenChoreo already creates one namespace per _Project-Environment_ combination. When you label that namespace for ambient mesh enrollment, ztunnel automatically encrypts all _pod-to-pod_ traffic with mTLS. Deploy a waypoint proxy in the namespace, and it becomes the Cell gateway evaluating AuthorizationPolicies before any request reaches your services.
 
 ### Why Ambient, Not Sidecars?
 
@@ -90,7 +90,7 @@ Adding Istio ambient mesh transforms Cells from network-isolated boundaries into
 
 ### The Three Layer Defense
 
-These layers are additive, not replacements. A request must pass all three to reach a service:
+These layers are _additive, not replacements_. A request must pass all three to reach a service:
 
 1. **OpenChoreo NetworkPolicies (L3/L4)** — The perimeter. Controls which namespaces and pods can establish connections. Blocks external traffic that shouldn't reach the Cell at all.
 
@@ -108,7 +108,7 @@ A rogue pod deployed within the Cell passes Layer 1 (same namespace) and Layer 2
 
 ![Defense Layers](assets/images/defense-layers.svg)
 
-## The Artemis II Demo Architecture
+## NASA Artemis II lunar mission demo
 
 To demonstrate the power of OpenChoreo + Istio Ambient Mesh, a simulated NASA Artemis II mission was built with 5 OpenChoreo Projects (Cells) containing 18 microservices:
 
@@ -152,39 +152,43 @@ spec:
     name: deployment/service
 ```
 
-### The Communication Map
+### Artemis II Cell Architecture
 
 ![Artemis II Communication Map](assets/images/artemis-cell-architecture.svg)
 
-Authorized cross-cell traffic flows through well-defined paths:
+Each Cell communicates only with the Cells its mission role demands. No more, no less:
 
-- **Houston CAPCOM** sends commands to Orion's comms-system
-- **Orion** relays telemetry through the **Deep Space Network** back to Houston
-- **Kennedy** hands off launch control to Houston after liftoff
-- **ESA** monitors the European Service Module and relays data to Houston
+- **Houston → Orion**: CAPCOM uplinks commands to the spacecraft comms-system
+- **Orion → DSN → Houston**: Telemetry flows through the Deep Space Network back to mission control
+- **Kennedy → Houston**: Launch control hands off to the flight director after liftoff
+- **ESA → Houston**: The European Service Module monitor relays health data to mission control
 
-## The Threat: A Compromised Container
+The demo includes a mission control dashboard where you can simulate adversaries, observe how each defense layer responds, and neutralize threats in real time to see zero-trust networking in action.
 
-Here's the scenario: a container inside the Orion Cell has been compromised. Maybe it was a supply chain attack, a vulnerability in a base image, or a misconfigured service account. The adversary now has network access _inside_ the Cell's namespace.
+![Artemis II launch](assets/images/artemis-ii-launch.png)
 
-Without additional security, this adversary can:
+## A Rogue Pod Inside the Cell
 
-1. **Abort the mission** — `POST /decision/abort` to Houston's flight-director
-2. **Hijack navigation** — `POST /maneuver` to Orion's guidance-nav, sending the spacecraft off course
-3. **Steal classified crew data** — `GET /crew/vitals` from Orion's life-support
-4. **Send fake commands** — `POST /uplink` to Orion's comms-system, impersonating CAPCOM
+A rogue pod gets deployed inside the Orion Cell namespace. Maybe an attacker gained access to the cluster through a misconfigured RBAC role, a leaked kubeconfig, or a CI/CD pipeline vulnerability. The pod runs with its own ServiceAccount and has full network access within the namespace.
 
-OpenChoreo's NetworkPolicies operate at L3/L4 — they allow same-namespace traffic on the application port. They can't distinguish a legitimate `POST /uplink` from CAPCOM versus a malicious one from a compromised container. The adversary is inside the perimeter.
+As OpenChoreo NetworkPolicies operate at L3/L4, they can't distinguish a legitimate `POST /uplink` from CAPCOM versus a malicious one from a rogue pod.
+
+Without additional security, it can:
+
+1. **Abort the mission** — `POST /decision/abort` to Houston flight-director
+2. **Hijack navigation** — `POST /maneuver` to Orion guidance-nav, sending the spacecraft off course
+3. **Steal classified crew data** — `GET /crew/vitals` from Orion life-support
+4. **Send fake commands** — `POST /uplink` to Orion comms-system, impersonating CAPCOM
 
 ```
 $ curl -X POST http://guidance-nav:8080/maneuver
 {"status":"acknowledged","type":"course-correction","deltaV":"2.3 m/s"}
-# Navigation hijacked. 200 OK.
+# 200 OK. No questions asked.
 ```
 
 ## Securing the Mission with Istio Ambient
 
-### Layer 1: Enable mTLS with ztunnel
+### Layer 1: Encrypt with ztunnel (mTLS + SPIFFE identities)
 
 Label each Cell namespace to enroll in the ambient mesh:
 
@@ -194,31 +198,12 @@ kubectl label namespace <cell-namespace> istio.io/dataplane-mode=ambient
 
 This does two things:
 
-1. **Encrypts all traffic** between pods using mTLS via the HBONE protocol
+1. **Encrypts all traffic** between pods using mTLS via the [HBONE protocol](https://istio.io/latest/docs/ambient/architecture/hbone/)
 2. **Assigns SPIFFE identities** to every pod based on its ServiceAccount
 
-After enrollment, every pod gets a cryptographic identity:
+After enrollment, every pod gets a cryptographic identity: `cluster.local/ns/<namespace>/sa/<service-account>`
 
-```
-cluster.local/ns/<namespace>/sa/<service-account>
-```
-
-> **Important**: OpenChoreo auto-generates NetworkPolicies that only allow traffic on the application port. Istio's ztunnel uses port 15008 (HBONE) for mTLS tunneling. You need to add a NetworkPolicy allowing the ambient mesh ports:
-
-```yaml
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: allow-istio-ambient
-spec:
-  podSelector: {}
-  policyTypes: [Ingress]
-  ingress:
-    - ports:
-        - { port: 15008, protocol: TCP }
-        - { port: 15006, protocol: TCP }
-        - { port: 15001, protocol: TCP }
-```
+![ztunnel mTLS](assets/images/ztunnel-mtls.svg)
 
 Verify all pods are enrolled in HBONE:
 
@@ -230,11 +215,11 @@ dp-default-orion-...  life-support-...    10.42.0.134  HBONE
 dp-default-orion-...  crew-interface-...  10.42.0.133  HBONE
 ```
 
-All traffic is now mTLS-encrypted. But encryption alone doesn't stop the adversary — it just ensures they can't eavesdrop on _other_ traffic. They can still make requests.
+All traffic is now mTLS encrypted. But encryption alone doesn't stop the adversary, it just ensures they can't eavesdrop on _other_ traffic. They can still make requests.
 
-### Layer 2: Deploy Waypoint Proxies
+### Layer 2: Enforce with Waypoint Proxies
 
-Waypoint proxies add L7 policy enforcement to the Cell. Think of them as the Cell's security checkpoint — every request entering the namespace flows through the waypoint, where AuthorizationPolicies are evaluated.
+Waypoint proxies add L7 policy enforcement to the Cell. Think of them as the Cell security checkpoint where every request entering the namespace flows through the waypoint, where AuthorizationPolicies are evaluated.
 
 ```bash
 istioctl waypoint apply -n <cell-namespace> --enroll-namespace
@@ -242,40 +227,15 @@ istioctl waypoint apply -n <cell-namespace> --enroll-namespace
 
 This creates an Envoy-based waypoint proxy (using the `istio-waypoint` GatewayClass) and labels the namespace so ztunnel routes all inbound traffic through it.
 
-The waypoint naturally acts as a **Cell gateway** — the L7 entrance point where identity-based access control is enforced. This aligns perfectly with OpenChoreo's Cell model, where all cross-cell communication should flow through well-defined gateways.
+The waypoint naturally acts as a **Cell gateway** which is the L7 entrance point where identity based access control is enforced. This aligns perfectly with OpenChoreo Cell Architecture, where all cross-cell communication should flow through well defined gateways.
 
-### Layer 3: Zero-Trust AuthorizationPolicies
+![Waypoint Proxy](assets/images/waypoint-proxy.svg)
 
-Now the critical part — defining _who_ can access _what_. Our approach is pure zero-trust: **allow only known identities, implicitly deny everything else**.
+Now the critical part is defining _who_ can access _what_. Our approach is pure zero-trust: **allow only known identities, implicitly deny everything else**.
 
-OpenChoreo deploys all components with the namespace's `default` ServiceAccount. The adversary uses a different SA. We don't need to know the adversary's identity — we only define who the legitimate callers are:
-
-```yaml
-# Orion Cell: guidance-nav can only be accessed by
-# other Orion components (sa/default in the Orion namespace)
-apiVersion: security.istio.io/v1
-kind: AuthorizationPolicy
-metadata:
-  name: guidance-nav-policy
-  namespace: dp-default-orion-development-<hash>
-spec:
-  targetRefs:
-    - kind: Service
-      group: ""
-      name: guidance-nav
-  action: ALLOW
-  rules:
-    - from:
-        - source:
-            principals:
-              - "cluster.local/ns/dp-default-orion-development-<hash>/sa/default"
-```
-
-For cross-cell communication, we specify exactly which namespace's `default` SA is allowed:
+For example, refer the `AuthorizationPolicy` for Orion comms-system. It combines **principal-based identity** (SPIFFE identities matching specific ServiceAccounts) with **HTTP route enforcement** (method and path):
 
 ```yaml
-# Orion Cell: comms-system accepts commands from Houston,
-# telemetry requests from DSN, and intra-cell traffic
 apiVersion: security.istio.io/v1
 kind: AuthorizationPolicy
 metadata:
@@ -313,60 +273,31 @@ spec:
               - "cluster.local/ns/dp-default-orion-development-<hash>/sa/default"
 ```
 
-No DENY policies. If your identity isn't in the allowlist, you don't exist. This is the fundamental difference from network-level security — we're not blocking IP ranges or port numbers, we're verifying cryptographic identities and inspecting HTTP methods and paths.
+Each rule defines _who_ (the SPIFFE principal) and _what_ (the HTTP method and path). Houston CAPCOM can `POST /uplink` but can't `GET /downlink`. The Deep Space Network can `POST /downlink` but can't touch `/uplink`. Intra-cell traffic from the Orion namespace is allowed on all paths but only from the `default` ServiceAccount.
 
-## Results: Before and After
-
-### Without Istio Security
-
-```
-ADVERSARY → POST /decision/abort     → flight-director    200 OK  ← Mission aborted
-ADVERSARY → POST /maneuver           → guidance-nav       200 OK  ← Navigation hijacked
-ADVERSARY → GET  /crew/vitals        → life-support       200 OK  ← Crew data stolen
-ADVERSARY → POST /uplink             → comms-system       200 OK  ← Fake command sent
-```
-
-All four attacks succeed. The adversary has full access to every service in the Cell.
-
-### With Istio Ambient + Waypoint + AuthorizationPolicies
-
-```
-ADVERSARY → POST /decision/abort     → flight-director    403 Forbidden
-ADVERSARY → POST /maneuver           → guidance-nav       403 Forbidden
-ADVERSARY → GET  /crew/vitals        → life-support       403 Forbidden
-ADVERSARY → POST /uplink             → comms-system       403 Forbidden
-
-LEGITIMATE → Gateway → flight-director                    200 OK  ✅
-LEGITIMATE → CAPCOM  → flight-director (intra-cell)       200 OK  ✅
-```
-
-All four attacks are blocked. Legitimate traffic flows normally. The adversary's SPIFFE identity (`sa/adversary`) doesn't match any ALLOW rule, so the waypoint returns 403 — without us ever needing to know the adversary's identity.
+There are no DENY policies. If your identity isn't in the allowlist, the waypoint implicitly denies the request. Every service in every Cell gets a policy like this, each one tailored to the exact communication paths that service needs.
 
 ## Key Takeaways
 
 ### 1. OpenChoreo Cells + Istio Ambient = Defense in Depth
 
-OpenChoreo's Cell model provides the L3/L4 perimeter. Istio's ambient mesh adds L4 encryption and L7 authorization inside the perimeter. Neither alone is sufficient — together they cover the full stack.
+OpenChoreo Cell Architecture provides the L3/L4 perimeter. Istio ambient mesh adds L4 encryption and L7 authorization inside the perimeter. Neither alone is sufficient and together they cover the full stack.
 
-### 2. The HBONE NetworkPolicy Discovery
+### 2. Zero-Trust Is "Allow Known, Deny Unknown"
 
-When combining OpenChoreo with Istio ambient, you need to allow port 15008 (HBONE) in each Cell namespace's NetworkPolicies. OpenChoreo auto-generates NetworkPolicies that only allow application ports, which blocks ztunnel's mTLS tunneling. This is a one-time configuration per namespace.
+The most effective security model doesn't try to enumerate attackers. It enumerates _legitimate callers_ and denies everything else. Istio AuthorizationPolicies with SPIFFE identities make this practical. You define who should have access, and the cryptographic identity system ensures no one can fake it.
 
-### 3. Zero-Trust Is "Allow Known, Deny Unknown"
+### 3. Waypoint Proxies as Cell Gateways
 
-The most effective security model doesn't try to enumerate attackers. It enumerates _legitimate callers_ and denies everything else. Istio's AuthorizationPolicies with SPIFFE identities make this practical — you define who should have access, and the cryptographic identity system ensures no one can fake it.
+Istio waypoint proxies are a natural fit for OpenChoreo Cell architecture. Each Cell gets its own waypoint that acts as the L7 entrance point, evaluating identity, method, and path before any request reaches the application. This is the missing piece between OpenChoreo network isolation and full zero-trust.
 
-### 4. Waypoint Proxies as Cell Gateways
+### 4. Gateway API as the Universal Contract
 
-Istio's waypoint proxies are a natural fit for OpenChoreo's Cell architecture. Each Cell gets its own waypoint that acts as the L7 entrance point — evaluating identity, method, and path before any request reaches the application. This is the missing piece between OpenChoreo's network isolation and full zero-trust.
-
-### 5. Gateway API as the Universal Contract
-
-OpenChoreo uses the Kubernetes Gateway API for routing. Istio implements the same API. Swapping the gateway implementation is a single `gatewayClassName` change — the developer experience is identical, the platform engineer chooses the infrastructure.
+OpenChoreo uses the Kubernetes Gateway API for routing. Istio implements the same API. Swapping the gateway implementation is a single `gatewayClassName` change. The developer experience is identical, the platform engineer chooses the infrastructure.
 
 ## Try It Yourself
 
-The complete Artemis II demo — including installation instructions, deployment steps, and all manifests — is available at [github.com/NomadXD/samples/artemis-ii-istio-openchoreo](https://github.com/NomadXD/samples/tree/main/artemis-ii-istio-openchoreo). The demo runs on a single k3d cluster and includes:
+The complete Artemis II demo including installation instructions, deployment steps, and all manifests is available at [github.com/NomadXD/samples/artemis-ii-istio-openchoreo](https://github.com/NomadXD/samples/tree/main/artemis-ii-istio-openchoreo). The demo use the OpenChoreo single cluster k3d setup and includes:
 
 - A configurable Go microservice (one binary, 18 deployments)
 - 5 OpenChoreo Project manifests with 18 Components

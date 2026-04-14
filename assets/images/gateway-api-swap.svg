@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 420" width="820" height="420">
+  <defs>
+    <marker id="arrow-down" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#999"/>
+    </marker>
+    <marker id="arrow-split" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#B0B0B0"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#66BB6A"/>
+    </marker>
+    <style>
+      .box { rx: 6; ry: 6; stroke-width: 1.5; }
+      .box-label { font-family: 'Segoe UI', Arial, sans-serif; font-weight: 600; text-anchor: middle; }
+      .box-sub { font-family: 'Segoe UI', Arial, sans-serif; font-weight: 400; text-anchor: middle; }
+      .arrow-line { stroke: #999; stroke-width: 1.5; fill: none; marker-end: url(#arrow-down); }
+      .arrow-label { font-family: 'Segoe UI', Arial, sans-serif; font-size: 11px; fill: #999; text-anchor: middle; font-style: italic; }
+      .split-line { stroke: #B0B0B0; stroke-width: 1.5; fill: none; marker-end: url(#arrow-split); }
+      .badge { font-family: 'Segoe UI', Arial, sans-serif; font-size: 10px; font-weight: 600; text-anchor: middle; }
+      .swap-label { font-family: 'Segoe UI', Arial, sans-serif; font-size: 12px; fill: #888; text-anchor: middle; }
+      .config-text { font-family: 'Courier New', monospace; font-size: 11px; fill: #777; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect width="820" height="420" fill="white"/>
+
+  <!-- ===== OPENCHOREO LAYER ===== -->
+  <rect class="box" x="160" y="20" width="500" height="65" fill="#F0F4F8" stroke="#90A4AE"/>
+  <text class="box-label" x="410" y="48" font-size="14" fill="#455A64">OpenChoreo</text>
+  <text class="box-sub" x="410" y="68" font-size="11" fill="#78909C">Components, Endpoints, Visibility</text>
+
+  <!-- Arrow: OpenChoreo → Gateway API -->
+  <line class="arrow-line" x1="410" y1="85" x2="410" y2="115"/>
+  <text class="arrow-label" x="450" y="106">generates</text>
+
+  <!-- ===== GATEWAY API LAYER ===== -->
+  <rect class="box" x="110" y="120" width="600" height="90" fill="#F5F5F5" stroke="#C0C0C0"/>
+  <text class="box-label" x="410" y="145" font-size="13" fill="#555">Kubernetes Gateway API</text>
+
+  <!-- Gateway sub-box -->
+  <rect class="box" x="170" y="158" width="130" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+  <text class="box-sub" x="235" y="181" font-size="12" fill="#666">Gateway</text>
+
+  <!-- HTTPRoute sub-box -->
+  <rect class="box" x="350" y="158" width="130" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+  <text class="box-sub" x="415" y="181" font-size="12" fill="#666">HTTPRoute</text>
+
+  <!-- ReferenceGrant sub-box -->
+  <rect class="box" x="530" y="158" width="130" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
+  <text class="box-sub" x="595" y="181" font-size="12" fill="#666">ReferenceGrant</text>
+
+  <!-- Arrow: Gateway API splits to implementations -->
+  <line class="arrow-line" x1="410" y1="210" x2="410" y2="245" stroke="#B0B0B0" marker-end="none"/>
+
+  <!-- Split lines -->
+  <path class="split-line" d="M 410,245 L 250,290"/>
+  <path class="split-line" d="M 410,245 L 570,290"/>
+
+  <!-- gatewayClassName label -->
+  <text class="swap-label" x="410" y="268">gatewayClassName</text>
+
+  <!-- ===== KGATEWAY (default, dimmed) ===== -->
+  <rect class="box" x="140" y="295" width="220" height="70" fill="#FAFAFA" stroke="#D0D0D0" stroke-dasharray="4,3"/>
+  <text class="box-label" x="250" y="325" font-size="13" fill="#BBB">kgateway</text>
+  <text class="box-sub" x="250" y="345" font-size="10" fill="#CCC">Envoy-based (default)</text>
+  <!-- Dimmed badge -->
+  <rect x="195" y="370" width="110" height="20" rx="10" fill="#E8E8E8"/>
+  <text class="badge" x="250" y="384" fill="#AAA">default</text>
+
+  <!-- ===== ISTIO GATEWAY (swapped in, highlighted) ===== -->
+  <rect class="box" x="460" y="295" width="220" height="70" fill="#E8F5E9" stroke="#66BB6A" stroke-width="2"/>
+  <text class="box-label" x="570" y="325" font-size="13" fill="#2E7D32">istio</text>
+  <text class="box-sub" x="570" y="345" font-size="10" fill="#4CAF50">Envoy-based (Istio)</text>
+  <!-- Active badge -->
+  <rect x="515" y="370" width="110" height="20" rx="10" fill="#C8E6C9"/>
+  <text class="badge" x="570" y="384" fill="#2E7D32">active</text>
+
+  <!-- Swap arrow -->
+  <path d="M 340,340 L 450,340" stroke="#66BB6A" stroke-width="1.8" fill="none" stroke-dasharray="5,3" marker-end="url(#arrow-green)"/>
+  <text class="config-text" x="385" y="330">swap</text>
+</svg>

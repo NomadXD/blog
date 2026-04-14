@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 380" width="860" height="380">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#999"/>
+    </marker>
+    <marker id="arr-purple" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#AB47BC"/>
+    </marker>
+    <marker id="arr-green" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#66BB6A"/>
+    </marker>
+    <marker id="arr-red" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#e57373"/>
+    </marker>
+    <style>
+      .box { rx: 6; ry: 6; stroke-width: 1.5; }
+      .box-label { font-family: 'Segoe UI', Arial, sans-serif; font-weight: 600; text-anchor: middle; }
+      .box-sub { font-family: 'Segoe UI', Arial, sans-serif; font-weight: 400; text-anchor: middle; }
+      .identity { font-family: 'Courier New', monospace; font-size: 9px; text-anchor: middle; fill: #7B1FA2; }
+      .section-label { font-family: 'Segoe UI', Arial, sans-serif; font-size: 11px; font-weight: 600; fill: #999; text-anchor: middle; }
+      .badge { font-family: 'Segoe UI', Arial, sans-serif; font-size: 9px; font-weight: 600; text-anchor: middle; }
+      .flow-label { font-family: 'Segoe UI', Arial, sans-serif; font-size: 10px; fill: #777; text-anchor: middle; }
+      .step { font-family: 'Segoe UI', Arial, sans-serif; font-size: 9px; font-weight: 700; fill: white; text-anchor: middle; }
+      .note { font-family: 'Segoe UI', Arial, sans-serif; font-size: 10px; fill: #999; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect width="860" height="380" fill="white"/>
+
+  <!-- ===== CELL NAMESPACE BOUNDARY ===== -->
+  <rect class="box" x="30" y="15" width="800" height="350" fill="#FAFAFA" stroke="#E0E0E0" stroke-dasharray="6,3"/>
+  <text class="section-label" x="430" y="38" fill="#BDBDBD">Cell Namespace (dp-default-orion-development)</text>
+
+  <!-- ===== SOURCE POD (CAPCOM from Houston) ===== -->
+  <rect class="box" x="50" y="130" width="140" height="70" fill="#E3F2FD" stroke="#64B5F6"/>
+  <text class="box-label" x="120" y="158" font-size="11" fill="#1565C0">capcom</text>
+  <text class="box-sub" x="120" y="174" font-size="9" fill="#64B5F6">Houston Cell</text>
+
+  <!-- Step 1 circle -->
+  <circle cx="215" cy="130" r="10" fill="#AB47BC"/>
+  <text class="step" x="215" y="134">1</text>
+
+  <!-- Arrow: source → ztunnel -->
+  <line x1="190" y1="165" x2="248" y2="165" stroke="#AB47BC" stroke-width="1.8" marker-end="url(#arr-purple)"/>
+  <text class="flow-label" x="220" y="160">mTLS</text>
+
+  <!-- ===== ZTUNNEL ===== -->
+  <rect class="box" x="255" y="120" width="130" height="90" fill="#F3E5F5" stroke="#BA68C8" stroke-width="2"/>
+  <text class="box-label" x="320" y="155" font-size="13" fill="#7B1FA2">ztunnel</text>
+  <text class="box-sub" x="320" y="172" font-size="9" fill="#AB47BC">intercepts inbound</text>
+  <text class="box-sub" x="320" y="185" font-size="9" fill="#AB47BC">traffic to namespace</text>
+
+  <!-- Step 2 circle -->
+  <circle cx="415" cy="110" r="10" fill="#AB47BC"/>
+  <text class="step" x="415" y="114">2</text>
+
+  <!-- Arrow: ztunnel → waypoint (redirects) -->
+  <line x1="385" y1="145" x2="448" y2="145" stroke="#AB47BC" stroke-width="1.8" marker-end="url(#arr-purple)"/>
+  <text class="flow-label" x="417" y="140">redirects</text>
+
+  <!-- ===== WAYPOINT PROXY ===== -->
+  <rect class="box" x="455" y="60" width="200" height="210" fill="#E8F5E9" stroke="#66BB6A" stroke-width="2"/>
+  <text class="box-label" x="555" y="88" font-size="14" fill="#2E7D32">Waypoint Proxy</text>
+  <text class="box-sub" x="555" y="105" font-size="10" fill="#4CAF50">Cell gateway (Envoy)</text>
+
+  <!-- AuthorizationPolicy check box inside waypoint -->
+  <rect x="470" y="118" width="170" height="65" rx="4" fill="#C8E6C9" stroke="#66BB6A" stroke-width="1"/>
+  <text class="box-label" x="555" y="140" font-size="10" fill="#2E7D32">AuthorizationPolicy</text>
+  <text class="box-sub" x="555" y="155" font-size="9" fill="#4CAF50">SPIFFE identity</text>
+  <text class="box-sub" x="555" y="168" font-size="9" fill="#4CAF50">HTTP method + path</text>
+
+  <!-- Step 3 circle -->
+  <circle cx="555" cy="200" r="10" fill="#66BB6A"/>
+  <text class="step" x="555" y="204">3</text>
+
+  <!-- Decision: ALLOW path -->
+  <rect x="475" y="215" width="70" height="22" rx="11" fill="#C8E6C9"/>
+  <text class="badge" x="510" y="230" fill="#2E7D32">ALLOW</text>
+
+  <!-- Decision: DENY path -->
+  <rect x="560" y="215" width="70" height="22" rx="11" fill="#FFCDD2"/>
+  <text class="badge" x="595" y="230" fill="#C62828">DENY</text>
+
+  <!-- ===== DESTINATION SERVICE ===== -->
+  <rect class="box" x="690" y="60" width="130" height="70" fill="#E3F2FD" stroke="#64B5F6"/>
+  <text class="box-label" x="755" y="88" font-size="11" fill="#1565C0">comms-system</text>
+  <text class="box-sub" x="755" y="104" font-size="9" fill="#64B5F6">Orion Cell</text>
+
+  <!-- Arrow: waypoint ALLOW → destination -->
+  <line x1="510" y1="237" x2="510" y2="260" stroke="#66BB6A" stroke-width="1.5" fill="none"/>
+  <path d="M 510,260 L 755,260 L 755,132" stroke="#66BB6A" stroke-width="1.8" fill="none" marker-end="url(#arr-green)"/>
+  <text class="flow-label" x="630" y="255" fill="#2E7D32">200 OK</text>
+
+  <!-- Arrow: waypoint DENY → blocked -->
+  <line x1="595" y1="237" x2="595" y2="290" stroke="#e57373" stroke-width="1.5" fill="none"/>
+
+  <!-- 403 response box -->
+  <rect x="555" y="290" width="80" height="30" rx="6" fill="#FFEBEE" stroke="#e57373" stroke-width="1.5"/>
+  <text class="box-label" x="595" y="310" font-size="11" fill="#C62828">403</text>
+
+  <!-- ===== ROGUE POD ===== -->
+  <rect class="box" x="50" y="270" width="140" height="70" fill="#FFEBEE" stroke="#e57373"/>
+  <text class="box-label" x="120" y="298" font-size="11" fill="#C62828">rogue pod</text>
+  <text class="box-sub" x="120" y="314" font-size="9" fill="#e57373">Orion Cell</text>
+
+  <!-- Arrow: rogue → ztunnel -->
+  <line x1="190" y1="290" x2="248" y2="212" stroke="#e57373" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-red)"/>
+
+  <!-- Dotted path: ztunnel → waypoint (same redirect as legitimate traffic) -->
+  <line x1="385" y1="190" x2="448" y2="190" stroke="#e57373" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-red)"/>
+  <text class="flow-label" x="417" y="186" fill="#C62828">redirects</text>
+  <text class="flow-label" x="595" y="330" fill="#C62828">unknown identity → denied</text>
+</svg>

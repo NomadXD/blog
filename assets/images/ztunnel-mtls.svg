@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 400" width="860" height="400">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#999"/>
+    </marker>
+    <marker id="arr-purple" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#AB47BC"/>
+    </marker>
+    <style>
+      .box { rx: 6; ry: 6; stroke-width: 1.5; }
+      .box-label { font-family: 'Segoe UI', Arial, sans-serif; font-weight: 600; text-anchor: middle; }
+      .box-sub { font-family: 'Segoe UI', Arial, sans-serif; font-weight: 400; text-anchor: middle; }
+      .identity { font-family: 'Courier New', monospace; font-size: 9px; text-anchor: middle; fill: #7B1FA2; }
+      .section-label { font-family: 'Segoe UI', Arial, sans-serif; font-size: 11px; font-weight: 600; fill: #999; text-anchor: middle; }
+      .badge { font-family: 'Segoe UI', Arial, sans-serif; font-size: 9px; font-weight: 600; text-anchor: middle; }
+      .tunnel-label { font-family: 'Segoe UI', Arial, sans-serif; font-size: 11px; font-weight: 600; text-anchor: middle; fill: #7B1FA2; }
+      .note { font-family: 'Segoe UI', Arial, sans-serif; font-size: 10px; fill: #999; text-anchor: middle; }
+    </style>
+  </defs>
+
+  <rect width="860" height="400" fill="white"/>
+
+  <!-- ===== CELL NAMESPACE BOUNDARY ===== -->
+  <rect class="box" x="30" y="15" width="800" height="370" fill="#FAFAFA" stroke="#E0E0E0" stroke-dasharray="6,3"/>
+  <text class="section-label" x="430" y="38" fill="#BDBDBD">Cell Namespace (dp-default-orion-development)</text>
+
+  <!-- ===== NODE A ===== -->
+  <rect class="box" x="60" y="55" width="330" height="310" fill="#F5F5F5" stroke="#BDBDBD"/>
+  <text class="box-label" x="225" y="78" font-size="12" fill="#777">Node A</text>
+
+  <!-- Pod: guidance-nav -->
+  <rect class="box" x="90" y="95" width="140" height="65" fill="#E3F2FD" stroke="#64B5F6"/>
+  <text class="box-label" x="160" y="118" font-size="11" fill="#1565C0">guidance-nav</text>
+  <text class="identity" x="160" y="148">sa/default</text>
+
+  <!-- Pod: life-support -->
+  <rect class="box" x="220" y="180" width="140" height="65" fill="#E3F2FD" stroke="#64B5F6"/>
+  <text class="box-label" x="290" y="203" font-size="11" fill="#1565C0">life-support</text>
+  <text class="identity" x="290" y="233">sa/default</text>
+
+  <!-- ztunnel on Node A -->
+  <rect class="box" x="80" y="270" width="290" height="75" fill="#F3E5F5" stroke="#BA68C8" stroke-width="2"/>
+  <text class="box-label" x="225" y="298" font-size="13" fill="#7B1FA2">ztunnel</text>
+  <text class="box-sub" x="225" y="316" font-size="10" fill="#AB47BC">intercepts traffic, terminates mTLS</text>
+  <text class="box-sub" x="225" y="332" font-size="10" fill="#AB47BC">assigns SPIFFE identity via cert</text>
+
+  <!-- Arrows: pods to ztunnel A -->
+  <line x1="160" y1="160" x2="160" y2="268" stroke="#BA68C8" stroke-width="1.2" stroke-dasharray="3,2" marker-end="url(#arr-purple)"/>
+  <line x1="290" y1="245" x2="290" y2="268" stroke="#BA68C8" stroke-width="1.2" stroke-dasharray="3,2" marker-end="url(#arr-purple)"/>
+
+  <!-- ===== NODE B ===== -->
+  <rect class="box" x="470" y="55" width="330" height="310" fill="#F5F5F5" stroke="#BDBDBD"/>
+  <text class="box-label" x="635" y="78" font-size="12" fill="#777">Node B</text>
+
+  <!-- Pod: comms-system -->
+  <rect class="box" x="630" y="95" width="140" height="65" fill="#E3F2FD" stroke="#64B5F6"/>
+  <text class="box-label" x="700" y="118" font-size="11" fill="#1565C0">comms-system</text>
+  <text class="identity" x="700" y="148">sa/default</text>
+
+  <!-- Pod: crew-interface -->
+  <rect class="box" x="500" y="180" width="140" height="65" fill="#E3F2FD" stroke="#64B5F6"/>
+  <text class="box-label" x="570" y="203" font-size="11" fill="#1565C0">crew-interface</text>
+  <text class="identity" x="570" y="233">sa/default</text>
+
+  <!-- ztunnel on Node B -->
+  <rect class="box" x="490" y="270" width="290" height="75" fill="#F3E5F5" stroke="#BA68C8" stroke-width="2"/>
+  <text class="box-label" x="635" y="298" font-size="13" fill="#7B1FA2">ztunnel</text>
+  <text class="box-sub" x="635" y="316" font-size="10" fill="#AB47BC">intercepts traffic, terminates mTLS</text>
+  <text class="box-sub" x="635" y="332" font-size="10" fill="#AB47BC">assigns SPIFFE identity via cert</text>
+
+  <!-- Arrows: pods to ztunnel B -->
+  <line x1="700" y1="160" x2="700" y2="268" stroke="#BA68C8" stroke-width="1.2" stroke-dasharray="3,2" marker-end="url(#arr-purple)"/>
+  <line x1="570" y1="245" x2="570" y2="268" stroke="#BA68C8" stroke-width="1.2" stroke-dasharray="3,2" marker-end="url(#arr-purple)"/>
+
+  <!-- ===== HBONE mTLS TUNNEL between ztunnels ===== -->
+  <rect x="345" y="290" width="170" height="36" rx="18" fill="#EDE7F6" stroke="#BA68C8" stroke-width="2"/>
+  <text class="tunnel-label" x="430" y="313">HBONE mTLS tunnel</text>
+
+  <!-- Tunnel connection lines -->
+  <line x1="370" y1="308" x2="345" y2="308" stroke="#BA68C8" stroke-width="2"/>
+  <line x1="515" y1="308" x2="490" y2="308" stroke="#BA68C8" stroke-width="2"/>
+
+  <!-- Port label -->
+  <text class="note" x="430" y="340">port 15008</text>
+
+  <!-- SPIFFE identity callout -->
+  <rect x="260" y="95" width="180" height="40" rx="6" fill="#EDE7F6" stroke="#CE93D8" stroke-width="1"/>
+  <text class="identity" x="350" y="112" font-size="8">SPIFFE identity:</text>
+  <text class="identity" x="350" y="126" font-size="8">cluster.local/ns/.../sa/default</text>
+
+  <!-- Arrow from callout to pod -->
+  <line x1="260" y1="115" x2="232" y2="115" stroke="#CE93D8" stroke-width="1" marker-end="url(#arr-purple)"/>
+</svg>
