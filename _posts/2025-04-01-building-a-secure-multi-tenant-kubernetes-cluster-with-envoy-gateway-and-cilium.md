@@ -10,6 +10,7 @@ class: post-template
 subclass: "post"
 logo: assets/images/ghost.png
 author: lahiru
+published: false
 ---
 
 The widespread adoption of Kubernetes has revolutionized application deployment and management, enabling unprecedented scalability and flexibility. This often leads to scenarios where multiple teams or applications share the same Kubernetes cluster, a concept known as multi-tenancy. While offering numerous benefits, multi-tenancy introduces significant challenges, like network isolation, storage isolation, node isolation, API server priority and fairness, and mitigating "noisy neighbor" issues. Among these, network isolation and controlled communication between different tenants or applications often emerge as the most crucial concerns for organizations, primarily because an unsegmented network can lead to unauthorized access to sensitive data and allow lateral movement for attackers, thereby compromising the confidentiality and integrity of tenant workloads.
@@ -288,90 +289,255 @@ function openTab(evt, tabName) {
 }
 </script>
 
-## Gateway Architecture for Secure Traffic Management
+As we can see from the examples above, for outbound traffic to external services (like Salesforce and Google Analytics), our applications act as API consumers. In these scenarios, network-level restrictions through Cilium policies are sufficient since the authentication and authorization are handled by the external services themselves. This is why we see the sales team's applications authenticating directly with Salesforce, and the marketing team's applications authenticating with Google Analytics.
 
-With the Cilium network policies in place, we have successfully established strong network boundaries for each tenant, ensuring proper isolation and controlled access to external services. The next crucial step is to facilitate and manage legitimate traffic flows both from outside the cluster (north-south traffic) and between services within the cluster (east-west traffic). To achieve this, we'll implement a dual-gateway architecture using Envoy Gateway: an external gateway for handling incoming traffic from outside the cluster, and an internal gateway for managing service-to-service communication within the cluster. This approach allows us to maintain strict control over traffic patterns while ensuring necessary services remain accessible to authorized consumers.
+However, for inbound traffic from external clients and internal service-to-service communication, our applications act as API providers. In these scenarios, network-level restrictions alone are not enough - we need to implement application-level security controls to properly authenticate and authorize clients, validate request contents, and enforce fine-grained access policies. This brings us to our next crucial component: a dual-gateway architecture.
+
+## Gateway Architecture for Secure Traffic Management
 
 <p align="center">
   <img alt="Multi-tenant Kubernetes Architecture" src="assets/images/topology-mermaid.svg">
     <em>Multi-tenant Kubernetes Architecture with Envoy Gateway and Cilium</em>
 </p>
 
-```mermaid
-graph TB
-    %% Matrix/Terminal Theme Styling
-    classDef default fill:#1a1a1a,stroke:#00ff00,color:#00ff00,stroke-width:2px
-    classDef k8s fill:#000,stroke:#00ff00,color:#00ff00,stroke-width:3px,stroke-dasharray: 5
-    classDef namespace fill:#1a1a1a,stroke:#00ff00,color:#00ff00,stroke-width:2px,stroke-dasharray: 5
-    linkStyle default stroke:#00ff00,stroke-width:2px
+## Reference Implementation
 
-    %% External Services
-    Salesforce["api.salesforce.com"]
-    Analytics["analyticsdata.googleapis.com"]
-    Legacy["Legacy System<br/>203.0.113.0/24"]
+Let's walk through a reference implementation of this architecture. Before proceeding with the configuration, ensure you have the following prerequisites installed in your Kubernetes cluster:
 
-    %% External Users
-    Users((External Users))
+1. **Cilium**: Follow the [official Cilium installation guide](https://docs.cilium.io/en/stable/gettingstarted/k8s-install-default/) to install Cilium as your CNI provider.
+2. **Envoy Gateway**: Install Envoy Gateway following the [official installation documentation](https://gateway.envoyproxy.io/v0.6.0/user/quickstart.html).
 
-    subgraph K8S["Kubernetes Cluster"]
-        %% Gateway Layer
-        ExternalGW["External Gateway<br/>[Envoy Proxy]"]
-        InternalGW["Internal Gateway<br/>[Envoy Proxy]"]
+### Gateway Configuration
 
-        %% Tenant Namespaces
-        subgraph SalesNS["tenant-sales"]
-            SalesApp["Sales App"]
-        end
+First, let's configure our dual gateway setup. We'll create two Gateway resources: an external gateway for handling incoming traffic from outside the cluster, and an internal gateway for service-to-service communication.
 
-        subgraph MarketingNS["tenant-marketing"]
-            MarketingApp["Marketing App"]
-        end
-
-        subgraph FinanceNS["tenant-finance"]
-            FinanceApp["Finance App"]
-        end
-    end
-
-    %% North-South Traffic (External)
-    Users -->|"North-South"| ExternalGW
-    ExternalGW -->|"North-South"| SalesApp
-    ExternalGW -->|"North-South"| MarketingApp
-    ExternalGW -->|"North-South"| FinanceApp
-
-    %% East-West Traffic (Internal)
-    SalesApp -->|"East-West"| InternalGW
-    MarketingApp -->|"East-West"| InternalGW
-    FinanceApp -->|"East-West"| InternalGW
-
-    %% External Service Access
-    SalesApp --> Salesforce
-    MarketingApp --> Analytics
-    FinanceApp --> Legacy
-
-    %% Apply styles
-    class K8S k8s
-    class ExternalGW gateway
-    class InternalGW internal
-    class SalesNS,MarketingNS,FinanceNS namespace
-    class SalesNS,MarketingNS,FinanceNS namespace
-    class SalesApp,MarketingApp,FinanceApp app
-    class Salesforce,Analytics,Legacy external
-    class Users users
+```yaml
+# external-gateway.yaml
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: external-gateway
+  namespace: gateway-system
+spec:
+  gatewayClassName: envoy
+  listeners:
+    - name: https
+      port: 443
+      protocol: HTTPS
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - name: external-gateway-cert
+      allowedRoutes:
+        namespaces:
+          from: Selector
+          selector:
+            matchExpressions:
+              - key: kubernetes.io/metadata.name
+                operator: In
+                values: [tenant-sales, tenant-marketing, tenant-finance]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: external-gateway
+  namespace: gateway-system
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: nlb # Use appropriate cloud provider annotation
+spec:
+  type: LoadBalancer
+  ports:
+    - name: https
+      port: 443
+      protocol: TCP
+  selector:
+    gateway.envoyproxy.io/gateway-name: external-gateway
 ```
 
-The diagram above illustrates our multi-tenant architecture with the following key components:
+```yaml
+# internal-gateway.yaml
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: internal-gateway
+  namespace: gateway-system
+spec:
+  gatewayClassName: envoy
+  listeners:
+    - name: http
+      port: 8080
+      protocol: HTTP
+      allowedRoutes:
+        namespaces:
+          from: Selector
+          selector:
+            matchExpressions:
+              - key: kubernetes.io/metadata.name
+                operator: In
+                values: [tenant-sales, tenant-marketing, tenant-finance]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: internal-gateway
+  namespace: gateway-system
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-internal: "true" # For internal load balancer
+spec:
+  type: LoadBalancer # Or ClusterIP if you don't need a load balancer
+  ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+  selector:
+    gateway.envoyproxy.io/gateway-name: internal-gateway
+```
 
-1. **Tenant Namespaces**: Each team (Sales, Marketing, Finance) has its own isolated namespace with their respective applications.
+### HTTP Route Configuration
 
-2. **External Connectivity**:
+Now, let's configure the HTTPRoute resources for each tenant namespace. These routes define how traffic should be handled for different services within each namespace.
 
-   - Sales team connects to Salesforce APIs
-   - Marketing team connects to Google Analytics APIs
-   - Finance team connects to their legacy system (203.0.113.0/24)
+<div class="tabs">
+  <div class="tab-buttons">
+    <button class="tab-button active" onclick="openTab(event, 'sales-routes')">Sales Routes</button>
+    <button class="tab-button" onclick="openTab(event, 'marketing-routes')">Marketing Routes</button>
+    <button class="tab-button" onclick="openTab(event, 'finance-routes')">Finance Routes</button>
+  </div>
 
-3. **Gateway Layer**:
+<div id="sales-routes" class="tab-content active">
+<pre><code class="language-yaml">
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: sales-external-route
+  namespace: tenant-sales
+spec:
+  parentRefs:
+  - name: external-gateway
+    namespace: gateway-system
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /api/sales
+    backendRefs:
+    - name: sales-app-1
+      port: 8080
+      weight: 1
+    - name: sales-app-2
+      port: 8080
+      weight: 1
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: sales-internal-route
+  namespace: tenant-sales
+spec:
+  parentRefs:
+  - name: internal-gateway
+    namespace: gateway-system
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /internal/sales
+    backendRefs:
+    - name: sales-app-1
+      port: 8080
+      weight: 1
+</code></pre>
+</div>
 
-   - External Gateway: Handles north-south traffic (external clients accessing services)
-   - Internal Gateway: Manages east-west traffic (inter-service communication between namespaces)
+<div id="marketing-routes" class="tab-content">
+<pre><code class="language-yaml">
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: marketing-external-route
+  namespace: tenant-marketing
+spec:
+  parentRefs:
+  - name: external-gateway
+    namespace: gateway-system
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /api/marketing
+    backendRefs:
+    - name: marketing-app-1
+      port: 8080
+      weight: 1
+    - name: marketing-app-2
+      port: 8080
+      weight: 1
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: marketing-internal-route
+  namespace: tenant-marketing
+spec:
+  parentRefs:
+  - name: internal-gateway
+    namespace: gateway-system
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /internal/marketing
+    backendRefs:
+    - name: marketing-app-1
+      port: 8080
+      weight: 1
+</code></pre>
+</div>
 
-4. **Network Boundaries**: The entire setup runs within a Kubernetes cluster with clear namespace boundaries and controlled communication paths.
+<div id="finance-routes" class="tab-content">
+<pre><code class="language-yaml">
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: finance-external-route
+  namespace: tenant-finance
+spec:
+  parentRefs:
+  - name: external-gateway
+    namespace: gateway-system
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /api/finance
+    backendRefs:
+    - name: finance-app-1
+      port: 8080
+      weight: 1
+    - name: finance-app-2
+      port: 8080
+      weight: 1
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: finance-internal-route
+  namespace: tenant-finance
+spec:
+  parentRefs:
+  - name: internal-gateway
+    namespace: gateway-system
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /internal/finance
+    backendRefs:
+    - name: finance-app-1
+      port: 8080
+      weight: 1
+</code></pre>
+</div>
+</div>
+
+This multi-layered approach combines network-level isolation with application-level security controls, providing comprehensive protection for multi-tenant environments.
