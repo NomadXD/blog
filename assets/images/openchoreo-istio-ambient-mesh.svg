@@ -139,7 +139,7 @@
 
   <!-- E/W traffic -->
   <text class="traffic-label" x="440" y="332" fill="#8E6AB8" font-size="11">E/W Traffic</text>
-  <text font-family="'Segoe UI', Arial, sans-serif" font-size="9" fill="#8E6AB8" text-anchor="middle" x="440" y="346" opacity="0.8">via Waypoint Proxy (L7 AuthZ)</text>
+  <text font-family="'Segoe UI', Arial, sans-serif" font-size="10" fill="#8E6AB8" text-anchor="middle" x="440" y="346" opacity="0.8">via Waypoint Proxy (L7 AuthZ)</text>
   <line class="ew-line" x1="346" y1="385" x2="601" y2="355" marker-end="url(#ew-arr)"/>
 
   <!-- Legend -->

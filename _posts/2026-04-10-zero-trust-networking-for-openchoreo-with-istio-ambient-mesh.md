@@ -3,7 +3,7 @@ layout: post
 current: post
 cover: assets/images/artemis-ii-cover.jpg
 navigation: True
-title: "Zero-Trust Networking with OpenChoreo and Istio Ambient Mesh"
+title: "Zero Trust Networking for OpenChoreo with Istio Ambient Mesh"
 date: 2026-04-14 00:00:00
 tags: tech
 class: post-template
@@ -26,7 +26,7 @@ This is where **Istio Ambient Mesh** comes in. Istio ambient mesh can handle the
 
 ![OpenChoreo + Istio Ambient Mesh Architecture](assets/images/openchoreo-istio-ambient-mesh.svg)
 
-Together, they create a zero-trust networking stack where:
+Together, they create a zero trust networking stack where:
 
 - **OpenChoreo Cells** define _what is isolated_ (namespace boundaries with NetworkPolicies at L3/L4)
 - **Istio Gateway** handles _north/south traffic_ (external ingress via the standard Gateway API)
@@ -71,11 +71,11 @@ The developer experience doesn't change at all. They still declare endpoints wit
 
 ![Gateway API Swap](assets/images/gateway-api-swap.svg)
 
-## From Network Isolation to Zero-Trust Cells
+## From Network Isolation to Zero Trust Cells
 
 OpenChoreo Cells already provide strong isolation. Each Project gets its own namespace with NetworkPolicies that restrict which pods can talk to which pods on which ports. But NetworkPolicies operate at L3/L4. They answer _"can this IP reach that port?"_, not _"should this identity be allowed to call that endpoint?"_. And all traffic inside the Cell travels as **plaintext**. Any process that can sniff the network can read every request.
 
-Adding Istio ambient mesh transforms Cells from network-isolated boundaries into **zero-trust boundaries**:
+Adding Istio ambient mesh transforms Cells from network-isolated boundaries into **zero trust boundaries**:
 
 ### What Changes
 
@@ -108,7 +108,7 @@ A rogue pod deployed within the Cell passes Layer 1 (same namespace) and Layer 2
 
 ![Defense Layers](assets/images/defense-layers.svg)
 
-## NASA Artemis II lunar mission demo
+## NASA Artemis II Lunar mission demo
 
 To demonstrate the power of OpenChoreo + Istio Ambient Mesh, a simulated NASA Artemis II mission was built with 5 OpenChoreo Projects (Cells) containing 18 microservices:
 
@@ -163,7 +163,7 @@ Each Cell communicates only with the Cells its mission role demands. No more, no
 - **Kennedy → Houston**: Launch control hands off to the flight director after liftoff
 - **ESA → Houston**: The European Service Module monitor relays health data to mission control
 
-The demo includes a mission control dashboard where you can simulate adversaries, observe how each defense layer responds, and neutralize threats in real time to see zero-trust networking in action.
+The demo includes a mission control dashboard where you can simulate adversaries, observe how each defense layer responds, and neutralize threats in real time to see zero trust networking in action.
 
 ![Artemis II launch](assets/images/artemis-ii-launch.png)
 
@@ -231,7 +231,7 @@ The waypoint naturally acts as a **Cell gateway** which is the L7 entrance point
 
 ![Waypoint Proxy](assets/images/waypoint-proxy.svg)
 
-Now the critical part is defining _who_ can access _what_. Our approach is pure zero-trust: **allow only known identities, implicitly deny everything else**.
+Now the critical part is defining _who_ can access _what_. Our approach is pure zero trust: **allow only known identities, implicitly deny everything else**.
 
 For example, refer the `AuthorizationPolicy` for Orion comms-system. It combines **principal-based identity** (SPIFFE identities matching specific ServiceAccounts) with **HTTP route enforcement** (method and path):
 
@@ -283,13 +283,13 @@ There are no DENY policies. If your identity isn't in the allowlist, the waypoin
 
 OpenChoreo Cell Architecture provides the L3/L4 perimeter. Istio ambient mesh adds L4 encryption and L7 authorization inside the perimeter. Neither alone is sufficient and together they cover the full stack.
 
-### 2. Zero-Trust Is "Allow Known, Deny Unknown"
+### 2. Zero Trust Is "Allow Known, Deny Unknown"
 
 The most effective security model doesn't try to enumerate attackers. It enumerates _legitimate callers_ and denies everything else. Istio AuthorizationPolicies with SPIFFE identities make this practical. You define who should have access, and the cryptographic identity system ensures no one can fake it.
 
 ### 3. Waypoint Proxies as Cell Gateways
 
-Istio waypoint proxies are a natural fit for OpenChoreo Cell architecture. Each Cell gets its own waypoint that acts as the L7 entrance point, evaluating identity, method, and path before any request reaches the application. This is the missing piece between OpenChoreo network isolation and full zero-trust.
+Istio waypoint proxies are a natural fit for OpenChoreo Cell architecture. Each Cell gets its own waypoint that acts as the L7 entrance point, evaluating identity, method, and path before any request reaches the application. This is the missing piece between OpenChoreo network isolation and full zero trust.
 
 ### 4. Gateway API as the Universal Contract
 

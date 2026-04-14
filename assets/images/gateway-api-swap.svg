@@ -46,9 +46,9 @@
   <rect class="box" x="350" y="158" width="130" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
   <text class="box-sub" x="415" y="181" font-size="12" fill="#666">HTTPRoute</text>
 
-  <!-- ReferenceGrant sub-box -->
+  <!-- TLSRoute sub-box -->
   <rect class="box" x="530" y="158" width="130" height="36" fill="#FFFFFF" stroke="#B0B0B0" stroke-width="1"/>
-  <text class="box-sub" x="595" y="181" font-size="12" fill="#666">ReferenceGrant</text>
+  <text class="box-sub" x="595" y="181" font-size="12" fill="#666">TLSRoute</text>
 
   <!-- Arrow: Gateway API splits to implementations -->
   <line class="arrow-line" x1="410" y1="210" x2="410" y2="245" stroke="#B0B0B0" marker-end="none"/>
