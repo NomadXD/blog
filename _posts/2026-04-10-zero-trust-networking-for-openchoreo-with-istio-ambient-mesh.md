@@ -278,6 +278,29 @@ Each rule defines _who_ (the SPIFFE principal) and _what_ (the HTTP method and p
 
 There are no DENY policies. If your identity isn't in the allowlist, the waypoint implicitly denies the request. Every service in every Cell gets a policy like this, each one tailored to the exact communication paths that service needs.
 
+## Abstracting Istio Complexity with OpenChoreo
+
+The AuthorizationPolicies, waypoint proxy configurations, and SPIFFE identity mappings shown above are powerful but too low level for developers to work with directly. Platform engineers shouldn't expect developers to author these Istio specific resources directly. This is where OpenChoreo programmable abstraction layer [ComponentTypes and Traits](https://openchoreo.dev/docs/developer-guide/projects-and-components/overview/#componenttypes-and-traits) comes in.
+
+Platform engineers can encode all of this Istio complexity into **ComponentTypes** (deployment blueprints that define what Kubernetes resources get created) and **Traits** (reusable cross cutting concerns that attach to Components). For example, a platform engineer could create a `zero-trust-service` ComponentType that automatically generates the waypoint proxy enrollment and a baseline AuthorizationPolicy alongside the Deployment and Service. An `istio-authz` Trait could let developers declare allowed callers with a simple interface:
+
+```yaml
+traits:
+  - kind: ClusterTrait
+    name: istio-authz
+    instanceName: comms-policy
+    parameters:
+      allowFrom:
+        - project: houston
+          methods: ["POST"]
+          paths: ["/uplink", "/uplink/*"]
+        - project: deep-space-network
+          methods: ["POST"]
+          paths: ["/downlink"]
+```
+
+Behind the scenes, the Trait template renders the full `AuthorizationPolicy` with SPIFFE principals, namespace mappings, and method/path rules. The developer never sees `security.istio.io/v1` or `cluster.local/ns/...`. Instead they work with project names, HTTP methods, and paths. The platform engineer owns the template, controls the security posture, and can update the underlying Istio configuration across all Components without requiring developer changes.
+
 ## Key Takeaways
 
 ### 1. OpenChoreo Cells + Istio Ambient = Defense in Depth
@@ -292,7 +315,11 @@ The most effective security model doesn't try to enumerate attackers. It enumera
 
 Istio waypoint proxies are a natural fit for OpenChoreo Cell architecture. Each Cell gets its own waypoint that acts as the L7 entrance point, evaluating identity, method, and path before any request reaches the application. This is the missing piece between OpenChoreo network isolation and full zero trust.
 
-### 4. Gateway API as the Universal Contract
+### 4. Developer Abstractions Hide Infrastructure Complexity
+
+OpenChoreo ComponentTypes and Traits can encapsulate Istio specific resources like AuthorizationPolicies, waypoint configurations, and SPIFFE identity mappings into developer friendly interfaces. Platform engineers define the security templates once, developers consume them with simple parameters like project names and allowed paths, never touching raw Istio manifests. This separation lets the platform team evolve the underlying security infrastructure without breaking the developer experience.
+
+### 5. Gateway API as the Universal Contract
 
 OpenChoreo uses the Kubernetes Gateway API for routing. Istio implements the same API. Swapping the gateway implementation is a single `gatewayClassName` change. The developer experience is identical, the platform engineer chooses the infrastructure.
 
