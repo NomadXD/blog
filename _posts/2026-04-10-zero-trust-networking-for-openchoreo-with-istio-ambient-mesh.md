@@ -317,7 +317,7 @@ Istio waypoint proxies are a natural fit for OpenChoreo Cell architecture. Each 
 
 ### 4. Developer Abstractions Hide Infrastructure Complexity
 
-OpenChoreo ComponentTypes and Traits can encapsulate Istio specific resources like AuthorizationPolicies, waypoint configurations, and SPIFFE identity mappings into developer friendly interfaces. Platform engineers define the security templates once, developers consume them with simple parameters like project names and allowed paths, never touching raw Istio manifests. This separation lets the platform team evolve the underlying security infrastructure without breaking the developer experience.
+OpenChoreo ComponentTypes and Traits can encapsulate Istio specific resources like AuthorizationPolicies, waypoint configurations, and SPIFFE identity mappings into developer friendly interfaces. Platform engineers define the templates once, developers consume them with simple parameters like project names and allowed paths, never touching raw Istio manifests. This separation lets the platform team evolve the underlying security infrastructure without breaking the developer experience.
 
 ### 5. Gateway API as the Universal Contract
 
